@@ -1,0 +1,323 @@
+LANDING PAGE FEJLESZTÉSI BRIEF (V1 – STRUCTURE + DESIGN ONLY)
+
+PROJEKT CÉLJA
+
+Ez egy one-page sales landing oldal, amelynek célja:
+- elmagyarázni a Managed Intelligent Automation szolgáltatást
+- bemutatni az üzleti előnyöket
+- ROI-t demonstrálni (vizuálisan + kalkulátor UI)
+- bemutatni a pricing modellt
+- leadet generálni
+
+Ez NEM corporate oldal, hanem konverzió-orientált landing.
+
+--------------------------------------------------
+
+SCOPE
+
+Ebben a fázisban:
+- teljes oldal struktúra
+- vizuális megjelenés
+- layout
+- komponensek
+- statikus tartalom
+- kalkulátor UI (LOGIKA NÉLKÜL)
+
+NEM része:
+- kalkulátor számítás
+- backend
+- adatbázis
+- email küldés
+- CMS
+
+--------------------------------------------------
+
+TECHNIKAI ELVÁRÁSOK
+
+- reszponzív design (desktop / tablet / mobile)
+- tiszta, jól strukturált kód
+- később bővíthető felépítés
+
+--------------------------------------------------
+
+DESIGN IRÁNY
+
+Stílus:
+- modern
+- clean
+- corporate / enterprise
+- premium, de nem tech-hype
+
+Tipográfia:
+- font: Dosis
+- címsorok: UPPERCASE
+
+Színek:
+- primary: #731517
+- visszafogott paletta
+
+UI:
+- sok whitespace
+- tiszta szekciók
+- card alapú blokkok ahol szükséges
+- ROI számok hangsúlyosak
+- nincs robot / AI stock vizuál
+
+--------------------------------------------------
+
+FONTOS SZABÁLY
+
+A megadott szövegek NEM placeholder-ek.
+Ezek production contentek, használni kell őket.
+
+A wireframe struktúra kötelezően követendő.
+Layout finomhangolható, struktúra NEM.
+
+--------------------------------------------------
+
+OLDAL STRUKTÚRA
+
+1. HERO SECTION
+
+Layout:
+- desktop: 2 oszlop
+  bal: szöveg
+  jobb: vizuális elem
+
+Tartalom:
+
+Headline:
+Automation without the operational burden
+
+Subheadline:
+We deliver business process automation as a fully managed service.
+
+Bulletek:
+- No infrastructure to build or maintain
+- No internal automation team needed
+- Fast ROI with predictable costs
+
+CTA:
+Calculate Your ROI
+
+--------------------------------------------------
+
+2. SERVICE EXPLANATION
+
+Title:
+Managed Intelligent Automation
+
+Lead:
+Managed Automation delivers business process automation as a fully managed service.
+
+Body:
+
+Instead of building an automation platform and internal team, organizations can simply automate their processes through our service.
+
+BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients.
+
+This enables organizations to achieve fast and measurable ROI, benefit from predictable service costs, and scale automation across the business.
+
+Highlight:
+You run the business. We run the automation.
+
+--------------------------------------------------
+
+3. VALUE PILLARS
+
+Title:
+Why organizations choose managed automation
+
+4 card:
+
+1.
+Lower Complexity
+No platform to manage
+
+2.
+Lower Risk
+Start small
+No commitment
+
+3.
+Fast Time-to-Value
+Live in weeks, not months
+
+4.
+Predictable Cost
+Transparent, scalable pricing
+
+Layout:
+- desktop: 4 oszlop
+- mobile: 1 oszlop
+
+--------------------------------------------------
+
+4. ROI CALCULATOR (UI ONLY)
+
+Title:
+Estimate Your Automation ROI
+
+Input mezők:
+
+Process Complexity (dropdown):
+- S
+- M
+- L
+- XL
+- XXL
+
+Helper text (a dropdown alatt jelenik meg):
+
+Default:
+Select process size to see complexity details
+
+S:
+1 application, 5–10 steps
+
+M:
+2 applications, 10–20 steps
+
+L:
+2–3 applications, 20–40 steps
+
+XL:
+3–4 applications, 40+ steps
+
+XXL:
+Complex, end-to-end processes
+
+FONTOS:
+- a helper text a kiválasztás alapján változik
+- ez csak UI viselkedés
+- nem szükséges backend vagy számítás
+
+További inputok:
+
+Monthly Time:
+- label: Hours per month
+- default: 120
+
+Hourly Cost:
+- label: EUR / hour
+- default: 35
+
+CTA:
+Calculate
+
+Output (statikus):
+
+Annual Savings:
+€32,400
+
+Payback Period:
+9.2 months
+
+Supporting text:
+This process is a strong automation candidate.
+
+--------------------------------------------------
+
+5. EXAMPLE ROI BLOCK
+
+Title:
+Typical ROI from automating a single process
+
+3 oszlop:
+
+Manual process:
+~2 hours/day
+€40/hour
+€16,800 annual cost
+
+Automation:
+€10,000 setup
+€5,000 annual service
+
+Business impact:
+~€12,000 savings
+~10-month payback
+~100% ROI
+
+Bottom:
+Small processes. Big impact.
+
+--------------------------------------------------
+
+6. PRICING
+
+Title:
+Automation engagement model
+
+Starter:
+1 process
+Setup: €10,000
+Annual: €5,000
+
+Growth:
+2–10 processes
+Setup: €9,500
+Annual: €4,500
+
+Scale:
+10+ processes
+Setup: €9,000
+Annual: €4,000
+
+Footnote:
+Setup fee depends on process complexity.
+
+--------------------------------------------------
+
+7. FINAL CTA + FORM
+
+Headline:
+Start with one process
+
+Subheadline:
+Validate ROI quickly and scale automation.
+
+Form:
+- Name
+- Email
+- Company
+
+CTA:
+Request Detailed Assessment
+
+--------------------------------------------------
+
+RESPONSIVE
+
+- hero stack mobile-on
+- cardok 1 oszlop
+- pricing stack
+- calculator vertical layout
+
+--------------------------------------------------
+
+NON-NEGOTIABLE
+
+- szekció sorrend
+- szövegek használata
+- kalkulátor struktúra
+- CTA-k jelenléte
+
+--------------------------------------------------
+
+FLEXIBILIS
+
+- spacing
+- méretek
+- ikonok
+- micro UX
+
+--------------------------------------------------
+
+VÉGEREDMÉNY
+
+Egy teljes, reszponzív, vizuálisan kész landing oldal:
+- minden szekció implementálva
+- minden tartalom beépítve
+- kalkulátor UI működik (vizuálisan)
+- form UI jelen van (backend nélkül)
