@@ -21,9 +21,8 @@ export default function FinalCTA() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Visual only
-    console.log(values);
+  function onSubmit(_values: z.infer<typeof formSchema>) {
+    // Form submission will be implemented in a future task
   }
 
   return (
