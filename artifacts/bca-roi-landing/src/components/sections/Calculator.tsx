@@ -15,7 +15,6 @@ export default function Calculator() {
   const [complexity, setComplexity] = useState<string>("");
   const [hours, setHours] = useState("120");
   const [rate, setRate] = useState("35");
-  const [calculated, setCalculated] = useState(false);
 
   const complexityDetails: Record<string, string> = {
     "": "Select process size to see complexity details",
@@ -27,7 +26,7 @@ export default function Calculator() {
   };
 
   const handleCalculate = () => {
-    setCalculated(true);
+    // Calculator logic will be implemented in a future task
   };
 
   return (

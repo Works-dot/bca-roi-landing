@@ -8,7 +8,7 @@ export default function ServiceExplanation() {
           
           <div className="mb-16">
             <h2 className="text-sm font-bold tracking-[0.3em] text-primary mb-4">
-              BCA | MANAGED INTELLIGENT AUTOMATION
+              MANAGED INTELLIGENT AUTOMATION
             </h2>
             <blockquote className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground leading-tight border-l-4 border-primary pl-6 md:pl-10">
               You run the business. <span className="font-bold text-primary">We run the automation.</span>
