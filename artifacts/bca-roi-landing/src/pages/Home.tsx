@@ -1,0 +1,27 @@
+import Navigation from "@/components/sections/Navigation";
+import Hero from "@/components/sections/Hero";
+import ServiceExplanation from "@/components/sections/ServiceExplanation";
+import ValuePillars from "@/components/sections/ValuePillars";
+import Calculator from "@/components/sections/Calculator";
+import ExampleROI from "@/components/sections/ExampleROI";
+import Pricing from "@/components/sections/Pricing";
+import FinalCTA from "@/components/sections/FinalCTA";
+import Footer from "@/components/sections/Footer";
+
+export default function Home() {
+  return (
+    <div className="flex flex-col min-h-screen font-sans">
+      <Navigation />
+      <main className="flex-1">
+        <Hero />
+        <ServiceExplanation />
+        <ValuePillars />
+        <Calculator />
+        <ExampleROI />
+        <Pricing />
+        <FinalCTA />
+      </main>
+      <Footer />
+    </div>
+  );
+}
