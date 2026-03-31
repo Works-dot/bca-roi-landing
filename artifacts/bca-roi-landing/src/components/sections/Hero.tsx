@@ -1,4 +1,4 @@
-import { CheckCircle2, ArrowDown } from "lucide-react";
+import { CheckCircle2, ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
@@ -56,25 +56,27 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hidden lg:flex flex-col items-center gap-0 w-[220px]">
-            <div className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-4 text-center">
-              <span className="font-bold text-sm tracking-widest text-white uppercase">Manual Process</span>
+          <div className="flex flex-row lg:flex-col items-center justify-center gap-0 w-full lg:w-[220px] pt-4 lg:pt-0">
+            <div className="flex-1 lg:flex-none lg:w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-3 lg:px-5 lg:py-4 text-center">
+              <span className="font-bold text-xs lg:text-sm tracking-widest text-white uppercase">Manual Process</span>
             </div>
 
-            <div className="flex justify-center py-1.5">
-              <ArrowDown className="w-5 h-5 text-primary" />
+            <div className="flex items-center justify-center px-1 lg:px-0 lg:py-1.5">
+              <ArrowRight className="w-4 h-4 text-primary lg:hidden" />
+              <ArrowDown className="w-5 h-5 text-primary hidden lg:block" />
             </div>
 
-            <div className="w-full bg-primary/80 backdrop-blur-sm border border-primary rounded-lg px-5 py-4 text-center shadow-lg shadow-primary/20">
-              <span className="font-bold text-sm tracking-widest text-white uppercase">Automated Process</span>
+            <div className="flex-1 lg:flex-none lg:w-full bg-primary/80 backdrop-blur-sm border border-primary rounded-lg px-3 py-3 lg:px-5 lg:py-4 text-center shadow-lg shadow-primary/20">
+              <span className="font-bold text-xs lg:text-sm tracking-widest text-white uppercase">Automated Process</span>
             </div>
 
-            <div className="flex justify-center py-1.5">
-              <ArrowDown className="w-5 h-5 text-primary" />
+            <div className="flex items-center justify-center px-1 lg:px-0 lg:py-1.5">
+              <ArrowRight className="w-4 h-4 text-primary lg:hidden" />
+              <ArrowDown className="w-5 h-5 text-primary hidden lg:block" />
             </div>
 
-            <div className="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg px-5 py-4 text-center">
-              <span className="font-bold text-sm tracking-widest text-white uppercase">Time Saved,<br />Costs Reduced</span>
+            <div className="flex-1 lg:flex-none lg:w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg px-3 py-3 lg:px-5 lg:py-4 text-center">
+              <span className="font-bold text-xs lg:text-sm tracking-widest text-white uppercase leading-tight">Time Saved, Costs Reduced</span>
             </div>
           </div>
 
