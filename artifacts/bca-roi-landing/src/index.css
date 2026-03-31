@@ -55,7 +55,7 @@
   --foreground: 240 10% 15%;
   --border: 40 20% 90%;
   --input: 40 20% 85%;
-  --ring: 358 78% 27%;
+  --ring: 359 69% 27%;
   
   --card: 0 0% 100%;
   --card-foreground: 240 10% 15%;
@@ -65,7 +65,7 @@
   --popover-foreground: 240 10% 15%;
   --popover-border: 40 20% 90%;
   
-  --primary: 358 78% 27%;
+  --primary: 359 69% 27%;
   --primary-foreground: 0 0% 100%;
   
   --secondary: 40 20% 93%;
@@ -89,7 +89,7 @@
   --foreground: 40 33% 98%;
   --border: 240 10% 20%;
   --input: 240 10% 25%;
-  --ring: 358 78% 27%;
+  --ring: 359 69% 27%;
   
   --card: 240 10% 12%;
   --card-foreground: 40 33% 98%;
@@ -99,7 +99,7 @@
   --popover-foreground: 40 33% 98%;
   --popover-border: 240 10% 20%;
   
-  --primary: 358 78% 27%;
+  --primary: 359 69% 27%;
   --primary-foreground: 0 0% 100%;
   
   --secondary: 240 10% 20%;
