@@ -1,4 +1,4 @@
-import { CheckCircle2, ArrowRight, Cog, Zap, TrendingDown } from "lucide-react";
+import { CheckCircle2, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
@@ -10,37 +10,44 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-muted border-b border-border">
-      <div className="container mx-auto px-4 md:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          <div className="flex flex-col space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground leading-[1.1]">
+    <section className="relative overflow-hidden min-h-[600px] lg:min-h-[700px]">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,15,10,0.92)] via-[rgba(30,20,15,0.82)] to-[rgba(40,25,15,0.55)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(20,15,10,0.4)] to-transparent" />
+
+      <div className="relative container mx-auto px-4 md:px-8 py-24 lg:py-32">
+        <div className="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
+
+          <div className="flex flex-col space-y-8 max-w-2xl">
+            <div className="space-y-5">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1]">
                 AUTOMATION WITHOUT THE OPERATIONAL BURDEN
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-lg">
+              <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium max-w-xl">
                 We deliver business process automation as a fully managed service.
               </p>
             </div>
-            
-            <ul className="space-y-4">
+
+            <ul className="space-y-3">
               {[
                 "No infrastructure to build or maintain",
                 "No internal automation team needed",
                 "Fast ROI with predictable costs"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-lg font-medium text-foreground">
-                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
+                <li key={i} className="flex items-center gap-3 text-base md:text-lg font-medium text-white/90">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            
-            <div className="pt-4">
-              <Button 
-                size="lg" 
-                className="h-14 px-10 text-base uppercase tracking-widest font-bold rounded-none shadow-lg shadow-primary/20"
+
+            <div className="pt-2">
+              <Button
+                size="lg"
+                className="h-14 px-10 text-base uppercase tracking-widest font-bold rounded-none shadow-lg shadow-primary/30"
                 onClick={scrollToCalculator}
                 data-testid="btn-hero-cta"
               >
@@ -48,44 +55,29 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          
-          <div className="relative w-full aspect-square md:aspect-[4/3] bg-card border border-border shadow-xl p-8 flex flex-col justify-center gap-6">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-tr-full -z-10" />
-            
-            <div className="flex flex-col items-center p-6 border-2 border-dashed border-muted-foreground/30 bg-muted/30">
-              <div className="flex items-center justify-center w-12 h-12 bg-background border border-border mb-3">
-                <Cog className="w-6 h-6 text-muted-foreground" />
-              </div>
-              <span className="font-bold text-lg tracking-wider text-center uppercase">Manual Process</span>
+
+          <div className="hidden lg:flex flex-col items-center gap-0 w-[220px]">
+            <div className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-5 py-4 text-center">
+              <span className="font-bold text-sm tracking-widest text-white uppercase">Manual Process</span>
             </div>
-            
-            <div className="flex justify-center">
-              <ArrowRight className="w-8 h-8 text-primary" />
+
+            <div className="flex justify-center py-1.5">
+              <ArrowDown className="w-5 h-5 text-primary" />
             </div>
-            
-            <div className="flex flex-col items-center p-6 border-2 border-primary bg-primary/5 shadow-md shadow-primary/5 relative">
-              <div className="absolute -top-3 -right-3 w-6 h-6 bg-primary text-primary-foreground flex items-center justify-center rounded-full">
-                <Zap className="w-3 h-3" />
-              </div>
-              <div className="flex items-center justify-center w-12 h-12 bg-primary mb-3">
-                <Cog className="w-6 h-6 text-primary-foreground animate-[spin_4s_linear_infinite]" />
-              </div>
-              <span className="font-bold text-lg tracking-wider text-center text-primary uppercase">Automated Process</span>
+
+            <div className="w-full bg-primary/80 backdrop-blur-sm border border-primary rounded-lg px-5 py-4 text-center shadow-lg shadow-primary/20">
+              <span className="font-bold text-sm tracking-widest text-white uppercase">Automated Process</span>
             </div>
-            
-            <div className="flex justify-center">
-              <ArrowRight className="w-8 h-8 text-primary" />
+
+            <div className="flex justify-center py-1.5">
+              <ArrowDown className="w-5 h-5 text-primary" />
             </div>
-            
-            <div className="flex flex-col items-center p-6 bg-foreground text-background">
-              <div className="flex items-center justify-center w-12 h-12 border border-background/20 mb-3">
-                <TrendingDown className="w-6 h-6 text-background" />
-              </div>
-              <span className="font-bold text-lg tracking-wider text-center uppercase">Time Saved, Costs Reduced</span>
+
+            <div className="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg px-5 py-4 text-center">
+              <span className="font-bold text-sm tracking-widest text-white uppercase">Time Saved,<br />Costs Reduced</span>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>

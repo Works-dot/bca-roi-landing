@@ -1,0 +1,74 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "sd5Eq02tukL7pY1qSrc71"
+uri = "file://attached_assets/stock_images/hero-bg_1.jpg"
+type = "image"
+title = "modern industrial office space warm golden lighting atmospheric business corporate workspace"
+
+[[outputs]]
+id = "pOwcpNplTcZ3UsEF8VT8Q"
+uri = "file://attached_assets/stock_images/hero-bg_2.jpg"
+type = "image"
+title = "modern industrial office space warm golden lighting atmospheric business corporate workspace"
+
+[[outputs]]
+id = "CabL0KZVQfymvpRLbtgtT"
+uri = "file://attached_assets/stock_images/hero-bg_3.jpg"
+type = "image"
+title = "modern industrial office space warm golden lighting atmospheric business corporate workspace"
+
+[[outputs]]
+id = "ACW1dZun7CZyBPKxxxh8y"
+uri = "file://attached_assets/stock_images/hero-bg-warm_1.jpg"
+type = "image"
+title = "dark modern warehouse loft office space warm amber lighting bokeh atmospheric empty"
+
+[[outputs]]
+id = "derI44DlzJidvQbb8O1Q6"
+uri = "file://attached_assets/stock_images/hero-bg-warm_2.jpg"
+type = "image"
+title = "dark modern warehouse loft office space warm amber lighting bokeh atmospheric empty"
+
+[[outputs]]
+id = "fNxHPQDsjk0nwm5iwZy0c"
+uri = "file://attached_assets/stock_images/hero-bg-warm_3.jpg"
+type = "image"
+title = "dark modern warehouse loft office space warm amber lighting bokeh atmospheric empty"
+
+[[outputs]]
+id = "24h72upcvVstLOZK1FpG0"
+uri = "file://attached_assets/stock_images/hero-city_1.jpg"
+type = "image"
+title = "modern city skyline through office window sunset golden hour corporate building interior"
+
+[[outputs]]
+id = "H7dHPCbVwSQW919pUSv_w"
+uri = "file://attached_assets/stock_images/hero-city_2.jpg"
+type = "image"
+title = "modern city skyline through office window sunset golden hour corporate building interior"
+
+[[outputs]]
+id = "gKPQDqSmWY8Y_xrhBqvyW"
+uri = "file://attached_assets/stock_images/hero-city_3.jpg"
+type = "image"
+title = "modern city skyline through office window sunset golden hour corporate building interior"
+
+[[outputs]]
+id = "0OOfFdqM-NotmDhSVOy09"
+uri = "file://attached_assets/stock_images/hero-industrial_1.jpg"
+type = "image"
+title = "modern factory industrial hall manufacturing technology automation machinery warm light"
+
+[[outputs]]
+id = "JgS1bpRj6DSWfES9ve0Cy"
+uri = "file://attached_assets/stock_images/hero-industrial_2.jpg"
+type = "image"
+title = "modern factory industrial hall manufacturing technology automation machinery warm light"
+
+[[outputs]]
+id = "xmEPf5MNN_4qxwcN7NmfA"
+uri = "file://attached_assets/stock_images/hero-industrial_3.jpg"
+type = "image"
+title = "modern factory industrial hall manufacturing technology automation machinery warm light"
