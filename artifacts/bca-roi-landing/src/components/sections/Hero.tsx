@@ -51,7 +51,7 @@ export default function Hero() {
             <div className="pt-2">
               <Button
                 size="lg"
-                className="h-14 px-10 text-base uppercase tracking-widest font-bold rounded-none shadow-lg shadow-primary/30"
+                className="h-14 px-10 text-base uppercase tracking-widest font-bold rounded shadow-lg shadow-primary/30"
                 onClick={scrollToCalculator}
                 data-testid="btn-hero-cta"
               >
@@ -61,7 +61,7 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-row lg:flex-col items-center justify-center gap-0 w-full lg:max-w-[550px] lg:ml-auto pt-4 lg:pt-0">
-            <div className="flex-1 lg:flex-none lg:w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-3 lg:px-6 lg:py-7 text-center flex flex-col items-center">
+            <div className="flex-1 lg:flex-none lg:w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded px-3 py-3 lg:px-6 lg:py-7 text-center flex flex-col items-center">
               <Cog className="w-8 h-8 text-white/80 mb-2 hidden lg:block" />
               <span className="font-bold text-xs lg:text-base tracking-widest text-white uppercase">Manual Process</span>
             </div>
@@ -71,7 +71,7 @@ export default function Hero() {
               <ArrowDown className="w-7 h-7 text-white/80 hidden lg:block" />
             </div>
 
-            <div className="flex-1 lg:flex-none lg:w-full bg-primary/80 backdrop-blur-sm border border-primary rounded-lg px-3 py-3 lg:px-6 lg:py-7 text-center shadow-lg shadow-primary/20 flex flex-col items-center">
+            <div className="flex-1 lg:flex-none lg:w-full bg-primary/80 backdrop-blur-sm border border-primary rounded px-3 py-3 lg:px-6 lg:py-7 text-center shadow-lg shadow-primary/20 flex flex-col items-center">
               <Cog className="w-8 h-8 text-white mb-2 hidden lg:block animate-[spin_4s_linear_infinite]" />
               <span className="font-bold text-xs lg:text-base tracking-widest text-white uppercase">Automated Process</span>
             </div>
@@ -81,7 +81,7 @@ export default function Hero() {
               <ArrowDown className="w-7 h-7 text-white/80 hidden lg:block" />
             </div>
 
-            <div className="flex-1 lg:flex-none lg:w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-lg px-3 py-3 lg:px-6 lg:py-7 text-center flex flex-col items-center">
+            <div className="flex-1 lg:flex-none lg:w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded px-3 py-3 lg:px-6 lg:py-7 text-center flex flex-col items-center">
               <TrendingDown className="w-8 h-8 text-white/80 mb-2 hidden lg:block" />
               <span className="font-bold text-xs lg:text-base tracking-widest text-white uppercase leading-tight">Time Saved, Costs Reduced</span>
             </div>

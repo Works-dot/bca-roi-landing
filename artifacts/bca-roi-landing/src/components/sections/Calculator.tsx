@@ -209,7 +209,7 @@ export default function Calculator() {
                 <div className="space-y-3">
                   <Label className="text-base uppercase font-bold tracking-wider text-foreground">Process Complexity</Label>
                   <Select onValueChange={setComplexity} value={complexity}>
-                    <SelectTrigger className="h-12 bg-background border-border rounded-none text-lg">
+                    <SelectTrigger className="h-12 bg-background border-border rounded text-lg">
                       <SelectValue placeholder="Select size..." />
                     </SelectTrigger>
                     <SelectContent>
@@ -232,7 +232,7 @@ export default function Calculator() {
                       type="number" 
                       value={hours} 
                       onChange={(e) => setHours(e.target.value)}
-                      className="h-12 bg-background border-border rounded-none text-lg"
+                      className="h-12 bg-background border-border rounded text-lg"
                     />
                   </div>
                   <div className="space-y-3">
@@ -241,14 +241,14 @@ export default function Calculator() {
                       type="number" 
                       value={rate} 
                       onChange={(e) => setRate(e.target.value)}
-                      className="h-12 bg-background border-border rounded-none text-lg"
+                      className="h-12 bg-background border-border rounded text-lg"
                     />
                   </div>
                 </div>
 
                 <Button 
                   onClick={handleCalculate}
-                  className="w-full h-14 text-lg font-bold tracking-widest uppercase rounded-none mt-4"
+                  className="w-full h-14 text-lg font-bold tracking-widest uppercase rounded mt-4"
                   data-testid="btn-calculate"
                 >
                   Calculate
@@ -256,7 +256,7 @@ export default function Calculator() {
             </div>
 
             <div className="lg:col-span-5 flex flex-col">
-              <Card className="border-2 border-primary rounded-none shadow-xl flex-1 flex flex-col justify-center bg-card relative overflow-hidden min-h-[420px]">
+              <Card className="border-2 border-primary rounded shadow-xl flex-1 flex flex-col justify-center bg-card relative overflow-hidden min-h-[420px]">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full" />
                 <CardContent className="p-8 md:p-10 flex flex-col gap-6 relative z-10">
                   {renderResultsContent()}

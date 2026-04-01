@@ -219,7 +219,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
               <Input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="bg-background border-border rounded-none h-10"
+                className="bg-background border-border rounded h-10"
                 autoComplete="username"
                 autoFocus
               />
@@ -232,14 +232,14 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-background border-border rounded-none h-10"
+                className="bg-background border-border rounded h-10"
                 autoComplete="current-password"
               />
             </div>
             <Button
               type="submit"
               disabled={loading || !username || !password}
-              className="w-full h-12 text-sm font-bold uppercase tracking-widest rounded-none"
+              className="w-full h-12 text-sm font-bold uppercase tracking-widest rounded"
             >
               {loading ? "Signing in..." : "Sign In"}
             </Button>
@@ -374,7 +374,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
             value={current || "Layers"}
             onValueChange={(val) => handleContentChange(key, val)}
           >
-            <SelectTrigger className="bg-background border-border rounded-none h-10">
+            <SelectTrigger className="bg-background border-border rounded h-10">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -404,7 +404,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           <Textarea
             value={current}
             onChange={(e) => handleContentChange(key, e.target.value)}
-            className="bg-background border-border rounded-none min-h-[80px]"
+            className="bg-background border-border rounded min-h-[80px]"
           />
         </div>
       );
@@ -418,7 +418,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
         <Input
           value={current}
           onChange={(e) => handleContentChange(key, e.target.value)}
-          className="bg-background border-border rounded-none"
+          className="bg-background border-border rounded"
         />
       </div>
     );
@@ -434,7 +434,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           type="number"
           value={value}
           onChange={(e) => handleConstantFieldChange(path, parseFloat(e.target.value) || 0)}
-          className="bg-background border-border rounded-none h-10"
+          className="bg-background border-border rounded h-10"
         />
         {suffix && <span className="text-sm text-muted-foreground whitespace-nowrap">{suffix}</span>}
       </div>
@@ -505,7 +505,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
               <Button
                 onClick={handleSaveContent}
                 disabled={saving || Object.keys(dirty).length === 0}
-                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded-none"
+                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded"
               >
                 {saving ? "Saving..." : `Save Changes (${Object.keys(dirty).length})`}
               </Button>
@@ -553,7 +553,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
               <Button
                 onClick={handleSaveConstants}
                 disabled={saving || !constantsDirty}
-                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded-none"
+                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded"
               >
                 {saving ? "Saving..." : "Save Constants"}
               </Button>

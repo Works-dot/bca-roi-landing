@@ -82,7 +82,7 @@ export default function FinalCTA() {
                       <FormItem>
                         <FormLabel className="text-foreground font-bold uppercase tracking-wider">Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John Doe" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="John Doe" className="h-12 rounded border-border bg-background text-foreground" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -95,7 +95,7 @@ export default function FinalCTA() {
                       <FormItem>
                         <FormLabel className="text-foreground font-bold uppercase tracking-wider">Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="john@company.com" type="email" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="john@company.com" type="email" className="h-12 rounded border-border bg-background text-foreground" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -108,7 +108,7 @@ export default function FinalCTA() {
                       <FormItem>
                         <FormLabel className="text-foreground font-bold uppercase tracking-wider">Company</FormLabel>
                         <FormControl>
-                          <Input placeholder="Acme Corp" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="Acme Corp" className="h-12 rounded border-border bg-background text-foreground" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,7 +122,7 @@ export default function FinalCTA() {
                   <Button 
                     type="submit" 
                     disabled={submitting}
-                    className="w-full h-14 text-base font-bold uppercase tracking-widest rounded-none mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
+                    className="w-full h-14 text-base font-bold uppercase tracking-widest rounded mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
                     data-testid="btn-submit-assessment"
                   >
                     {submitting ? "Submitting..." : buttonText}

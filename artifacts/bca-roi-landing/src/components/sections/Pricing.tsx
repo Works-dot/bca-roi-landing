@@ -29,7 +29,7 @@ export default function Pricing() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <Card className="border-none shadow-md rounded-none bg-card">
+            <Card className="border-none shadow-md rounded bg-card">
               <CardHeader className="text-center pb-2 border-b border-border bg-muted/30">
                 <CardTitle className="text-2xl font-bold uppercase tracking-widest">{starterName}</CardTitle>
                 <p className="text-muted-foreground font-medium">{starterDesc}</p>
@@ -48,7 +48,7 @@ export default function Pricing() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-primary shadow-xl rounded-none bg-card relative transform md:-translate-y-4">
+            <Card className="border-2 border-primary shadow-xl rounded bg-card relative transform md:-translate-y-4">
               <div className="absolute top-0 inset-x-0 h-1 bg-primary"></div>
               <CardHeader className="text-center pb-2 border-b border-border bg-primary/5">
                 <CardTitle className="text-2xl font-bold uppercase tracking-widest text-primary">{growthName}</CardTitle>
@@ -68,7 +68,7 @@ export default function Pricing() {
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md rounded-none bg-card">
+            <Card className="border-none shadow-md rounded bg-card">
               <CardHeader className="text-center pb-2 border-b border-border bg-muted/30">
                 <CardTitle className="text-2xl font-bold uppercase tracking-widest">{scaleName}</CardTitle>
                 <p className="text-muted-foreground font-medium">{scaleDesc}</p>
