@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -39,7 +40,7 @@ export default function Calculator() {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
+          <div className="grid lg:grid-cols-12 gap-12 items-stretch">
             <div className="lg:col-span-7 space-y-8">
               <div className="space-y-6 bg-muted/50 p-8 border border-border">
                 <div className="space-y-3">
@@ -112,8 +113,11 @@ export default function Calculator() {
                     </div>
                   </div>
                   
-                  <div className="mt-4 p-4 bg-green-50 border border-green-200 text-green-800 font-medium">
-                    This process is a strong automation candidate.
+                  <div className="mt-4 bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="font-bold text-sm tracking-wider text-primary uppercase">
+                      Strong automation candidate
+                    </span>
                   </div>
                 </CardContent>
               </Card>
