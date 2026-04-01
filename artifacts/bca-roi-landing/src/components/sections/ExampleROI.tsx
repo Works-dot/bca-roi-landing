@@ -31,7 +31,7 @@ export default function ExampleROI() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-background/20 p-8 flex flex-col gap-6 relative">
+            <div className="border border-background/20 p-8 flex flex-col gap-6 relative rounded">
               <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{manualTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
@@ -49,7 +49,7 @@ export default function ExampleROI() {
               </div>
             </div>
 
-            <div className="border border-primary bg-primary/10 p-8 flex flex-col gap-6 relative">
+            <div className="border border-primary bg-primary/10 p-8 flex flex-col gap-6 relative rounded">
               <h3 className="text-xl font-bold text-primary tracking-widest uppercase">{autoTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
@@ -64,7 +64,7 @@ export default function ExampleROI() {
               </div>
             </div>
 
-            <div className="bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl">
+            <div className="bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl rounded">
               <h3 className="text-xl font-bold tracking-widest uppercase">{impactTitle}</h3>
               <ul className="space-y-4 text-lg font-medium">
                 <li className="flex justify-between border-b border-primary-foreground/20 pb-2">

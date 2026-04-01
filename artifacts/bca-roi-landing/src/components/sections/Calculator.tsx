@@ -205,7 +205,7 @@ export default function Calculator() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 items-stretch">
-            <div className="lg:col-span-7 space-y-6 bg-muted/50 p-8 border border-border">
+            <div className="lg:col-span-7 space-y-6 bg-muted/50 p-8 border border-border rounded">
                 <div className="space-y-3">
                   <Label className="text-base uppercase font-bold tracking-wider text-foreground">Process Complexity</Label>
                   <Select onValueChange={setComplexity} value={complexity}>
