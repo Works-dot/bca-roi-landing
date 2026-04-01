@@ -32,5 +32,3 @@ channel = "stable-25_05"
 
 [userenv.shared]
 ADMIN_USERNAME = "bca-admin"
-ADMIN_PASSWORD_HASH = "$2b$12$PqmZjo7o.Og/lqwpNxi02u1HtyUeN7vF041qI6KPKqFHbB8pba81C"
-JWT_SECRET = "bd1a47514b7aa34cd5d1912b9bf8cef465a11cc39ad0532e9bb40af88d984dcd"
