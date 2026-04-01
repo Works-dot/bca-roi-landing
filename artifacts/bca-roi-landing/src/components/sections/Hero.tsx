@@ -10,7 +10,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[600px] lg:min-h-[700px]">
+    <section className="relative overflow-hidden min-h-[600px] lg:min-h-screen">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-bg.jpg')" }}
