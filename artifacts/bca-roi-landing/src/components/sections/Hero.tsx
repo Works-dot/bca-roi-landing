@@ -1,7 +1,15 @@
 import { CheckCircle2, ArrowDown, ArrowRight, Cog, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useContent } from "@/lib/cms-context";
 
 export default function Hero() {
+  const headline = useContent("hero.headline", "AUTOMATION WITHOUT THE OPERATIONAL BURDEN");
+  const subheadline = useContent("hero.subheadline", "We deliver business process automation as a fully managed service.");
+  const check1 = useContent("hero.checklist.1", "No infrastructure to build or maintain");
+  const check2 = useContent("hero.checklist.2", "No internal automation team needed");
+  const check3 = useContent("hero.checklist.3", "Fast ROI with predictable costs");
+  const cta = useContent("hero.cta", "Calculate Your ROI");
+
   const scrollToCalculator = () => {
     const el = document.getElementById("calculator");
     if (el) {
@@ -24,19 +32,15 @@ export default function Hero() {
           <div className="flex flex-col space-y-8">
             <div className="space-y-5">
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1]">
-                AUTOMATION WITHOUT THE OPERATIONAL BURDEN
+                {headline}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium">
-                We deliver business process automation as a fully managed service.
+                {subheadline}
               </p>
             </div>
 
             <ul className="space-y-3">
-              {[
-                "No infrastructure to build or maintain",
-                "No internal automation team needed",
-                "Fast ROI with predictable costs"
-              ].map((item, i) => (
+              {[check1, check2, check3].map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-base md:text-lg font-medium text-white/90">
                   <CheckCircle2 className="w-5 h-5 text-white/70 flex-shrink-0" />
                   <span>{item}</span>
@@ -51,7 +55,7 @@ export default function Hero() {
                 onClick={scrollToCalculator}
                 data-testid="btn-hero-cta"
               >
-                Calculate Your ROI
+                {cta}
               </Button>
             </div>
           </div>

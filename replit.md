@@ -55,8 +55,13 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` for request and response validation and `@workspace/db` for persistence.
 
 - Entry: `src/index.ts` — reads `PORT`, starts Express
-- App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing, routes at `/api`
-- Routes: `src/routes/index.ts` mounts sub-routers; `src/routes/health.ts` exposes `GET /health` (full path: `/api/health`)
+- App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing (100kb limit), routes at `/api`, centralized error handler
+- Middleware: `src/middleware/admin-auth.ts` — `requireAdmin` checks `x-admin-key` header against `ADMIN_API_KEY` env var; skips auth when env var is unset (dev mode)
+- Routes: `src/routes/index.ts` mounts sub-routers:
+  - `health.ts` — `GET /api/healthz`
+  - `content.ts` — `GET /api/content` (public), `PUT /api/content` (admin-only, body: `{entries: [{key, value}]}`)
+  - `constants.ts` — `GET /api/constants` (public), `PUT /api/constants` (admin-only, body: `{entries: [{key, value}]}`)
+  - `submissions.ts` — `POST /api/submissions` (public, body: `{name, email, company}`), `GET /api/submissions` (admin-only)
 - Depends on: `@workspace/db`, `@workspace/api-zod`
 - `pnpm --filter @workspace/api-server run dev` — run the dev server
 - `pnpm --filter @workspace/api-server run build` — production esbuild bundle (`dist/index.cjs`)
@@ -67,12 +72,29 @@ Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` 
 Database layer using Drizzle ORM with PostgreSQL. Exports a Drizzle client instance and schema models.
 
 - `src/index.ts` — creates a `Pool` + Drizzle instance, exports schema
-- `src/schema/index.ts` — barrel re-export of all models
-- `src/schema/<modelname>.ts` — table definitions with `drizzle-zod` insert schemas (no models definitions exist right now)
+- `src/schema/index.ts` — table definitions:
+  - `cms_content` — key-value CMS content (key unique text, value text)
+  - `calculator_constants` — calculator pricing/ratios (key unique text, value jsonb)
+  - `contact_submissions` — lead form submissions (name, email, company, created_at)
+- `src/seed.ts` — seeds CMS content (54 entries) and calculator constants (3 entries) from hardcoded landing page values
 - `drizzle.config.ts` — Drizzle Kit config (requires `DATABASE_URL`, automatically provided by Replit)
 - Exports: `.` (pool, db, schema), `./schema` (schema only)
 
 Production migrations are handled by Replit when publishing. In development, we just use `pnpm --filter @workspace/db run push`, and we fallback to `pnpm --filter @workspace/db run push-force`.
+
+### `artifacts/bca-roi-landing` (`@workspace/bca-roi-landing`)
+
+React + Vite landing page for BCA Solutions' Managed Intelligent Automation service. Single-page app with CMS integration.
+
+- Design: Dosis font, UPPERCASE headings, primary #731517, warm neutral palette
+- Pages: `/` (landing page), `/admin` (admin panel)
+- CMS: All text content loaded from database via `CmsProvider` context (`src/lib/cms-context.tsx`)
+- Calculator: Uses admin-editable constants from DB (pricing, automationRatio, workingHoursPerMonth)
+- Contact form: Submits to `POST /api/submissions`, shows success state
+- Admin panel (`/admin`): 3 tabs — Content (grouped by section), Calculator Constants (JSON editor), Submissions (table view)
+- Admin auth: Pass `?key=<ADMIN_API_KEY>` query param to authenticate admin API calls
+- Vite proxy: `/api` proxied to `http://localhost:8080` in dev
+- Section components in `src/components/sections/` all use `useContent()` hook for CMS text
 
 ### `lib/api-spec` (`@workspace/api-spec`)
 

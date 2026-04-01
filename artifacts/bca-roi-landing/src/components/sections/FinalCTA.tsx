@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useContent } from "@/lib/cms-context";
+import { submitContact } from "@/lib/api";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -12,6 +15,14 @@ const formSchema = z.object({
 });
 
 export default function FinalCTA() {
+  const headline = useContent("cta.headline", "START WITH ONE PROCESS");
+  const subheadline = useContent("cta.subheadline", "Validate ROI quickly and scale automation.");
+  const buttonText = useContent("cta.button", "Request Detailed Assessment");
+
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -21,8 +32,17 @@ export default function FinalCTA() {
     },
   });
 
-  function onSubmit(_values: z.infer<typeof formSchema>) {
-    // Form submission will be implemented in a future task
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitContact(values);
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -34,65 +54,82 @@ export default function FinalCTA() {
           
           <div className="flex-1 space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold uppercase leading-tight">
-              START WITH ONE PROCESS
+              {headline}
             </h2>
             <p className="text-xl md:text-2xl font-medium text-primary-foreground/90">
-              Validate ROI quickly and scale automation.
+              {subheadline}
             </p>
           </div>
           
           <div className="flex-1 w-full max-w-md bg-background p-8 border-t-4 border-foreground shadow-2xl">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground font-bold uppercase tracking-wider">Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="John Doe" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
+            {submitted ? (
+              <div className="text-center space-y-4 py-8">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-foreground uppercase tracking-wider">Thank You</h3>
+                <p className="text-muted-foreground">We'll be in touch within 24 hours to schedule your assessment.</p>
+              </div>
+            ) : (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="John Doe" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="john@company.com" type="email" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="company"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Company</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Acme Corp" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  {error && (
+                    <p className="text-sm text-red-500 font-medium">{error}</p>
                   )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground font-bold uppercase tracking-wider">Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="john@company.com" type="email" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="company"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-foreground font-bold uppercase tracking-wider">Company</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Acme Corp" className="h-12 rounded-none border-border bg-background text-foreground" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <Button 
-                  type="submit" 
-                  className="w-full h-14 text-base font-bold uppercase tracking-widest rounded-none mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
-                  data-testid="btn-submit-assessment"
-                >
-                  Request Detailed Assessment
-                </Button>
-              </form>
-            </Form>
+                  
+                  <Button 
+                    type="submit" 
+                    disabled={submitting}
+                    className="w-full h-14 text-base font-bold uppercase tracking-widest rounded-none mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
+                    data-testid="btn-submit-assessment"
+                  >
+                    {submitting ? "Submitting..." : buttonText}
+                  </Button>
+                </form>
+              </Form>
+            )}
           </div>
 
         </div>

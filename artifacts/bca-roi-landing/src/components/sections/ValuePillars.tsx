@@ -1,29 +1,15 @@
 import { Layers, ShieldCheck, Clock, Calculator } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useContent } from "@/lib/cms-context";
 
 export default function ValuePillars() {
-  const pillars = [
-    {
-      icon: Layers,
-      title: "Lower Complexity",
-      description: "No platform to manage"
-    },
-    {
-      icon: ShieldCheck,
-      title: "Lower Risk",
-      description: "Start small, No commitment"
-    },
-    {
-      icon: Clock,
-      title: "Fast Time-to-Value",
-      description: "Live in weeks, not months"
-    },
-    {
-      icon: Calculator,
-      title: "Predictable Cost",
-      description: "Transparent, scalable pricing"
-    }
-  ];
+  const title = useContent("pillars.title", "WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION");
+  const icons = [Layers, ShieldCheck, Clock, Calculator];
+  const pillars = [1, 2, 3, 4].map((n, i) => ({
+    icon: icons[i],
+    title: useContent(`pillars.${n}.title`, ""),
+    description: useContent(`pillars.${n}.description`, ""),
+  }));
 
   return (
     <section className="py-24 bg-muted">
@@ -31,7 +17,7 @@ export default function ValuePillars() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION
+              {title}
             </h2>
           </div>
           

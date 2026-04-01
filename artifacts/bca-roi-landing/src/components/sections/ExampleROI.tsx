@@ -1,28 +1,47 @@
 import { ArrowRight } from "lucide-react";
+import { useContent } from "@/lib/cms-context";
 
 export default function ExampleROI() {
+  const title = useContent("example.title", "TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS");
+  const manualTitle = useContent("example.manual.title", "Manual process");
+  const manualHours = useContent("example.manual.hours", "~2 hours/day");
+  const manualRate = useContent("example.manual.rate", "\u20AC40/hour");
+  const manualCost = useContent("example.manual.cost", "\u20AC16,800 annual cost");
+  const autoTitle = useContent("example.automation.title", "Automation");
+  const autoSetup = useContent("example.automation.setup", "\u20AC10,000 setup");
+  const autoService = useContent("example.automation.service", "\u20AC5,000 annual service");
+  const impactTitle = useContent("example.impact.title", "Business impact");
+  const impactSavings = useContent("example.impact.savings", "~\u20AC12,000 savings");
+  const impactPayback = useContent("example.impact.payback", "~10-month payback");
+  const impactRoi = useContent("example.impact.roi", "~100% ROI");
+  const footer = useContent("example.footer", "Small processes. Big impact.");
+
+  const footerParts = footer.split(". ");
+  const footerFirst = footerParts[0] + ".";
+  const footerBold = footerParts.length > 1 ? footerParts.slice(1).join(". ") : "";
+
   return (
     <section className="py-24 bg-foreground text-background">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">
-              TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS
+              {title}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="border border-background/20 p-8 flex flex-col gap-6 relative">
-              <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">Manual process</h3>
+              <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{manualTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
-                  <span className="text-background">~2 hours/day</span>
+                  <span className="text-background">{manualHours}</span>
                 </li>
                 <li className="flex justify-between border-b border-background/10 pb-2">
-                  <span className="text-background">€40/hour</span>
+                  <span className="text-background">{manualRate}</span>
                 </li>
                 <li className="flex justify-between font-bold pt-2">
-                  <span className="text-primary-foreground text-xl">€16,800 annual cost</span>
+                  <span className="text-primary-foreground text-xl">{manualCost}</span>
                 </li>
               </ul>
               <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground p-1 rounded-full">
@@ -31,13 +50,13 @@ export default function ExampleROI() {
             </div>
 
             <div className="border border-primary bg-primary/10 p-8 flex flex-col gap-6 relative">
-              <h3 className="text-xl font-bold text-primary tracking-widest uppercase">Automation</h3>
+              <h3 className="text-xl font-bold text-primary tracking-widest uppercase">{autoTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
-                  <span className="text-background">€10,000 setup</span>
+                  <span className="text-background">{autoSetup}</span>
                 </li>
                 <li className="flex justify-between border-b border-background/10 pb-2">
-                  <span className="text-background">€5,000 annual service</span>
+                  <span className="text-background">{autoService}</span>
                 </li>
               </ul>
               <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground p-1 rounded-full">
@@ -46,16 +65,16 @@ export default function ExampleROI() {
             </div>
 
             <div className="bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl">
-              <h3 className="text-xl font-bold tracking-widest uppercase">Business impact</h3>
+              <h3 className="text-xl font-bold tracking-widest uppercase">{impactTitle}</h3>
               <ul className="space-y-4 text-lg font-medium">
                 <li className="flex justify-between border-b border-primary-foreground/20 pb-2">
-                  <span className="font-bold">~€12,000 savings</span>
+                  <span className="font-bold">{impactSavings}</span>
                 </li>
                 <li className="flex justify-between border-b border-primary-foreground/20 pb-2">
-                  <span className="font-bold">~10-month payback</span>
+                  <span className="font-bold">{impactPayback}</span>
                 </li>
                 <li className="flex justify-between font-bold pt-2">
-                  <span className="text-2xl">~100% ROI</span>
+                  <span className="text-2xl">{impactRoi}</span>
                 </li>
               </ul>
             </div>
@@ -63,7 +82,7 @@ export default function ExampleROI() {
 
           <div className="mt-16 text-center">
             <p className="text-3xl md:text-4xl font-light italic">
-              "Small processes. <span className="font-bold text-primary not-italic">Big impact.</span>"
+              "{footerFirst} <span className="font-bold text-primary not-italic">{footerBold}</span>"
             </p>
           </div>
         </div>

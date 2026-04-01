@@ -11,16 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const PRICING: Record<string, { setup: number; service: number }> = {
-  S: { setup: 5000, service: 3000 },
-  M: { setup: 10000, service: 5000 },
-  L: { setup: 17500, service: 7000 },
-};
-
-const AUTOMATION_RATIO = 0.9;
-const REMAINING_RATIO = 1 - AUTOMATION_RATIO;
-const WORKING_HOURS_PER_MONTH = 144;
+import { useContent, useConstants } from "@/lib/cms-context";
 
 interface CalculationResult {
   annualSavings: number;
@@ -30,7 +21,7 @@ interface CalculationResult {
 }
 
 function formatCurrency(value: number): string {
-  return "€" + Math.round(value).toLocaleString("en-US");
+  return "\u20AC" + Math.round(value).toLocaleString("en-US");
 }
 
 function getInsightLabel(paybackMonths: number): string {
@@ -41,6 +32,18 @@ function getInsightLabel(paybackMonths: number): string {
 }
 
 export default function Calculator() {
+  const sectionTitle = useContent("calculator.title", "ESTIMATE YOUR AUTOMATION ROI");
+  const constants = useConstants();
+
+  const PRICING: Record<string, { setup: number; service: number }> = (constants.pricing as Record<string, { setup: number; service: number }>) ?? {
+    S: { setup: 5000, service: 3000 },
+    M: { setup: 10000, service: 5000 },
+    L: { setup: 17500, service: 7000 },
+  };
+  const AUTOMATION_RATIO = (constants.automationRatio as number) ?? 0.9;
+  const WORKING_HOURS_PER_MONTH = (constants.workingHoursPerMonth as number) ?? 144;
+  const REMAINING_RATIO = 1 - AUTOMATION_RATIO;
+
   const [complexity, setComplexity] = useState<string>("");
   const [hours, setHours] = useState("120");
   const [rate, setRate] = useState("35");
@@ -197,7 +200,7 @@ export default function Calculator() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              ESTIMATE YOUR AUTOMATION ROI
+              {sectionTitle}
             </h2>
           </div>
 
@@ -261,7 +264,7 @@ export default function Calculator() {
               </Card>
               {(result || negativeBusiness) && (
                 <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
-                  Indicative calculation based on standard managed automation pricing and an assumed 90% automation ratio. Final pricing depends on process complexity and business environment.
+                  Indicative calculation based on standard managed automation pricing and an assumed {Math.round(AUTOMATION_RATIO * 100)}% automation ratio. Final pricing depends on process complexity and business environment.
                 </p>
               )}
             </div>
