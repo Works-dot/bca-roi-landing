@@ -5,23 +5,13 @@ import { cmsContentTable, calculatorConstantsTable } from "@workspace/db/schema"
 import { cmsContent, calculatorConstants } from "@workspace/db/seed-data";
 
 async function autoSeed() {
-  const existingContent = await db.select({ key: cmsContentTable.key }).from(cmsContentTable).limit(1);
-  if (existingContent.length === 0) {
-    logger.info("CMS content table empty, seeding...");
-    for (const entry of cmsContent) {
-      await db.insert(cmsContentTable).values(entry).onConflictDoNothing();
-    }
-    logger.info(`Auto-seeded ${cmsContent.length} content entries.`);
+  for (const entry of cmsContent) {
+    await db.insert(cmsContentTable).values(entry).onConflictDoNothing();
   }
-
-  const existingConstants = await db.select({ key: calculatorConstantsTable.key }).from(calculatorConstantsTable).limit(1);
-  if (existingConstants.length === 0) {
-    logger.info("Calculator constants table empty, seeding...");
-    for (const entry of calculatorConstants) {
-      await db.insert(calculatorConstantsTable).values({ key: entry.key, value: entry.value }).onConflictDoNothing();
-    }
-    logger.info(`Auto-seeded ${calculatorConstants.length} calculator constants.`);
+  for (const entry of calculatorConstants) {
+    await db.insert(calculatorConstantsTable).values({ key: entry.key, value: entry.value }).onConflictDoNothing();
   }
+  logger.info("Auto-seed complete (missing keys backfilled).");
 }
 
 const rawPort = process.env["PORT"];

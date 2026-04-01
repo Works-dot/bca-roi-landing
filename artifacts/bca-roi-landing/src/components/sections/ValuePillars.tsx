@@ -31,8 +31,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Cog,
 };
 
-const DEFAULT_ICONS = ["Layers", "ShieldCheck", "Clock", "Calculator"];
-
 export { ICON_MAP };
 
 export default function ValuePillars() {
