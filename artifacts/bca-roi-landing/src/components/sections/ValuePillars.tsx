@@ -1,15 +1,62 @@
-import { Layers, ShieldCheck, Clock, Calculator } from "lucide-react";
+import {
+  Layers, ShieldCheck, Clock, Calculator,
+  Zap, Target, TrendingUp, BarChart3, Shield,
+  Settings, Rocket, Award, CheckCircle2, Globe,
+  Users, Lightbulb, Lock, RefreshCw, Gauge, Cog,
+  type LucideIcon,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useContent } from "@/lib/cms-context";
 
+const ICON_MAP: Record<string, LucideIcon> = {
+  Layers,
+  ShieldCheck,
+  Clock,
+  Calculator,
+  Zap,
+  Target,
+  TrendingUp,
+  BarChart3,
+  Shield,
+  Settings,
+  Rocket,
+  Award,
+  CheckCircle2,
+  Globe,
+  Users,
+  Lightbulb,
+  Lock,
+  RefreshCw,
+  Gauge,
+  Cog,
+};
+
+const DEFAULT_ICONS = ["Layers", "ShieldCheck", "Clock", "Calculator"];
+
+export { ICON_MAP };
+
 export default function ValuePillars() {
   const title = useContent("pillars.title", "WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION");
-  const icons = [Layers, ShieldCheck, Clock, Calculator];
-  const pillars = [1, 2, 3, 4].map((n, i) => ({
-    icon: icons[i],
-    title: useContent(`pillars.${n}.title`, ""),
-    description: useContent(`pillars.${n}.description`, ""),
-  }));
+
+  const p1Title = useContent("pillars.1.title", "");
+  const p1Desc = useContent("pillars.1.description", "");
+  const p1Icon = useContent("pillars.1.icon", "Layers");
+  const p2Title = useContent("pillars.2.title", "");
+  const p2Desc = useContent("pillars.2.description", "");
+  const p2Icon = useContent("pillars.2.icon", "ShieldCheck");
+  const p3Title = useContent("pillars.3.title", "");
+  const p3Desc = useContent("pillars.3.description", "");
+  const p3Icon = useContent("pillars.3.icon", "Clock");
+  const p4Title = useContent("pillars.4.title", "");
+  const p4Desc = useContent("pillars.4.description", "");
+  const p4Icon = useContent("pillars.4.icon", "Calculator");
+
+  const pillars = [
+    { icon: ICON_MAP[p1Icon] || Layers, title: p1Title, description: p1Desc },
+    { icon: ICON_MAP[p2Icon] || ShieldCheck, title: p2Title, description: p2Desc },
+    { icon: ICON_MAP[p3Icon] || Clock, title: p3Title, description: p3Desc },
+    { icon: ICON_MAP[p4Icon] || Calculator, title: p4Title, description: p4Desc },
+  ];
 
   return (
     <section className="py-24 bg-muted">

@@ -3,12 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import {
   fetchContent,
   updateContent,
   fetchConstants,
   updateConstants,
   fetchSubmissions,
 } from "@/lib/api";
+import { ICON_MAP } from "@/components/sections/ValuePillars";
 
 type Tab = "content" | "constants" | "submissions";
 
@@ -19,6 +28,32 @@ interface Submission {
   company: string;
   createdAt: string;
 }
+
+const ICON_OPTIONS = Object.keys(ICON_MAP);
+
+const TEXTAREA_KEYS = new Set([
+  "hero.subheadline",
+  "service.quote",
+  "service.intro",
+  "service.bullet.1",
+  "service.bullet.2",
+  "service.bullet.3",
+  "pillars.1.description",
+  "pillars.2.description",
+  "pillars.3.description",
+  "pillars.4.description",
+  "example.footer",
+  "pricing.note",
+  "cta.subheadline",
+  "footer.copyright",
+]);
+
+const ICON_KEYS = new Set([
+  "pillars.1.icon",
+  "pillars.2.icon",
+  "pillars.3.icon",
+  "pillars.4.icon",
+]);
 
 const CONTENT_GROUPS: Record<string, string[]> = {
   Hero: [
@@ -41,12 +76,16 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "pillars.title",
     "pillars.1.title",
     "pillars.1.description",
+    "pillars.1.icon",
     "pillars.2.title",
     "pillars.2.description",
+    "pillars.2.icon",
     "pillars.3.title",
     "pillars.3.description",
+    "pillars.3.icon",
     "pillars.4.title",
     "pillars.4.description",
+    "pillars.4.icon",
   ],
   Calculator: ["calculator.title"],
   "Example ROI": [
@@ -97,6 +136,45 @@ function getAdminKey(): string {
   return params.get("key") || "";
 }
 
+interface PricingTier {
+  setup: number;
+  service: number;
+}
+
+interface StructuredConstants {
+  pricingS: PricingTier;
+  pricingM: PricingTier;
+  pricingL: PricingTier;
+  automationRatio: number;
+  workingHoursPerMonth: number;
+}
+
+function parseConstants(constants: Record<string, unknown>): StructuredConstants {
+  const pricing = (constants.pricing ?? {}) as Record<string, PricingTier>;
+  return {
+    pricingS: pricing.S ?? { setup: 5000, service: 3000 },
+    pricingM: pricing.M ?? { setup: 10000, service: 5000 },
+    pricingL: pricing.L ?? { setup: 17500, service: 7000 },
+    automationRatio: ((constants.automationRatio as number) ?? 0.9) * 100,
+    workingHoursPerMonth: (constants.workingHoursPerMonth as number) ?? 144,
+  };
+}
+
+function toApiConstants(s: StructuredConstants): { key: string; value: unknown }[] {
+  return [
+    {
+      key: "pricing",
+      value: {
+        S: { setup: s.pricingS.setup, service: s.pricingS.service },
+        M: { setup: s.pricingM.setup, service: s.pricingM.service },
+        L: { setup: s.pricingL.setup, service: s.pricingL.service },
+      },
+    },
+    { key: "automationRatio", value: s.automationRatio / 100 },
+    { key: "workingHoursPerMonth", value: s.workingHoursPerMonth },
+  ];
+}
+
 export default function Admin() {
   const [tab, setTab] = useState<Tab>("content");
   const [content, setContent] = useState<Record<string, string>>({});
@@ -106,7 +184,8 @@ export default function Admin() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [dirty, setDirty] = useState<Record<string, string>>({});
-  const [dirtyConstants, setDirtyConstants] = useState<Record<string, string>>({});
+  const [structuredConstants, setStructuredConstants] = useState<StructuredConstants | null>(null);
+  const [constantsDirty, setConstantsDirty] = useState(false);
   const adminKey = getAdminKey();
 
   useEffect(() => {
@@ -124,7 +203,8 @@ export default function Admin() {
       fetchConstants()
         .then((c) => {
           setConstants(c);
-          setDirtyConstants({});
+          setStructuredConstants(parseConstants(c));
+          setConstantsDirty(false);
         })
         .catch(() => setMessage("Failed to load constants"))
         .finally(() => setLoading(false));
@@ -157,29 +237,31 @@ export default function Admin() {
     }
   };
 
-  const handleConstantChange = (key: string, value: string) => {
-    setDirtyConstants((prev) => ({ ...prev, [key]: value }));
+  const handleConstantFieldChange = (path: string, value: number) => {
+    setConstantsDirty(true);
+    setStructuredConstants((prev) => {
+      if (!prev) return prev;
+      const next = { ...prev };
+      if (path === "pricingS.setup") next.pricingS = { ...next.pricingS, setup: value };
+      else if (path === "pricingS.service") next.pricingS = { ...next.pricingS, service: value };
+      else if (path === "pricingM.setup") next.pricingM = { ...next.pricingM, setup: value };
+      else if (path === "pricingM.service") next.pricingM = { ...next.pricingM, service: value };
+      else if (path === "pricingL.setup") next.pricingL = { ...next.pricingL, setup: value };
+      else if (path === "pricingL.service") next.pricingL = { ...next.pricingL, service: value };
+      else if (path === "automationRatio") next.automationRatio = value;
+      else if (path === "workingHoursPerMonth") next.workingHoursPerMonth = value;
+      return next;
+    });
   };
 
   const handleSaveConstants = async () => {
-    const entries: { key: string; value: unknown }[] = [];
-    for (const [key, raw] of Object.entries(dirtyConstants)) {
-      try {
-        entries.push({ key, value: JSON.parse(raw) });
-      } catch {
-        setMessage(`Invalid JSON for "${key}".`);
-        return;
-      }
-    }
-    if (entries.length === 0) return;
+    if (!structuredConstants || !constantsDirty) return;
     setSaving(true);
     setMessage(null);
     try {
+      const entries = toApiConstants(structuredConstants);
       await updateConstants(entries, adminKey);
-      for (const e of entries) {
-        setConstants((prev) => ({ ...prev, [e.key]: e.value }));
-      }
-      setDirtyConstants({});
+      setConstantsDirty(false);
       setMessage("Constants saved successfully.");
     } catch {
       setMessage("Failed to save constants.");
@@ -193,6 +275,86 @@ export default function Admin() {
     { id: "constants", label: "Calculator Constants" },
     { id: "submissions", label: "Submissions" },
   ];
+
+  const renderContentField = (key: string) => {
+    const current = dirty[key] ?? content[key] ?? "";
+
+    if (ICON_KEYS.has(key)) {
+      return (
+        <div key={key} className="space-y-1">
+          <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            {prettyKey(key)}
+          </label>
+          <Select
+            value={current || "Layers"}
+            onValueChange={(val) => handleContentChange(key, val)}
+          >
+            <SelectTrigger className="bg-background border-border rounded-none h-10">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ICON_OPTIONS.map((name) => {
+                const Icon = ICON_MAP[name];
+                return (
+                  <SelectItem key={name} value={name}>
+                    <span className="flex items-center gap-2">
+                      <Icon className="w-4 h-4" />
+                      {name}
+                    </span>
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
+        </div>
+      );
+    }
+
+    if (TEXTAREA_KEYS.has(key)) {
+      return (
+        <div key={key} className="space-y-1">
+          <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            {prettyKey(key)}
+          </label>
+          <Textarea
+            value={current}
+            onChange={(e) => handleContentChange(key, e.target.value)}
+            className="bg-background border-border rounded-none min-h-[80px]"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div key={key} className="space-y-1">
+        <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          {prettyKey(key)}
+        </label>
+        <Input
+          value={current}
+          onChange={(e) => handleContentChange(key, e.target.value)}
+          className="bg-background border-border rounded-none"
+        />
+      </div>
+    );
+  };
+
+  const renderConstantField = (label: string, path: string, value: number, suffix?: string) => (
+    <div className="space-y-1">
+      <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </Label>
+      <div className="flex items-center gap-2">
+        <Input
+          type="number"
+          value={value}
+          onChange={(e) => handleConstantFieldChange(path, parseFloat(e.target.value) || 0)}
+          className="bg-background border-border rounded-none h-10"
+        />
+        {suffix && <span className="text-sm text-muted-foreground whitespace-nowrap">{suffix}</span>}
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-muted">
@@ -243,30 +405,7 @@ export default function Admin() {
                 <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
                   {group}
                 </h2>
-                {keys.map((key) => {
-                  const current = dirty[key] ?? content[key] ?? "";
-                  const isLong = current.length > 80;
-                  return (
-                    <div key={key} className="space-y-1">
-                      <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                        {prettyKey(key)}
-                      </label>
-                      {isLong ? (
-                        <Textarea
-                          value={current}
-                          onChange={(e) => handleContentChange(key, e.target.value)}
-                          className="bg-background border-border rounded-none min-h-[80px]"
-                        />
-                      ) : (
-                        <Input
-                          value={current}
-                          onChange={(e) => handleContentChange(key, e.target.value)}
-                          className="bg-background border-border rounded-none"
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+                {keys.map((key) => renderContentField(key))}
               </div>
             ))}
             <div className="flex justify-end">
@@ -281,36 +420,49 @@ export default function Admin() {
           </div>
         ) : tab === "constants" ? (
           <div className="space-y-6">
-            <div className="bg-card border border-border p-6 space-y-4">
-              <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
-                Calculator Constants
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Values are stored as JSON. Edit carefully.
-              </p>
-              {Object.entries(constants).map(([key, value]) => {
-                const current = dirtyConstants[key] ?? JSON.stringify(value, null, 2);
-                return (
-                  <div key={key} className="space-y-1">
-                    <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      {key}
-                    </label>
-                    <Textarea
-                      value={current}
-                      onChange={(e) => handleConstantChange(key, e.target.value)}
-                      className="bg-background border-border rounded-none font-mono text-sm min-h-[60px]"
-                    />
+            {structuredConstants && (
+              <>
+                <div className="bg-card border border-border p-6 space-y-6">
+                  <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
+                    Pricing Tiers
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="space-y-4">
+                      <h3 className="font-bold text-foreground uppercase tracking-wider text-sm">S — Small</h3>
+                      {renderConstantField("Setup Fee", "pricingS.setup", structuredConstants.pricingS.setup, "\u20AC")}
+                      {renderConstantField("Annual Service", "pricingS.service", structuredConstants.pricingS.service, "\u20AC")}
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="font-bold text-foreground uppercase tracking-wider text-sm">M — Medium</h3>
+                      {renderConstantField("Setup Fee", "pricingM.setup", structuredConstants.pricingM.setup, "\u20AC")}
+                      {renderConstantField("Annual Service", "pricingM.service", structuredConstants.pricingM.service, "\u20AC")}
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="font-bold text-foreground uppercase tracking-wider text-sm">L — Large</h3>
+                      {renderConstantField("Setup Fee", "pricingL.setup", structuredConstants.pricingL.setup, "\u20AC")}
+                      {renderConstantField("Annual Service", "pricingL.service", structuredConstants.pricingL.service, "\u20AC")}
+                    </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+
+                <div className="bg-card border border-border p-6 space-y-4">
+                  <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
+                    Calculation Parameters
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {renderConstantField("Automation Ratio", "automationRatio", structuredConstants.automationRatio, "%")}
+                    {renderConstantField("Working Hours / Month", "workingHoursPerMonth", structuredConstants.workingHoursPerMonth, "hours")}
+                  </div>
+                </div>
+              </>
+            )}
             <div className="flex justify-end">
               <Button
                 onClick={handleSaveConstants}
-                disabled={saving || Object.keys(dirtyConstants).length === 0}
+                disabled={saving || !constantsDirty}
                 className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded-none"
               >
-                {saving ? "Saving..." : `Save Constants (${Object.keys(dirtyConstants).length})`}
+                {saving ? "Saving..." : "Save Constants"}
               </Button>
             </div>
           </div>

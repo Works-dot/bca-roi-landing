@@ -54,7 +54,7 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` for request and response validation and `@workspace/db` for persistence.
 
-- Entry: `src/index.ts` — reads `PORT`, starts Express
+- Entry: `src/index.ts` — reads `PORT`, auto-seeds CMS tables if empty on startup, then starts Express
 - App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing (100kb limit), routes at `/api`, centralized error handler
 - Middleware: `src/middleware/admin-auth.ts` — `requireAdmin` checks `x-admin-key` header against `ADMIN_API_KEY` env var; skips auth when env var is unset (dev mode)
 - Routes: `src/routes/index.ts` mounts sub-routers:
@@ -76,9 +76,10 @@ Database layer using Drizzle ORM with PostgreSQL. Exports a Drizzle client insta
   - `cms_content` — key-value CMS content (key unique text, value text)
   - `calculator_constants` — calculator pricing/ratios (key unique text, value jsonb)
   - `contact_submissions` — lead form submissions (name, email, company, created_at)
-- `src/seed.ts` — seeds CMS content (54 entries) and calculator constants (3 entries) from hardcoded landing page values
+- `src/seed-data.ts` — exported arrays of CMS content (58 entries incl. pillar icons) and calculator constants (3 entries)
+- `src/seed.ts` — CLI script that imports seed-data and upserts all entries; run via `pnpm --filter @workspace/db seed`
 - `drizzle.config.ts` — Drizzle Kit config (requires `DATABASE_URL`, automatically provided by Replit)
-- Exports: `.` (pool, db, schema), `./schema` (schema only)
+- Exports: `.` (pool, db, schema), `./schema` (schema only), `./seed-data` (seed arrays only, no DB import)
 
 Production migrations are handled by Replit when publishing. In development, we just use `pnpm --filter @workspace/db run push`, and we fallback to `pnpm --filter @workspace/db run push-force`.
 
@@ -91,7 +92,7 @@ React + Vite landing page for BCA Solutions' Managed Intelligent Automation serv
 - CMS: All text content loaded from database via `CmsProvider` context (`src/lib/cms-context.tsx`)
 - Calculator: Uses admin-editable constants from DB (pricing, automationRatio, workingHoursPerMonth)
 - Contact form: Submits to `POST /api/submissions`, shows success state
-- Admin panel (`/admin`): 3 tabs — Content (grouped by section), Calculator Constants (JSON editor), Submissions (table view)
+- Admin panel (`/admin`): 3 tabs — Content (grouped by section, textareas for long text, icon dropdowns for pillar icons), Calculator Constants (structured numeric inputs for pricing tiers S/M/L, automation ratio %, working hours/month), Submissions (table view)
 - Admin auth: Pass `?key=<ADMIN_API_KEY>` query param to authenticate admin API calls
 - Vite proxy: `/api` proxied to `http://localhost:8080` in dev
 - Section components in `src/components/sections/` all use `useContent()` hook for CMS text
