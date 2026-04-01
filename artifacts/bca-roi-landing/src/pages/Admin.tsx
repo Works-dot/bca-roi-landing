@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import {
+  login,
+  getStoredToken,
+  clearStoredToken,
   fetchContent,
   updateContent,
   fetchConstants,
@@ -131,11 +134,6 @@ function prettyKey(key: string): string {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-function getAdminKey(): string {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("key") || "";
-}
-
 interface PricingTier {
   setup: number;
   service: number;
@@ -175,7 +173,83 @@ function toApiConstants(s: StructuredConstants): { key: string; value: unknown }
   ];
 }
 
-export default function Admin() {
+function LoginForm({ onLogin }: { onLogin: () => void }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      await login(username, password);
+      onLogin();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-muted flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
+        <div className="bg-card border border-border p-8">
+          <h1 className="text-xl font-bold tracking-widest uppercase text-center mb-2">
+            BCA Admin
+          </h1>
+          <p className="text-sm text-muted-foreground text-center mb-8">
+            Sign in to manage your site
+          </p>
+
+          {error && (
+            <div className="mb-6 px-4 py-3 text-sm font-medium bg-red-100 text-red-800 rounded">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1">
+              <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Username
+              </Label>
+              <Input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="bg-background border-border rounded-none h-10"
+                autoComplete="username"
+                autoFocus
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Password
+              </Label>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-background border-border rounded-none h-10"
+                autoComplete="current-password"
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={loading || !username || !password}
+              className="w-full h-12 text-sm font-bold uppercase tracking-widest rounded-none"
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </Button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminPanel({ onLogout }: { onLogout: () => void }) {
   const [tab, setTab] = useState<Tab>("content");
   const [content, setContent] = useState<Record<string, string>>({});
   const [constants, setConstants] = useState<Record<string, unknown>>({});
@@ -186,7 +260,6 @@ export default function Admin() {
   const [dirty, setDirty] = useState<Record<string, string>>({});
   const [structuredConstants, setStructuredConstants] = useState<StructuredConstants | null>(null);
   const [constantsDirty, setConstantsDirty] = useState(false);
-  const adminKey = getAdminKey();
 
   useEffect(() => {
     setLoading(true);
@@ -197,7 +270,10 @@ export default function Admin() {
           setContent(c);
           setDirty({});
         })
-        .catch(() => setMessage("Failed to load content"))
+        .catch((err) => {
+          if (err.message === "Session expired") onLogout();
+          else setMessage("Failed to load content");
+        })
         .finally(() => setLoading(false));
     } else if (tab === "constants") {
       fetchConstants()
@@ -206,12 +282,18 @@ export default function Admin() {
           setStructuredConstants(parseConstants(c));
           setConstantsDirty(false);
         })
-        .catch(() => setMessage("Failed to load constants"))
+        .catch((err) => {
+          if (err.message === "Session expired") onLogout();
+          else setMessage("Failed to load constants");
+        })
         .finally(() => setLoading(false));
     } else {
-      fetchSubmissions(adminKey)
+      fetchSubmissions()
         .then(setSubmissions)
-        .catch(() => setMessage("Failed to load submissions"))
+        .catch((err) => {
+          if (err.message === "Session expired") onLogout();
+          else setMessage("Failed to load submissions");
+        })
         .finally(() => setLoading(false));
     }
   }, [tab]);
@@ -226,12 +308,13 @@ export default function Admin() {
     setSaving(true);
     setMessage(null);
     try {
-      await updateContent(entries, adminKey);
+      await updateContent(entries);
       setContent((prev) => ({ ...prev, ...dirty }));
       setDirty({});
       setMessage("Content saved successfully.");
-    } catch {
-      setMessage("Failed to save content.");
+    } catch (err) {
+      if (err instanceof Error && err.message === "Session expired") onLogout();
+      else setMessage("Failed to save content.");
     } finally {
       setSaving(false);
     }
@@ -260,11 +343,12 @@ export default function Admin() {
     setMessage(null);
     try {
       const entries = toApiConstants(structuredConstants);
-      await updateConstants(entries, adminKey);
+      await updateConstants(entries);
       setConstantsDirty(false);
       setMessage("Constants saved successfully.");
-    } catch {
-      setMessage("Failed to save constants.");
+    } catch (err) {
+      if (err instanceof Error && err.message === "Session expired") onLogout();
+      else setMessage("Failed to save constants.");
     } finally {
       setSaving(false);
     }
@@ -361,9 +445,17 @@ export default function Admin() {
       <header className="bg-foreground text-background py-4 px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-widest uppercase">BCA Admin</h1>
-          <a href="/" className="text-sm text-background/60 hover:text-background transition-colors">
-            Back to site
-          </a>
+          <div className="flex items-center gap-4">
+            <a href="/" className="text-sm text-background/60 hover:text-background transition-colors">
+              Back to site
+            </a>
+            <button
+              onClick={onLogout}
+              className="text-sm text-background/60 hover:text-background transition-colors cursor-pointer"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
@@ -513,4 +605,19 @@ export default function Admin() {
       </div>
     </div>
   );
+}
+
+export default function Admin() {
+  const [authenticated, setAuthenticated] = useState(!!getStoredToken());
+
+  const handleLogout = () => {
+    clearStoredToken();
+    setAuthenticated(false);
+  };
+
+  if (!authenticated) {
+    return <LoginForm onLogin={() => setAuthenticated(true)} />;
+  }
+
+  return <AdminPanel onLogout={handleLogout} />;
 }

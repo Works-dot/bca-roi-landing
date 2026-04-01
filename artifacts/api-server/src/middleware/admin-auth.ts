@@ -1,17 +1,25 @@
 import type { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
-const ADMIN_KEY = process.env.ADMIN_API_KEY;
+const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export function requireAdmin(req: Request, res: Response, next: NextFunction): void {
-  if (!ADMIN_KEY) {
+  if (!JWT_SECRET) {
     next();
     return;
   }
 
-  const provided = req.headers["x-admin-key"] as string | undefined;
-  if (provided !== ADMIN_KEY) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     res.status(401).json({ error: "Unauthorized" });
     return;
   }
-  next();
+
+  const token = authHeader.slice(7);
+  try {
+    jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: "Unauthorized" });
+  }
 }

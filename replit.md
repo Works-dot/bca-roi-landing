@@ -56,8 +56,9 @@ Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` 
 
 - Entry: `src/index.ts` — reads `PORT`, auto-seeds CMS tables if empty on startup, then starts Express
 - App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing (100kb limit), routes at `/api`, centralized error handler
-- Middleware: `src/middleware/admin-auth.ts` — `requireAdmin` checks `x-admin-key` header against `ADMIN_API_KEY` env var; skips auth when env var is unset (dev mode)
+- Middleware: `src/middleware/admin-auth.ts` — `requireAdmin` validates JWT `Authorization: Bearer <token>` header using `JWT_SECRET` env var; skips auth when env var is unset (dev mode)
 - Routes: `src/routes/index.ts` mounts sub-routers:
+  - `auth.ts` — `POST /api/admin/login` (validates username/password against `ADMIN_USERNAME` env var + bcrypt-hashed `ADMIN_PASSWORD_HASH`, returns JWT token)
   - `health.ts` — `GET /api/healthz`
   - `content.ts` — `GET /api/content` (public), `PUT /api/content` (admin-only, body: `{entries: [{key, value}]}`)
   - `constants.ts` — `GET /api/constants` (public), `PUT /api/constants` (admin-only, body: `{entries: [{key, value}]}`)
@@ -93,7 +94,7 @@ React + Vite landing page for BCA Solutions' Managed Intelligent Automation serv
 - Calculator: Uses admin-editable constants from DB (pricing, automationRatio, workingHoursPerMonth)
 - Contact form: Submits to `POST /api/submissions`, shows success state
 - Admin panel (`/admin`): 3 tabs — Content (grouped by section, textareas for long text, icon dropdowns for pillar icons), Calculator Constants (structured numeric inputs for pricing tiers S/M/L, automation ratio %, working hours/month), Submissions (table view)
-- Admin auth: Pass `?key=<ADMIN_API_KEY>` query param to authenticate admin API calls
+- Admin auth: Username/password login form at `/admin`, JWT token stored in localStorage, logout button in header. Credentials: username `bca-admin`, bcrypt-hashed password in env vars (`ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `JWT_SECRET`)
 - Vite proxy: `/api` proxied to `http://localhost:8080` in dev
 - Section components in `src/components/sections/` all use `useContent()` hook for CMS text
 
