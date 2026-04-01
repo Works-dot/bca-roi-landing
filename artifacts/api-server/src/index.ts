@@ -7,14 +7,20 @@ import { cmsContent, calculatorConstants } from "@workspace/db/seed-data";
 async function autoSeed() {
   const existingContent = await db.select({ key: cmsContentTable.key }).from(cmsContentTable).limit(1);
   if (existingContent.length === 0) {
-    logger.info("CMS tables empty, running auto-seed...");
+    logger.info("CMS content table empty, seeding...");
     for (const entry of cmsContent) {
       await db.insert(cmsContentTable).values(entry).onConflictDoNothing();
     }
+    logger.info(`Auto-seeded ${cmsContent.length} content entries.`);
+  }
+
+  const existingConstants = await db.select({ key: calculatorConstantsTable.key }).from(calculatorConstantsTable).limit(1);
+  if (existingConstants.length === 0) {
+    logger.info("Calculator constants table empty, seeding...");
     for (const entry of calculatorConstants) {
       await db.insert(calculatorConstantsTable).values({ key: entry.key, value: entry.value }).onConflictDoNothing();
     }
-    logger.info(`Auto-seeded ${cmsContent.length} content entries and ${calculatorConstants.length} constants.`);
+    logger.info(`Auto-seeded ${calculatorConstants.length} calculator constants.`);
   }
 }
 
