@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export function requireAdmin(req: Request, res: Response, next: NextFunction): void {
   if (!JWT_SECRET) {
-    next();
+    res.status(500).json({ error: "Auth not configured" });
     return;
   }
 
