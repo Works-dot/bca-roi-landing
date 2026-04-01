@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,15,10,0.92)] via-[rgba(30,20,15,0.82)] to-[rgba(40,25,15,0.55)]" />
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(20,15,10,0.4)] to-transparent" />
 
-      <div className="relative container mx-auto px-4 md:px-8 py-24 lg:py-32">
+      <div className="relative container mx-auto px-4 md:px-8 py-24 lg:py-0 flex items-center min-h-[inherit]">
         <div className="grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-center">
 
           <div className="flex flex-col space-y-8">
