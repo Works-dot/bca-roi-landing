@@ -17,7 +17,7 @@ import {
   updateConstants,
   fetchSubmissions,
 } from "@/lib/api";
-import { ICON_MAP } from "@/components/sections/ValuePillars";
+import { ICON_MAP } from "@/lib/icon-map";
 
 type Tab = "content" | "constants" | "submissions";
 

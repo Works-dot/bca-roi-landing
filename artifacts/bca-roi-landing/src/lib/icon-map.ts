@@ -1,0 +1,30 @@
+import {
+  Layers, ShieldCheck, Clock, Calculator,
+  Zap, Target, TrendingUp, BarChart3, Shield,
+  Settings, Rocket, Award, CheckCircle2, Globe,
+  Users, Lightbulb, Lock, RefreshCw, Gauge, Cog,
+  type LucideIcon,
+} from "lucide-react";
+
+export const ICON_MAP: Record<string, LucideIcon> = {
+  Layers,
+  ShieldCheck,
+  Clock,
+  Calculator,
+  Zap,
+  Target,
+  TrendingUp,
+  BarChart3,
+  Shield,
+  Settings,
+  Rocket,
+  Award,
+  CheckCircle2,
+  Globe,
+  Users,
+  Lightbulb,
+  Lock,
+  RefreshCw,
+  Gauge,
+  Cog,
+};

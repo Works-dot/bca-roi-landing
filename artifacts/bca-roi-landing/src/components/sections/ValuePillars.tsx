@@ -1,37 +1,7 @@
-import {
-  Layers, ShieldCheck, Clock, Calculator,
-  Zap, Target, TrendingUp, BarChart3, Shield,
-  Settings, Rocket, Award, CheckCircle2, Globe,
-  Users, Lightbulb, Lock, RefreshCw, Gauge, Cog,
-  type LucideIcon,
-} from "lucide-react";
+import { Layers, ShieldCheck, Clock, Calculator } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useContent } from "@/lib/cms-context";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Layers,
-  ShieldCheck,
-  Clock,
-  Calculator,
-  Zap,
-  Target,
-  TrendingUp,
-  BarChart3,
-  Shield,
-  Settings,
-  Rocket,
-  Award,
-  CheckCircle2,
-  Globe,
-  Users,
-  Lightbulb,
-  Lock,
-  RefreshCw,
-  Gauge,
-  Cog,
-};
-
-export { ICON_MAP };
+import { ICON_MAP } from "@/lib/icon-map";
 
 export default function ValuePillars() {
   const title = useContent("pillars.title", "WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION");
