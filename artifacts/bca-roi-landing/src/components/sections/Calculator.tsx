@@ -35,9 +35,9 @@ function formatCurrency(value: number): string {
 }
 
 function getInsightLabel(paybackMonths: number): { text: string; color: "excellent" | "strong" | "moderate" | "low" } {
-  if (paybackMonths < 6) return { text: "Excellent automation candidate", color: "excellent" };
-  if (paybackMonths < 12) return { text: "Strong automation candidate", color: "strong" };
-  if (paybackMonths < 24) return { text: "Moderate automation candidate", color: "moderate" };
+  if (paybackMonths < 6) return { text: "Excellent candidate", color: "excellent" };
+  if (paybackMonths < 12) return { text: "Strong candidate", color: "strong" };
+  if (paybackMonths < 24) return { text: "Moderate candidate", color: "moderate" };
   return { text: "Low ROI candidate", color: "low" };
 }
 
@@ -112,7 +112,7 @@ export default function Calculator() {
             </p>
           </div>
           <a
-            href="#contact"
+            href="#assessment"
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-bold text-sm tracking-widest uppercase cursor-pointer hover:bg-primary/90 transition-colors"
           >
             Request Custom Assessment
