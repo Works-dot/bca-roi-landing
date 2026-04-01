@@ -23,7 +23,6 @@ const REMAINING_RATIO = 1 - AUTOMATION_RATIO;
 const WORKING_HOURS_PER_MONTH = 144;
 
 interface CalculationResult {
-  annualManualCost: number;
   annualSavings: number;
   paybackMonths: number;
   roi: number;
@@ -34,11 +33,11 @@ function formatCurrency(value: number): string {
   return "€" + Math.round(value).toLocaleString("en-US");
 }
 
-function getInsightLabel(paybackMonths: number): { text: string; color: "excellent" | "strong" | "moderate" | "low" } {
-  if (paybackMonths < 6) return { text: "Excellent candidate", color: "excellent" };
-  if (paybackMonths < 12) return { text: "Strong candidate", color: "strong" };
-  if (paybackMonths < 24) return { text: "Moderate candidate", color: "moderate" };
-  return { text: "Low ROI candidate", color: "low" };
+function getInsightLabel(paybackMonths: number): string {
+  if (paybackMonths < 6) return "Excellent candidate";
+  if (paybackMonths < 12) return "Strong candidate";
+  if (paybackMonths < 24) return "Moderate candidate";
+  return "Low ROI candidate";
 }
 
 export default function Calculator() {
@@ -48,7 +47,6 @@ export default function Calculator() {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [customAssessment, setCustomAssessment] = useState(false);
   const [negativeBusiness, setNegativeBusiness] = useState(false);
-  const [calculated, setCalculated] = useState(false);
 
   const complexityDetails: Record<string, string> = {
     "": "Select process size to see complexity details",
@@ -60,8 +58,6 @@ export default function Calculator() {
   };
 
   const handleCalculate = () => {
-    setCalculated(true);
-
     if (complexity === "XL" || complexity === "XXL") {
       setCustomAssessment(true);
       setResult(null);
@@ -97,7 +93,7 @@ export default function Calculator() {
     }
 
     setNegativeBusiness(false);
-    setResult({ annualManualCost, annualSavings, paybackMonths, roi, fte });
+    setResult({ annualSavings, paybackMonths, roi, fte });
   };
 
   const renderResultsContent = () => {
@@ -137,7 +133,6 @@ export default function Calculator() {
     }
 
     if (result) {
-      const insight = getInsightLabel(result.paybackMonths);
       return (
         <>
           <div className="space-y-2">
@@ -176,7 +171,7 @@ export default function Calculator() {
           <div className="bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
             <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
             <span className="font-bold text-sm tracking-wider text-primary uppercase">
-              {insight.text}
+              {getInsightLabel(result.paybackMonths)}
             </span>
           </div>
         </>
@@ -264,7 +259,7 @@ export default function Calculator() {
                   {renderResultsContent()}
                 </CardContent>
               </Card>
-              {calculated && !customAssessment && (
+              {(result || negativeBusiness) && (
                 <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
                   Indicative calculation based on standard managed automation pricing and an assumed 90% automation ratio. Final pricing depends on process complexity and business environment.
                 </p>
