@@ -32,14 +32,14 @@ export default function Navigation() {
         </div>
 
         <nav className="hidden md:flex items-center gap-8">
-          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Home</button>
-          <button onClick={() => scrollTo("service")} className="text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Solutions</button>
-          <button onClick={() => scrollTo("pricing")} className="text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Pricing</button>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="cursor-pointer text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Home</button>
+          <button onClick={() => scrollTo("service")} className="cursor-pointer text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Solutions</button>
+          <button onClick={() => scrollTo("pricing")} className="cursor-pointer text-sm font-semibold tracking-wider uppercase text-white hover:text-white/70 transition-colors">Pricing</button>
         </nav>
 
         <div className="flex items-center">
           <button
-            className="uppercase tracking-widest font-bold px-8 h-12 rounded-none border-2 border-white text-white bg-transparent hover:bg-white/10 transition-colors text-sm"
+            className="cursor-pointer uppercase tracking-widest font-bold px-8 h-12 rounded-none border-2 border-white text-white bg-transparent hover:bg-white/10 transition-colors text-sm"
             onClick={() => scrollTo("assessment")}
             data-testid="btn-nav-assessment"
           >
