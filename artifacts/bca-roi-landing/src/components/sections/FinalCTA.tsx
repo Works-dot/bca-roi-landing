@@ -30,7 +30,7 @@ export default function FinalCTA() {
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
       
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
           
           <div className="flex-1 space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold uppercase leading-tight">
