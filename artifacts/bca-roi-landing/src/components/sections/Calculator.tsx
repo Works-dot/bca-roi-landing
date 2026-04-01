@@ -146,7 +146,7 @@ export default function Calculator() {
 
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Payback</h3>
+              <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Payback Period</h3>
               <div className="text-2xl font-bold text-foreground">
                 {result.paybackMonths.toFixed(1)} months
               </div>
