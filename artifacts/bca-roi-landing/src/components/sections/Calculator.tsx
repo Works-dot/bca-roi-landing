@@ -111,7 +111,7 @@ export default function Calculator() {
                     </div>
                   </div>
                   
-                  <div className="mt-4 bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
+                  <div className="bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                     <span className="font-bold text-sm tracking-wider text-primary uppercase">
                       Strong automation candidate
