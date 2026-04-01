@@ -148,7 +148,7 @@ export function WarmExecutive() {
       </section>
 
       {/* ServiceExplanation */}
-      <section className="py-24 bg-[var(--card)] border-b border-[var(--border)]">
+      <section id="service" className="py-24 bg-[var(--card)] border-b border-[var(--border)]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             
@@ -196,10 +196,10 @@ export function WarmExecutive() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { icon: Layers, title: "END-TO-END SERVICE", description: "We handle everything from design to daily operations." },
-                { icon: ShieldCheck, title: "ENTERPRISE GRADE", description: "Bank-level security and governance built-in." },
-                { icon: Clock, title: "FASTER TIME TO VALUE", description: "Deploy automations in weeks, not months." },
-                { icon: Calculator, title: "PREDICTABLE COSTS", description: "Fixed pricing with guaranteed outcomes." }
+                { icon: Layers, title: "Lower Complexity", description: "No platform to manage" },
+                { icon: ShieldCheck, title: "Lower Risk", description: "Start small, No commitment" },
+                { icon: Clock, title: "Fast Time-to-Value", description: "Live in weeks, not months" },
+                { icon: Calculator, title: "Predictable Cost", description: "Transparent, scalable pricing" }
               ].map((pillar, i) => (
                 <div key={i} className="bg-[var(--card)] rounded-[4px] p-8 flex flex-col items-center text-center space-y-4 shadow-[0_8px_24px_rgba(43,35,32,0.05)] border border-[var(--border)] transition-transform hover:-translate-y-1 duration-300">
                   <div className="w-16 h-16 bg-[#f7f3ec] border border-[var(--border)] flex items-center justify-center rounded-[4px] mb-2 shadow-inner">
@@ -219,7 +219,7 @@ export function WarmExecutive() {
       </section>
 
       {/* Calculator */}
-      <section className="py-24 bg-[var(--card)] relative">
+      <section id="calculator" className="py-24 bg-[var(--card)] relative">
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -232,23 +232,24 @@ export function WarmExecutive() {
               <div className="lg:col-span-7 space-y-6 bg-[var(--muted)] p-8 border border-[var(--border)] rounded-[4px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)]">
                   <div className="space-y-3">
                     <label className="text-base uppercase font-bold tracking-[0.1em] text-[var(--fg)]">Process Complexity</label>
-                    <div className="h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg flex items-center px-3 text-[var(--muted-fg)] shadow-sm">
-                      Select size...
-                    </div>
+                    <select className="w-full h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--muted-fg)] shadow-sm appearance-none">
+                      <option value="">Select size...</option>
+                      <option value="S">S - 1 application, 5-10 steps</option>
+                      <option value="M">M - 2 applications, 10-20 steps</option>
+                      <option value="L">L - 2-3 applications, 20-40 steps</option>
+                      <option value="XL">XL - 3-4 applications, 40+ steps</option>
+                      <option value="XXL">XXL - Complex, end-to-end processes</option>
+                    </select>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
                       <label className="text-base uppercase font-bold tracking-[0.1em] text-[var(--fg)]">Hours per month</label>
-                      <div className="h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg flex items-center px-3 text-[var(--fg)] shadow-sm">
-                        120
-                      </div>
+                      <input type="number" defaultValue="120" className="w-full h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--fg)] shadow-sm" />
                     </div>
                     <div className="space-y-3">
                       <label className="text-base uppercase font-bold tracking-[0.1em] text-[var(--fg)]">EUR / hour</label>
-                      <div className="h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg flex items-center px-3 text-[var(--fg)] shadow-sm">
-                        35
-                      </div>
+                      <input type="number" defaultValue="35" className="w-full h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--fg)] shadow-sm" />
                     </div>
                   </div>
 
@@ -351,7 +352,7 @@ export function WarmExecutive() {
       </section>
 
       {/* Pricing */}
-      <section className="py-24 bg-[var(--muted)]">
+      <section id="pricing" className="py-24 bg-[var(--muted)]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -432,7 +433,7 @@ export function WarmExecutive() {
       </section>
 
       {/* FinalCTA */}
-      <section className="py-24 bg-[var(--primary)] text-white relative overflow-hidden">
+      <section id="assessment" className="py-24 bg-[var(--primary)] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#731517] via-[#5c1112] to-[#3d0b0c]"></div>
         
         <div className="container mx-auto px-4 md:px-8 relative z-10">

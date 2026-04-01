@@ -202,10 +202,10 @@ export function CoolPrecision() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { icon: Layers, title: "Zero Infrastructure", description: "No servers, licenses, or platform software to manage." },
-                { icon: ShieldCheck, title: "Enterprise Grade", description: "Secure, compliant, and continuously monitored." },
-                { icon: Clock, title: "Rapid Deployment", description: "Go live in weeks, not months. Faster time to value." },
-                { icon: CalculatorIcon, title: "Predictable Costs", description: "Fixed pricing model with guaranteed ROI." }
+                { icon: Layers, title: "Lower Complexity", description: "No platform to manage" },
+                { icon: ShieldCheck, title: "Lower Risk", description: "Start small, No commitment" },
+                { icon: Clock, title: "Fast Time-to-Value", description: "Live in weeks, not months" },
+                { icon: CalculatorIcon, title: "Predictable Cost", description: "Transparent, scalable pricing" }
               ].map((pillar, i) => (
                 <div key={i} className="bg-[var(--card)] rounded-[4px] border border-[var(--border)] shadow-sm hover:shadow-md transition-all hover:-translate-y-1 hover:border-[var(--primary)]/50 group">
                   <div className="p-8 flex flex-col items-center text-center space-y-4">
@@ -245,10 +245,14 @@ export function CoolPrecision() {
                       <div className="w-1.5 h-4 bg-[var(--primary)] rounded-full"></div>
                       Process Complexity
                     </label>
-                    <div className="h-12 bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 flex items-center justify-between text-[var(--muted-foreground)] cursor-not-allowed opacity-80">
-                      <span>Select size...</span>
-                      <ArrowDown className="w-4 h-4" />
-                    </div>
+                    <select className="h-12 w-full bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--muted-foreground)] appearance-none">
+                      <option value="">Select size...</option>
+                      <option value="S">S - 1 application, 5-10 steps</option>
+                      <option value="M">M - 2 applications, 10-20 steps</option>
+                      <option value="L">L - 2-3 applications, 20-40 steps</option>
+                      <option value="XL">XL - 3-4 applications, 40+ steps</option>
+                      <option value="XXL">XXL - Complex, end-to-end processes</option>
+                    </select>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -258,10 +262,9 @@ export function CoolPrecision() {
                         Hours per month
                       </label>
                       <input 
-                        type="text" 
-                        value="120"
-                        readOnly
-                        className="h-12 w-full bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--foreground)] opacity-80 cursor-not-allowed font-mono"
+                        type="number" 
+                        defaultValue="120"
+                        className="h-12 w-full bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--foreground)]"
                       />
                     </div>
                     <div className="space-y-3">
@@ -270,10 +273,9 @@ export function CoolPrecision() {
                         EUR / hour
                       </label>
                       <input 
-                        type="text" 
-                        value="35"
-                        readOnly
-                        className="h-12 w-full bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--foreground)] opacity-80 cursor-not-allowed font-mono"
+                        type="number" 
+                        defaultValue="35"
+                        className="h-12 w-full bg-[var(--card)] border border-[var(--border)] rounded-[4px] text-lg px-3 text-[var(--foreground)]"
                       />
                     </div>
                   </div>

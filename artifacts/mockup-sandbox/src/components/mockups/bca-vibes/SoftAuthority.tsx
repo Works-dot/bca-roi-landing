@@ -142,7 +142,7 @@ export function SoftAuthority() {
       </section>
 
       {/* SERVICE EXPLANATION */}
-      <section className="py-32 bg-[var(--muted)] border-y border-[var(--border)]">
+      <section id="service" className="py-32 bg-[var(--muted)] border-y border-[var(--border)]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             
@@ -190,10 +190,10 @@ export function SoftAuthority() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { icon: Layers, title: "Operational Simplicity", description: "No infrastructure, no hiring, no maintenance. We handle it all." },
-                { icon: ShieldCheck, title: "Enterprise Grade", description: "Secure, reliable, and compliant automation architecture." },
-                { icon: Clock, title: "Rapid Deployment", description: "From assessment to production in weeks, not months." },
-                { icon: CalculatorIcon, title: "Predictable Costs", description: "Fixed pricing model ensures measurable and guaranteed ROI." },
+                { icon: Layers, title: "Lower Complexity", description: "No platform to manage" },
+                { icon: ShieldCheck, title: "Lower Risk", description: "Start small, No commitment" },
+                { icon: Clock, title: "Fast Time-to-Value", description: "Live in weeks, not months" },
+                { icon: CalculatorIcon, title: "Predictable Cost", description: "Transparent, scalable pricing" },
               ].map((pillar, i) => (
                 <div key={i} className="border border-[var(--border)] rounded-[4px] bg-[var(--card)] p-10 flex flex-col items-center text-center space-y-6 hover:border-[var(--primary)] transition-colors">
                   <div className="w-16 h-16 bg-[var(--muted)] flex items-center justify-center rounded-full mb-2">
@@ -213,7 +213,7 @@ export function SoftAuthority() {
       </section>
 
       {/* CALCULATOR */}
-      <section className="py-32 bg-[var(--muted)] border-y border-[var(--border)]">
+      <section id="calculator" className="py-32 bg-[var(--muted)] border-y border-[var(--border)]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-20">
@@ -231,6 +231,9 @@ export function SoftAuthority() {
                         <option value="">Select size...</option>
                         <option value="S">S - 1 application, 5-10 steps</option>
                         <option value="M">M - 2 applications, 10-20 steps</option>
+                        <option value="L">L - 2-3 applications, 20-40 steps</option>
+                        <option value="XL">XL - 3-4 applications, 40+ steps</option>
+                        <option value="XXL">XXL - Complex, end-to-end processes</option>
                       </select>
                       <ArrowDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)] pointer-events-none" strokeWidth={1.5} />
                     </div>
@@ -351,7 +354,7 @@ export function SoftAuthority() {
       </section>
 
       {/* PRICING */}
-      <section className="py-32 bg-[var(--background)]">
+      <section id="pricing" className="py-32 bg-[var(--background)]">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-24">
@@ -432,7 +435,7 @@ export function SoftAuthority() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-32 bg-[var(--foreground)] text-[var(--background)] relative overflow-hidden">
+      <section id="assessment" className="py-32 bg-[var(--foreground)] text-[var(--background)] relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
             
