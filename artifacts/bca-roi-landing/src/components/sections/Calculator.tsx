@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Calculator as CalculatorIcon, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -12,10 +12,43 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const PRICING: Record<string, { setup: number; service: number }> = {
+  S: { setup: 5000, service: 3000 },
+  M: { setup: 10000, service: 5000 },
+  L: { setup: 17500, service: 7000 },
+};
+
+const AUTOMATION_RATIO = 0.9;
+const REMAINING_RATIO = 1 - AUTOMATION_RATIO;
+const WORKING_HOURS_PER_MONTH = 144;
+
+interface CalculationResult {
+  annualManualCost: number;
+  annualSavings: number;
+  paybackMonths: number;
+  roi: number;
+  fte: number;
+}
+
+function formatCurrency(value: number): string {
+  return "€" + Math.round(value).toLocaleString("en-US");
+}
+
+function getInsightLabel(paybackMonths: number): { text: string; color: "excellent" | "strong" | "moderate" | "low" } {
+  if (paybackMonths < 6) return { text: "Excellent automation candidate", color: "excellent" };
+  if (paybackMonths < 12) return { text: "Strong automation candidate", color: "strong" };
+  if (paybackMonths < 24) return { text: "Moderate automation candidate", color: "moderate" };
+  return { text: "Low ROI candidate", color: "low" };
+}
+
 export default function Calculator() {
   const [complexity, setComplexity] = useState<string>("");
   const [hours, setHours] = useState("120");
   const [rate, setRate] = useState("35");
+  const [result, setResult] = useState<CalculationResult | null>(null);
+  const [customAssessment, setCustomAssessment] = useState(false);
+  const [negativeBusiness, setNegativeBusiness] = useState(false);
+  const [calculated, setCalculated] = useState(false);
 
   const complexityDetails: Record<string, string> = {
     "": "Select process size to see complexity details",
@@ -27,7 +60,140 @@ export default function Calculator() {
   };
 
   const handleCalculate = () => {
-    // Calculator logic will be implemented in a future task
+    setCalculated(true);
+
+    if (complexity === "XL" || complexity === "XXL") {
+      setCustomAssessment(true);
+      setResult(null);
+      setNegativeBusiness(false);
+      return;
+    }
+
+    setCustomAssessment(false);
+
+    const monthlyHours = parseFloat(hours) || 0;
+    const hourlyCost = parseFloat(rate) || 0;
+    const pricing = PRICING[complexity];
+
+    if (!pricing || monthlyHours <= 0 || hourlyCost <= 0) {
+      setResult(null);
+      setNegativeBusiness(false);
+      return;
+    }
+
+    const annualManualCost = monthlyHours * hourlyCost * 12;
+    const remainingManualCost = annualManualCost * REMAINING_RATIO;
+    const annualAutomationCost = pricing.service + remainingManualCost;
+    const annualSavings = annualManualCost - annualAutomationCost;
+    const monthlySavings = annualSavings / 12;
+    const paybackMonths = monthlySavings > 0 ? pricing.setup / monthlySavings : Infinity;
+    const roi = annualSavings > 0 ? (annualSavings / pricing.setup) * 100 : 0;
+    const fte = monthlyHours / WORKING_HOURS_PER_MONTH;
+
+    if (annualSavings <= 0) {
+      setNegativeBusiness(true);
+      setResult(null);
+      return;
+    }
+
+    setNegativeBusiness(false);
+    setResult({ annualManualCost, annualSavings, paybackMonths, roi, fte });
+  };
+
+  const renderResultsContent = () => {
+    if (customAssessment) {
+      return (
+        <div className="flex flex-col items-center justify-center text-center gap-6 py-4">
+          <AlertTriangle className="w-12 h-12 text-primary" />
+          <div className="space-y-3">
+            <h3 className="text-lg font-bold text-foreground uppercase tracking-wider">Custom Assessment Required</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              This process likely requires a custom assessment. For XL and XXL complexity, we provide indicative pricing only after a detailed review.
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 font-bold text-sm tracking-widest uppercase cursor-pointer hover:bg-primary/90 transition-colors"
+          >
+            Request Custom Assessment
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      );
+    }
+
+    if (negativeBusiness) {
+      return (
+        <div className="flex flex-col items-center justify-center text-center gap-6 py-4">
+          <AlertTriangle className="w-12 h-12 text-muted-foreground" />
+          <div className="space-y-3">
+            <h3 className="text-lg font-bold text-foreground uppercase tracking-wider">Review Recommended</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              This process may not be a strong candidate for managed automation based on the current inputs.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    if (result) {
+      const insight = getInsightLabel(result.paybackMonths);
+      return (
+        <>
+          <div className="space-y-2">
+            <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Annual Savings</h3>
+            <div className="text-5xl md:text-6xl font-extrabold text-primary">
+              {formatCurrency(result.annualSavings)}
+            </div>
+          </div>
+
+          <div className="w-full h-px bg-border" />
+
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Payback</h3>
+              <div className="text-2xl font-bold text-foreground">
+                {result.paybackMonths.toFixed(1)} months
+              </div>
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">ROI</h3>
+              <div className="text-2xl font-bold text-foreground">
+                {Math.round(result.roi)}%
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full h-px bg-border" />
+
+          <div className="space-y-2">
+            <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">FTE Equivalent</h3>
+            <div className="text-2xl font-bold text-foreground">
+              {result.fte.toFixed(2)} FTE
+            </div>
+          </div>
+
+          <div className="bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
+            <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+            <span className="font-bold text-sm tracking-wider text-primary uppercase">
+              {insight.text}
+            </span>
+          </div>
+        </>
+      );
+    }
+
+    return (
+      <div className="flex flex-col items-center justify-center text-center gap-6 py-4">
+        <CalculatorIcon className="w-12 h-12 text-muted-foreground/40" />
+        <div className="space-y-3">
+          <h3 className="text-lg font-bold text-foreground uppercase tracking-wider">Your ROI Estimate</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Enter your process details and click Calculate to see your estimated automation savings.
+          </p>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -91,34 +257,18 @@ export default function Calculator() {
                 </Button>
             </div>
 
-            <div className="lg:col-span-5">
-              <Card className="border-2 border-primary rounded-none shadow-xl h-full flex flex-col justify-center bg-card relative overflow-hidden">
+            <div className="lg:col-span-5 flex flex-col">
+              <Card className="border-2 border-primary rounded-none shadow-xl flex-1 flex flex-col justify-center bg-card relative overflow-hidden min-h-[420px]">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full" />
-                <CardContent className="p-8 md:p-10 flex flex-col gap-8 relative z-10">
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Annual Savings</h3>
-                    <div className="text-5xl md:text-6xl font-extrabold text-primary">
-                      €32,400
-                    </div>
-                  </div>
-                  
-                  <div className="w-full h-px bg-border"></div>
-                  
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Payback Period</h3>
-                    <div className="text-3xl font-bold text-foreground">
-                      9.2 months
-                    </div>
-                  </div>
-                  
-                  <div className="bg-primary/10 border-l-4 border-primary px-5 py-4 flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="font-bold text-sm tracking-wider text-primary uppercase">
-                      Strong automation candidate
-                    </span>
-                  </div>
+                <CardContent className="p-8 md:p-10 flex flex-col gap-6 relative z-10">
+                  {renderResultsContent()}
                 </CardContent>
               </Card>
+              {calculated && !customAssessment && (
+                <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
+                  Indicative calculation based on standard managed automation pricing and an assumed 90% automation ratio. Final pricing depends on process complexity and business environment.
+                </p>
+              )}
             </div>
           </div>
         </div>
