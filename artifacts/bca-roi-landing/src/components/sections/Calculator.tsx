@@ -51,15 +51,6 @@ export default function Calculator() {
   const [customAssessment, setCustomAssessment] = useState(false);
   const [negativeBusiness, setNegativeBusiness] = useState(false);
 
-  const complexityDetails: Record<string, string> = {
-    "": "Select process size to see complexity details",
-    "S": "1 application, 5-10 steps",
-    "M": "2 applications, 10-20 steps",
-    "L": "2-3 applications, 20-40 steps",
-    "XL": "3-4 applications, 40+ steps",
-    "XXL": "Complex, end-to-end processes"
-  };
-
   const handleCalculate = () => {
     if (complexity === "XL" || complexity === "XXL") {
       setCustomAssessment(true);
@@ -213,16 +204,13 @@ export default function Calculator() {
                       <SelectValue placeholder="Select size..." />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="S">S</SelectItem>
-                      <SelectItem value="M">M</SelectItem>
-                      <SelectItem value="L">L</SelectItem>
-                      <SelectItem value="XL">XL</SelectItem>
-                      <SelectItem value="XXL">XXL</SelectItem>
+                      <SelectItem value="S">S - 1 application, 5-10 steps</SelectItem>
+                      <SelectItem value="M">M - 2 applications, 10-20 steps</SelectItem>
+                      <SelectItem value="L">L - 2-3 applications, 20-40 steps</SelectItem>
+                      <SelectItem value="XL">XL - 3-4 applications, 40+ steps</SelectItem>
+                      <SelectItem value="XXL">XXL - Complex, end-to-end processes</SelectItem>
                     </SelectContent>
                   </Select>
-                  <p className="text-sm font-medium text-primary h-5">
-                    {complexityDetails[complexity] || complexityDetails[""]}
-                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
