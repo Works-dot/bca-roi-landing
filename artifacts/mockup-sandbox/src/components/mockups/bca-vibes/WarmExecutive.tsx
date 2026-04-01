@@ -78,7 +78,7 @@ export function WarmExecutive() {
       <section className="relative overflow-hidden min-h-[600px] lg:min-h-screen flex flex-col justify-center">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')" }}
         />
         {/* Warm mahogany/amber gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#2b2320] via-[#3a2922]/90 to-[#4d2f22]/70" />
