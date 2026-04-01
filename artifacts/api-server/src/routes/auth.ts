@@ -39,4 +39,24 @@ router.post("/admin/login", async (req, res) => {
   res.json({ token });
 });
 
+router.get("/admin/verify", (req, res) => {
+  if (!JWT_SECRET) {
+    res.status(500).json({ error: "Auth not configured" });
+    return;
+  }
+
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    res.status(401).json({ valid: false });
+    return;
+  }
+
+  try {
+    jwt.verify(authHeader.slice(7), JWT_SECRET);
+    res.json({ valid: true });
+  } catch {
+    res.status(401).json({ valid: false });
+  }
+});
+
 export default router;

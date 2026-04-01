@@ -36,6 +36,23 @@ export async function login(username: string, password: string): Promise<string>
   return data.token;
 }
 
+export async function verifyToken(): Promise<boolean> {
+  const token = getStoredToken();
+  if (!token) return false;
+  try {
+    const res = await fetch(`${BASE}/admin/verify`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) {
+      clearStoredToken();
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function fetchContent(): Promise<Record<string, string>> {
   const res = await fetch(`${BASE}/content`);
   if (!res.ok) throw new Error("Failed to fetch content");

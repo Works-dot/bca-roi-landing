@@ -14,6 +14,7 @@ import {
   login,
   getStoredToken,
   clearStoredToken,
+  verifyToken,
   fetchContent,
   updateContent,
   fetchConstants,
@@ -608,12 +609,33 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
 }
 
 export default function Admin() {
-  const [authenticated, setAuthenticated] = useState(!!getStoredToken());
+  const [authenticated, setAuthenticated] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    if (!getStoredToken()) {
+      setChecking(false);
+      return;
+    }
+    verifyToken()
+      .then((valid) => {
+        setAuthenticated(valid);
+      })
+      .finally(() => setChecking(false));
+  }, []);
 
   const handleLogout = () => {
     clearStoredToken();
     setAuthenticated(false);
   };
+
+  if (checking) {
+    return (
+      <div className="min-h-screen bg-muted flex items-center justify-center">
+        <div className="text-muted-foreground">Verifying session...</div>
+      </div>
+    );
+  }
 
   if (!authenticated) {
     return <LoginForm onLogin={() => setAuthenticated(true)} />;
