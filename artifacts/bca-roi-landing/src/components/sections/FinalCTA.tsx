@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +22,8 @@ export default function FinalCTA() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
+  const formLoadTime = useRef(Date.now());
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,7 +38,7 @@ export default function FinalCTA() {
     setSubmitting(true);
     setError(null);
     try {
-      await submitContact(values);
+      await submitContact({ ...values, website: honeypot, _t: formLoadTime.current });
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again.");
@@ -76,6 +78,18 @@ export default function FinalCTA() {
             ) : (
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="absolute opacity-0 -z-10 pointer-events-none" aria-hidden="true" tabIndex={-1}>
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
                   <FormField
                     control={form.control}
                     name="name"

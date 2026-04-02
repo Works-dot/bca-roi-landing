@@ -91,7 +91,7 @@ export async function updateConstants(entries: { key: string; value: unknown }[]
   if (!res.ok) throw new Error("Failed to update constants");
 }
 
-export async function submitContact(data: { name: string; email: string; company: string }): Promise<unknown> {
+export async function submitContact(data: { name: string; email: string; company: string; website?: string; _t?: number }): Promise<unknown> {
   const res = await fetch(`${BASE}/submissions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -99,6 +99,18 @@ export async function submitContact(data: { name: string; email: string; company
   });
   if (!res.ok) throw new Error("Failed to submit contact form");
   return res.json();
+}
+
+export async function deleteSubmission(id: number): Promise<void> {
+  const res = await fetch(`${BASE}/submissions/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  if (res.status === 401) {
+    clearStoredToken();
+    throw new Error("Session expired");
+  }
+  if (!res.ok) throw new Error("Failed to delete submission");
 }
 
 export async function fetchSubmissions(): Promise<Array<{

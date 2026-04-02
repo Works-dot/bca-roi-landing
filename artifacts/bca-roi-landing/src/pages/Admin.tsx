@@ -20,6 +20,7 @@ import {
   fetchConstants,
   updateConstants,
   fetchSubmissions,
+  deleteSubmission,
 } from "@/lib/api";
 import { ICON_MAP } from "@/lib/icon-map";
 
@@ -570,12 +571,13 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Email</th>
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Company</th>
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Date</th>
+                    <th className="text-right px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
                   {submissions.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="text-center py-12 text-muted-foreground">
+                      <td colSpan={6} className="text-center py-12 text-muted-foreground">
                         No submissions yet.
                       </td>
                     </tr>
@@ -594,6 +596,24 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                             hour: "2-digit",
                             minute: "2-digit",
                           })}
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <button
+                            onClick={async () => {
+                              if (!window.confirm(`Delete submission from "${s.name}"?`)) return;
+                              try {
+                                await deleteSubmission(s.id);
+                                setSubmissions((prev) => prev.filter((x) => x.id !== s.id));
+                                setMessage("Submission deleted.");
+                              } catch (err) {
+                                if (err instanceof Error && err.message === "Session expired") onLogout();
+                                else setMessage("Failed to delete submission.");
+                              }
+                            }}
+                            className="text-xs font-bold uppercase tracking-wider text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))
