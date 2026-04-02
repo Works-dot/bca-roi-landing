@@ -2,7 +2,6 @@ import './_group.css';
 import { ArrowRight } from 'lucide-react';
 
 const LIGHTER_BORDO = 'hsl(359, 65%, 50%)';
-const DARK_BG = 'hsl(240 10% 15%)';
 
 export function LighterBordo() {
   return (
