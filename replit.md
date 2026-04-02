@@ -84,6 +84,18 @@ Database layer using Drizzle ORM with PostgreSQL. Exports a Drizzle client insta
 
 Production migrations are handled by Replit when publishing. In development, we just use `pnpm --filter @workspace/db run push`, and we fallback to `pnpm --filter @workspace/db run push-force`.
 
+## Railway Deployment
+
+The project is deployed to Railway via GitHub auto-deploy:
+
+- **GitHub repo**: `https://github.com/Works-dot/bca-roi-landing.git` (remote name: `github`)
+- **Auto-push**: A git post-commit hook pushes to GitHub after every commit. Railway auto-deploys from `main` branch.
+- **Dockerfile**: Multi-stage build — installs deps, builds frontend + API, copies only production artifacts to final image
+- **railway.toml**: Healthcheck on `/api/content`
+- **Production architecture**: Single service — API server serves both `/api` routes AND the frontend static files (via `express.static`)
+- **Required env vars on Railway**: `DATABASE_URL` (from Railway PostgreSQL addon), `PORT` (Railway provides), `JWT_SECRET`, `ADMIN_PASSWORD_HASH`, `ADMIN_USERNAME`
+- **DB migration on Railway**: Run `npx drizzle-kit push` with `DATABASE_URL` set, or use the Railway CLI
+
 ### `artifacts/bca-roi-landing` (`@workspace/bca-roi-landing`)
 
 React + Vite landing page for BCA Solutions' Managed Intelligent Automation service. Single-page app with CMS integration.
