@@ -23,7 +23,7 @@ export default function ExampleROI() {
   return (
     <section className="py-24 bg-foreground text-background relative overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070')" }} />
-      <div className="absolute inset-0 bg-foreground/[0.88]" />
+      <div className="absolute inset-0 bg-foreground/[0.93]" />
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, hsla(240,10%,10%,0.3) 0%, transparent 20%, transparent 80%, hsla(240,10%,10%,0.3) 100%)' }} />
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
