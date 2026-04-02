@@ -17,8 +17,12 @@ router.post("/submissions", async (req, res, next) => {
       return;
     }
 
-    const submitTime = typeof _t === "number" ? Date.now() - _t : Infinity;
-    if (submitTime < MIN_SUBMIT_TIME_MS) {
+    if (typeof _t !== "number" || !Number.isFinite(_t)) {
+      res.status(201).json({ id: 0, name: "", email: "", company: "", createdAt: new Date().toISOString() });
+      return;
+    }
+    const elapsed = Date.now() - _t;
+    if (elapsed < MIN_SUBMIT_TIME_MS || elapsed > 3600000) {
       res.status(201).json({ id: 0, name: "", email: "", company: "", createdAt: new Date().toISOString() });
       return;
     }
@@ -61,12 +65,17 @@ router.get("/submissions", requireAdmin, async (_req, res, next) => {
 
 router.delete("/submissions/:id", requireAdmin, async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) {
+    const raw = req.params.id;
+    const id = Number(raw);
+    if (!Number.isInteger(id) || String(id) !== raw || id <= 0) {
       res.status(400).json({ error: "Invalid ID" });
       return;
     }
-    await db.delete(contactSubmissionsTable).where(eq(contactSubmissionsTable.id, id));
+    const deleted = await db.delete(contactSubmissionsTable).where(eq(contactSubmissionsTable.id, id)).returning();
+    if (deleted.length === 0) {
+      res.status(404).json({ error: "Submission not found" });
+      return;
+    }
     res.json({ success: true });
   } catch (err) {
     next(err);
