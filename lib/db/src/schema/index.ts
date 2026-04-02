@@ -35,3 +35,8 @@ export type CalculatorConstant = typeof calculatorConstantsTable.$inferSelect;
 export const insertContactSubmissionSchema = createInsertSchema(contactSubmissionsTable).omit({ id: true, createdAt: true });
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissionsTable.$inferSelect;
+
+export const calculatorUsageTable = pgTable("calculator_usage", {
+  id: serial("id").primaryKey(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

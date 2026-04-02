@@ -113,6 +113,20 @@ export async function deleteSubmission(id: number): Promise<void> {
   if (!res.ok) throw new Error("Failed to delete submission");
 }
 
+export async function trackCalculatorUse(): Promise<void> {
+  fetch(`${BASE}/analytics/calculator-use`, { method: "POST", headers: { "Content-Type": "application/json" } }).catch(() => {});
+}
+
+export async function fetchAnalyticsStats(): Promise<{ calculatorUses: { total: number; today: number; thisWeek: number } }> {
+  const res = await fetch(`${BASE}/analytics/stats`, { headers: authHeaders() });
+  if (res.status === 401) {
+    clearStoredToken();
+    throw new Error("Session expired");
+  }
+  if (!res.ok) throw new Error("Failed to fetch analytics");
+  return res.json();
+}
+
 export async function fetchSubmissions(): Promise<Array<{
   id: number;
   name: string;

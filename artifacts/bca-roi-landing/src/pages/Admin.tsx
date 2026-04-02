@@ -21,10 +21,15 @@ import {
   updateConstants,
   fetchSubmissions,
   deleteSubmission,
+  fetchAnalyticsStats,
 } from "@/lib/api";
 import { ICON_MAP } from "@/lib/icon-map";
 
-type Tab = "content" | "constants" | "submissions";
+type Tab = "content" | "constants" | "submissions" | "analytics";
+
+interface AnalyticsStats {
+  calculatorUses: { total: number; today: number; thisWeek: number };
+}
 
 interface Submission {
   id: number;
@@ -256,6 +261,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
   const [content, setContent] = useState<Record<string, string>>({});
   const [constants, setConstants] = useState<Record<string, unknown>>({});
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [analyticsStats, setAnalyticsStats] = useState<AnalyticsStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -289,12 +295,20 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           else setMessage("Failed to load constants");
         })
         .finally(() => setLoading(false));
-    } else {
+    } else if (tab === "submissions") {
       fetchSubmissions()
         .then(setSubmissions)
         .catch((err) => {
           if (err.message === "Session expired") onLogout();
           else setMessage("Failed to load submissions");
+        })
+        .finally(() => setLoading(false));
+    } else {
+      fetchAnalyticsStats()
+        .then(setAnalyticsStats)
+        .catch((err) => {
+          if (err.message === "Session expired") onLogout();
+          else setMessage("Failed to load analytics");
         })
         .finally(() => setLoading(false));
     }
@@ -360,6 +374,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
     { id: "content", label: "Content" },
     { id: "constants", label: "Calculator Constants" },
     { id: "submissions", label: "Submissions" },
+    { id: "analytics", label: "Analytics" },
   ];
 
   const renderContentField = (key: string) => {
@@ -560,7 +575,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
               </Button>
             </div>
           </div>
-        ) : (
+        ) : tab === "submissions" ? (
           <div className="bg-card border border-border overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -621,6 +636,30 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                 </tbody>
               </table>
             </div>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {analyticsStats && (
+              <div className="bg-card border border-border p-6">
+                <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2 mb-6">
+                  Calculator Usage
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-muted/50 border border-border rounded p-6 text-center">
+                    <div className="text-4xl font-extrabold text-primary">{analyticsStats.calculatorUses.total}</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-2">Total Uses</div>
+                  </div>
+                  <div className="bg-muted/50 border border-border rounded p-6 text-center">
+                    <div className="text-4xl font-extrabold text-foreground">{analyticsStats.calculatorUses.thisWeek}</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-2">This Week</div>
+                  </div>
+                  <div className="bg-muted/50 border border-border rounded p-6 text-center">
+                    <div className="text-4xl font-extrabold text-foreground">{analyticsStats.calculatorUses.today}</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-2">Today</div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

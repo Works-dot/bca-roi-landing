@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useContent, useConstants } from "@/lib/cms-context";
+import { trackCalculatorUse } from "@/lib/api";
 
 interface CalculationResult {
   annualSavings: number;
@@ -55,6 +56,7 @@ export default function Calculator() {
       setCustomAssessment(true);
       setResult(null);
       setNegativeBusiness(false);
+      trackCalculatorUse();
       return;
     }
 
@@ -87,6 +89,7 @@ export default function Calculator() {
 
     setNegativeBusiness(false);
     setResult({ annualSavings, paybackMonths, roi, fte });
+    trackCalculatorUse();
   };
 
   const hasResults = result || customAssessment || negativeBusiness;
