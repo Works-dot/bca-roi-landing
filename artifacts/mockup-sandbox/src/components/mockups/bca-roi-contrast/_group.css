@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --background: hsl(40 33% 98%);
+  --foreground: hsl(240 10% 15%);
+  --border: hsl(40 20% 90%);
+  --primary: hsl(359 69% 27%);
+  --primary-foreground: hsl(0 0% 100%);
+  --muted-foreground: hsl(240 5% 45%);
+  --card: hsl(0 0% 100%);
+}
+
+body {
+  font-family: 'Dosis', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
