@@ -47,13 +47,13 @@ export default function ExampleROI() {
                   <span className="text-primary-foreground text-xl">{manualCost}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground p-1 rounded-full">
-                <ArrowRight className="w-8 h-8 text-primary" />
+              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 p-1 rounded-full">
+                <ArrowRight className="w-8 h-8 text-primary-foreground" />
               </div>
             </div>
 
             <div className="border border-primary bg-primary/[0.12] p-8 flex flex-col gap-6 relative rounded backdrop-blur-sm">
-              <h3 className="text-xl font-bold text-primary tracking-widest uppercase">{autoTitle}</h3>
+              <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{autoTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
                   <span className="text-background">{autoSetup}</span>
@@ -62,8 +62,8 @@ export default function ExampleROI() {
                   <span className="text-background">{autoService}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground p-1 rounded-full">
-                <ArrowRight className="w-8 h-8 text-primary" />
+              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 p-1 rounded-full">
+                <ArrowRight className="w-8 h-8 text-primary-foreground" />
               </div>
             </div>
 
@@ -85,7 +85,7 @@ export default function ExampleROI() {
 
           <div className="mt-16 text-center">
             <p className="text-3xl md:text-4xl font-light italic">
-              "{footerFirst} <span className="font-bold text-primary not-italic">{footerBold}</span>"
+              "{footerFirst} <span className="font-bold not-italic">{footerBold}</span>"
             </p>
           </div>
         </div>
