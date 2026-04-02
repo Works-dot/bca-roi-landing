@@ -26,8 +26,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,15,10,0.92)] via-[rgba(30,20,15,0.82)] to-[rgba(40,25,15,0.55)]" />
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(20,15,10,0.4)] to-transparent" />
 
-      <div className="relative container mx-auto px-4 md:px-8 py-16 lg:py-0 flex items-center min-h-[inherit]">
-        <div className="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-16 items-center">
+      <div className="relative container mx-auto px-4 md:px-8 py-20 lg:py-0 flex items-center justify-center min-h-[inherit]">
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-16 items-center w-full">
 
           <div className="flex flex-col space-y-6 lg:space-y-8">
             <div className="space-y-4 lg:space-y-5">
@@ -60,7 +60,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-0 w-full lg:max-w-[550px] lg:ml-auto pt-2 lg:pt-0">
+          <div className="hidden lg:flex flex-col items-center justify-center gap-0 w-full lg:max-w-[550px] lg:ml-auto pt-2 lg:pt-0">
             <div className="w-full lg:w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded px-4 py-4 lg:px-6 lg:py-7 text-center flex flex-col items-center">
               <Cog className="w-6 h-6 lg:w-8 lg:h-8 text-white/80 mb-1.5 lg:mb-2" />
               <span className="font-bold text-xs lg:text-base tracking-widest text-white uppercase">Manual Process</span>
