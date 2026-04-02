@@ -21,8 +21,11 @@ export default function ExampleROI() {
   const footerBold = footerParts.length > 1 ? footerParts.slice(1).join(". ") : "";
 
   return (
-    <section className="py-24 bg-foreground text-background">
-      <div className="container mx-auto px-4 md:px-8">
+    <section className="py-24 bg-foreground text-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070')" }} />
+      <div className="absolute inset-0 bg-foreground/[0.88]" />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, hsla(240,10%,10%,0.3) 0%, transparent 20%, transparent 80%, hsla(240,10%,10%,0.3) 100%)' }} />
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">
@@ -31,7 +34,7 @@ export default function ExampleROI() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-background/20 p-8 flex flex-col gap-6 relative rounded">
+            <div className="border border-background/20 p-8 flex flex-col gap-6 relative rounded backdrop-blur-sm bg-background/[0.03]">
               <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{manualTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
@@ -49,7 +52,7 @@ export default function ExampleROI() {
               </div>
             </div>
 
-            <div className="border border-primary bg-primary/10 p-8 flex flex-col gap-6 relative rounded">
+            <div className="border border-primary bg-primary/[0.12] p-8 flex flex-col gap-6 relative rounded backdrop-blur-sm">
               <h3 className="text-xl font-bold text-primary tracking-widest uppercase">{autoTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
