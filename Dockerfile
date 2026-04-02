@@ -20,4 +20,4 @@ COPY --from=builder /app/artifacts/bca-roi-landing/dist/public ./artifacts/bca-r
 
 ENV NODE_ENV=production
 EXPOSE 3000
-CMD ["node", "artifacts/api-server/dist/index.mjs"]
+CMD ["sh", "-c", "pnpm --filter @workspace/db run push-force && node artifacts/api-server/dist/index.mjs"]
