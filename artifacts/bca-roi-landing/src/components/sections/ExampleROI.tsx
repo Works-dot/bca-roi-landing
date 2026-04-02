@@ -47,8 +47,8 @@ export default function ExampleROI() {
                   <span className="text-primary-foreground text-xl">{manualCost}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 p-1 rounded-full">
-                <ArrowRight className="w-8 h-8 text-primary-foreground" />
+              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 backdrop-blur-md p-2 rounded-full">
+                <ArrowRight className="w-7 h-7 text-primary-foreground" />
               </div>
             </div>
 
@@ -62,8 +62,8 @@ export default function ExampleROI() {
                   <span className="text-background">{autoService}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 p-1 rounded-full">
-                <ArrowRight className="w-8 h-8 text-primary-foreground" />
+              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 backdrop-blur-md p-2 rounded-full">
+                <ArrowRight className="w-7 h-7 text-primary-foreground" />
               </div>
             </div>
 
