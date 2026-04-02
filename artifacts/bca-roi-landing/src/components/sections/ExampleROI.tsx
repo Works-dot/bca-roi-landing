@@ -60,7 +60,7 @@ export default function ExampleROI() {
                 <li className="flex justify-between border-b border-background/10 pb-2">
                   <span className="text-background">{autoSetup}</span>
                 </li>
-                <li className="flex justify-between border-b border-background/10 pb-2">
+                <li className="flex justify-between">
                   <span className="text-background">{autoService}</span>
                 </li>
               </ul>
