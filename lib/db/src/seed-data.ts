@@ -64,6 +64,14 @@ export const cmsContent: { key: string; value: string }[] = [
 
   { key: "footer.brand", value: "BCA Solutions" },
   { key: "footer.copyright", value: "BCA Solutions. All rights reserved." },
+
+  { key: "seo.title", value: "BCA Solutions — Managed Intelligent Automation" },
+  { key: "seo.description", value: "Deliver business process automation as a fully managed service. No infrastructure, no internal team needed. Calculate your ROI today." },
+  { key: "seo.ogTitle", value: "BCA Solutions — Managed Intelligent Automation" },
+  { key: "seo.ogDescription", value: "We run the automation so you can run the business. Fast ROI, predictable costs, zero operational burden." },
+  { key: "seo.ogImage", value: "" },
+  { key: "seo.canonical", value: "" },
+  { key: "seo.keywords", value: "managed automation, business process automation, RPA, ROI calculator, BCA Solutions" },
 ];
 
 export const calculatorConstants: { key: string; value: unknown }[] = [

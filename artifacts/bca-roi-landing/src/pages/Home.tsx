@@ -7,10 +7,12 @@ import ExampleROI from "@/components/sections/ExampleROI";
 import Pricing from "@/components/sections/Pricing";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
+import SeoHead from "@/components/SeoHead";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen font-sans">
+      <SeoHead />
       <Navigation />
       <main className="flex-1">
         <Hero />

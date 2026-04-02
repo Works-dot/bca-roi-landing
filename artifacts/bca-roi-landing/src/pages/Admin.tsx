@@ -25,7 +25,7 @@ import {
 } from "@/lib/api";
 import { ICON_MAP } from "@/lib/icon-map";
 
-type Tab = "content" | "constants" | "submissions" | "analytics";
+type Tab = "content" | "constants" | "submissions" | "analytics" | "seo";
 
 interface AnalyticsStats {
   calculatorUses: { total: number; today: number; thisWeek: number };
@@ -272,7 +272,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
   useEffect(() => {
     setLoading(true);
     setMessage(null);
-    if (tab === "content") {
+    if (tab === "content" || tab === "seo") {
       fetchContent()
         .then((c) => {
           setContent(c);
@@ -373,8 +373,19 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
   const tabs: { id: Tab; label: string }[] = [
     { id: "content", label: "Content" },
     { id: "constants", label: "Calculator Constants" },
+    { id: "seo", label: "SEO" },
     { id: "submissions", label: "Submissions" },
     { id: "analytics", label: "Analytics" },
+  ];
+
+  const SEO_FIELDS: { key: string; label: string; placeholder: string; multiline?: boolean }[] = [
+    { key: "seo.title", label: "Page Title", placeholder: "BCA Solutions — Managed Intelligent Automation" },
+    { key: "seo.description", label: "Meta Description", placeholder: "Deliver business process automation as a fully managed service...", multiline: true },
+    { key: "seo.keywords", label: "Keywords", placeholder: "managed automation, RPA, business process..." },
+    { key: "seo.ogTitle", label: "OG Title (Social Share)", placeholder: "Same as Page Title if left empty" },
+    { key: "seo.ogDescription", label: "OG Description (Social Share)", placeholder: "Same as Meta Description if left empty", multiline: true },
+    { key: "seo.ogImage", label: "OG Image URL", placeholder: "https://example.com/og-image.jpg" },
+    { key: "seo.canonical", label: "Canonical URL", placeholder: "https://bcasolutions.com" },
   ];
 
   const renderContentField = (key: string) => {
@@ -572,6 +583,51 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                 className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded"
               >
                 {saving ? "Saving..." : "Save Constants"}
+              </Button>
+            </div>
+          </div>
+        ) : tab === "seo" ? (
+          <div className="space-y-6">
+            <div className="bg-card border border-border p-6 space-y-4">
+              <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
+                SEO & Meta Tags
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                These values control how search engines and social media platforms display your page.
+              </p>
+              {SEO_FIELDS.map((field) => {
+                const current = dirty[field.key] ?? content[field.key] ?? "";
+                return (
+                  <div key={field.key} className="space-y-1">
+                    <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      {field.label}
+                    </label>
+                    {field.multiline ? (
+                      <Textarea
+                        value={current}
+                        onChange={(e) => handleContentChange(field.key, e.target.value)}
+                        placeholder={field.placeholder}
+                        className="bg-background border-border rounded min-h-[80px]"
+                      />
+                    ) : (
+                      <Input
+                        value={current}
+                        onChange={(e) => handleContentChange(field.key, e.target.value)}
+                        placeholder={field.placeholder}
+                        className="bg-background border-border rounded"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex justify-end">
+              <Button
+                onClick={handleSaveContent}
+                disabled={saving || Object.keys(dirty).length === 0}
+                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded"
+              >
+                {saving ? "Saving..." : `Save SEO (${Object.keys(dirty).length})`}
               </Button>
             </div>
           </div>
