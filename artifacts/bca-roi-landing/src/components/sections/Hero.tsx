@@ -31,7 +31,7 @@ export default function Hero() {
 
           <div className="flex flex-col space-y-6 lg:space-y-8">
             <div className="space-y-4 lg:space-y-5">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1]">
                 {headline}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium">
