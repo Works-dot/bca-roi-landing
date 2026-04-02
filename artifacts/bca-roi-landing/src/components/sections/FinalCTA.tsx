@@ -46,12 +46,12 @@ export default function FinalCTA() {
   }
 
   return (
-    <section id="assessment" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="assessment" className="py-16 md:py-24 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')" }} />
       <div className="absolute inset-0 bg-primary/90" />
       
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
           
           <div className="flex-1 space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold uppercase leading-tight">

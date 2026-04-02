@@ -27,10 +27,10 @@ export default function ValuePillars() {
   ];
 
   return (
-    <section className="py-24 bg-muted">
+    <section className="py-16 md:py-24 bg-muted">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               {title}
             </h2>

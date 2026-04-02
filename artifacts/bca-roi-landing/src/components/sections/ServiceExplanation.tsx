@@ -14,11 +14,11 @@ export default function ServiceExplanation() {
   const secondPart = quoteParts.length > 1 ? quoteParts.slice(1).join(". ") : "";
 
   return (
-    <section id="service" className="py-24 bg-card border-b border-border">
+    <section id="service" className="py-16 md:py-24 bg-card border-b border-border">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <h2 className="text-sm font-bold tracking-[0.3em] text-primary mb-4">
               {label}
             </h2>
