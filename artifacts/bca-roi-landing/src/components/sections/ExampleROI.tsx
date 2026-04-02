@@ -1,5 +1,12 @@
-import { ArrowRight } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
+
+function ChevronArrow({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 40 48" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,8 0,40 16,40 16,48 40,24 16,0 16,8" />
+    </svg>
+  );
+}
 
 export default function ExampleROI() {
   const title = useContent("example.title", "TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS");
@@ -33,8 +40,8 @@ export default function ExampleROI() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border border-background/20 p-8 flex flex-col gap-6 relative rounded backdrop-blur-sm bg-background/[0.03]">
+          <div className="flex flex-col md:flex-row md:items-stretch gap-4 md:gap-0">
+            <div className="flex-1 border border-background/20 p-8 flex flex-col gap-6 rounded backdrop-blur-sm bg-background/[0.03]">
               <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{manualTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
@@ -47,12 +54,13 @@ export default function ExampleROI() {
                   <span className="text-primary-foreground text-xl">{manualCost}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 backdrop-blur-md p-2 rounded-full">
-                <ArrowRight className="w-7 h-7 text-primary-foreground" />
-              </div>
             </div>
 
-            <div className="border border-primary bg-primary/[0.12] p-8 flex flex-col gap-6 relative rounded backdrop-blur-sm">
+            <div className="hidden md:flex items-center justify-center px-4">
+              <ChevronArrow className="w-8 h-10 text-primary-foreground/70" />
+            </div>
+
+            <div className="flex-1 border border-primary bg-primary/[0.12] p-8 flex flex-col gap-6 rounded backdrop-blur-sm">
               <h3 className="text-xl font-bold text-primary-foreground tracking-widest uppercase">{autoTitle}</h3>
               <ul className="space-y-4 text-lg font-medium text-background/80">
                 <li className="flex justify-between border-b border-background/10 pb-2">
@@ -62,12 +70,13 @@ export default function ExampleROI() {
                   <span className="text-background">{autoService}</span>
                 </li>
               </ul>
-              <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-foreground/95 backdrop-blur-md p-2 rounded-full">
-                <ArrowRight className="w-7 h-7 text-primary-foreground" />
-              </div>
             </div>
 
-            <div className="bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl rounded">
+            <div className="hidden md:flex items-center justify-center px-4">
+              <ChevronArrow className="w-8 h-10 text-primary-foreground/70" />
+            </div>
+
+            <div className="flex-1 bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl rounded">
               <h3 className="text-xl font-bold tracking-widest uppercase">{impactTitle}</h3>
               <ul className="space-y-4 text-lg font-medium">
                 <li className="flex justify-between border-b border-primary-foreground/20 pb-2">
