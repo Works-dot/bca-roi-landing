@@ -2,8 +2,8 @@ import { useContent } from "@/lib/cms-context";
 
 function ChevronArrow({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 48" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-      <polygon points="0,8 0,40 16,40 16,48 40,24 16,0 16,8" />
+    <svg viewBox="0 0 28 80" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,12 0,68 10,68 10,80 28,40 10,0 10,12" />
     </svg>
   );
 }
@@ -57,7 +57,7 @@ export default function ExampleROI() {
             </div>
 
             <div className="hidden md:flex items-center justify-center px-4">
-              <ChevronArrow className="w-8 h-10 text-primary-foreground/70" />
+              <ChevronArrow className="w-5 h-16 text-primary-foreground/70" />
             </div>
 
             <div className="flex-1 border border-primary bg-primary/[0.12] p-8 flex flex-col gap-6 rounded backdrop-blur-sm">
@@ -73,7 +73,7 @@ export default function ExampleROI() {
             </div>
 
             <div className="hidden md:flex items-center justify-center px-4">
-              <ChevronArrow className="w-8 h-10 text-primary-foreground/70" />
+              <ChevronArrow className="w-5 h-16 text-primary-foreground/70" />
             </div>
 
             <div className="flex-1 bg-primary text-primary-foreground p-8 flex flex-col gap-6 shadow-2xl rounded">
