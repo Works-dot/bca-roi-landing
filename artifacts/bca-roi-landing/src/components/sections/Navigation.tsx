@@ -39,9 +39,7 @@ export default function Navigation() {
 
         <div className="flex items-center">
           <button
-            className={`cursor-pointer uppercase tracking-widest font-bold rounded border-2 border-white text-white bg-transparent hover:bg-white/10 transition-all text-sm ${
-              scrolled ? "px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm" : "px-8 h-12"
-            }`}
+            className={`cursor-pointer uppercase tracking-widest font-bold rounded border-2 border-white text-white bg-transparent hover:bg-white/10 transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm`}
             onClick={() => scrollTo("assessment")}
             data-testid="btn-nav-assessment"
           >
