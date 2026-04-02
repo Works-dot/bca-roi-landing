@@ -64,7 +64,7 @@ export default function FinalCTA() {
             </p>
           </div>
           
-          <div className="flex-1 w-full max-w-md bg-background p-8 border-t-4 border-foreground shadow-2xl">
+          <div className="flex-1 w-full max-w-md bg-background p-8 shadow-2xl">
             {submitted ? (
               <div className="text-center space-y-4 py-8">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
