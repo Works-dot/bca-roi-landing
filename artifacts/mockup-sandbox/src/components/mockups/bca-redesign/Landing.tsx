@@ -24,14 +24,56 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const CurvedDividerTop = ({ fillColor }: { fillColor: string }) => (
-  <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+const CurvedDividerBottom = ({ darkColor }: { darkColor: string }) => (
+  <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10">
     <svg
-      viewBox="0 0 1440 60"
+      viewBox="0 0 1440 80"
       preserveAspectRatio="none"
-      className="block w-full h-[40px] md:h-[60px]"
+      className="block w-full h-[50px] md:h-[70px]"
     >
-      <path d="M0,60 Q720,0 1440,60 L1440,0 L0,0 Z" fill={fillColor} />
+      <path
+        d="M0,0 Q720,80 1440,0"
+        fill="none"
+        stroke="url(#glowBottom)"
+        strokeWidth="2"
+      />
+      <path d="M0,0 Q720,80 1440,0 L1440,80 L0,80 Z" fill={darkColor} />
+      <defs>
+        <linearGradient id="glowBottom" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+          <stop offset="30%" stopColor="rgba(255,255,255,0.25)" />
+          <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
+          <stop offset="70%" stopColor="rgba(255,255,255,0.25)" />
+          <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+);
+
+const CurvedDividerTop = ({ darkColor }: { darkColor: string }) => (
+  <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10">
+    <svg
+      viewBox="0 0 1440 80"
+      preserveAspectRatio="none"
+      className="block w-full h-[50px] md:h-[70px]"
+    >
+      <path d="M0,80 Q720,0 1440,80 L1440,0 L0,0 Z" fill={darkColor} />
+      <path
+        d="M0,80 Q720,0 1440,80"
+        fill="none"
+        stroke="url(#glowTop)"
+        strokeWidth="2"
+      />
+      <defs>
+        <linearGradient id="glowTop" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+          <stop offset="30%" stopColor="rgba(255,255,255,0.25)" />
+          <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
+          <stop offset="70%" stopColor="rgba(255,255,255,0.25)" />
+          <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+        </linearGradient>
+      </defs>
     </svg>
   </div>
 );
@@ -99,7 +141,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="min-h-screen font-['Prompt'] bg-[#faf8f5] text-[#1a1a1a]">
+    <div className="min-h-screen font-['Prompt'] bg-[#130707] text-white">
 
       {/* ========== NAVIGATION ========== */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#130707]/95 backdrop-blur-sm border-b border-white/10 h-20 transition-all">
@@ -207,26 +249,28 @@ export default function Landing() {
             </div>
           </div>
         </div>
+
+        <CurvedDividerBottom darkColor="#130707" />
       </section>
 
       {/* ========== SERVICE EXPLANATION ========== */}
-      <section className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e8e0d8]">
+      <section className="py-16 md:py-24 bg-[#130707] relative">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10 md:mb-16">
-              <h2 className="text-sm font-bold tracking-[0.3em] text-[#311111] mb-4">
+              <h2 className="text-sm font-bold tracking-[0.3em] text-white/50 mb-4">
                 MANAGED INTELLIGENT AUTOMATION
               </h2>
-              <blockquote className="text-3xl md:text-4xl lg:text-5xl font-medium text-[#1a1a1a] leading-tight border-l-4 border-[#311111] pl-6 md:pl-10">
+              <blockquote className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight border-l-4 border-white/30 pl-6 md:pl-10">
                 You run the business.{" "}
-                <span className="font-bold text-[#311111]">
+                <span className="font-bold text-white">
                   We run the automation.
                 </span>
               </blockquote>
             </div>
 
-            <div className="space-y-8 text-lg text-[#1a1a1a]/80 font-medium">
-              <p className="text-2xl text-[#1a1a1a] font-semibold">
+            <div className="space-y-8 text-lg text-white/70 font-medium">
+              <p className="text-2xl text-white font-semibold">
                 Managed Automation delivers business process automation as a
                 fully managed service.
               </p>
@@ -238,7 +282,7 @@ export default function Landing() {
                   "This enables organizations to achieve fast and measurable ROI, benefit from predictable service costs, and scale automation across the business.",
                 ].map((text, i) => (
                   <li key={i} className="flex gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#311111] shrink-0 mt-1" />
+                    <CheckCircle2 className="w-6 h-6 text-white/50 shrink-0 mt-1" />
                     <p>{text}</p>
                   </li>
                 ))}
@@ -249,8 +293,8 @@ export default function Landing() {
       </section>
 
       {/* ========== VALUE PILLARS ========== */}
-      <section className="relative py-16 md:py-24 bg-[#311111]">
-        <CurvedDividerTop fillColor="#faf8f5" />
+      <section className="relative py-16 md:py-24 bg-[#1a0a0a] pt-24 md:pt-32">
+        <CurvedDividerTop darkColor="#130707" />
         <div className="container mx-auto px-4 md:px-8 pt-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
@@ -284,45 +328,47 @@ export default function Landing() {
               ].map((pillar, i) => (
                 <Card
                   key={i}
-                  className="border border-white/15 shadow-md hover:shadow-lg transition-shadow rounded-2xl bg-[#130707]/50 backdrop-blur-sm"
+                  className="border border-white/10 shadow-md hover:shadow-lg transition-shadow rounded-2xl bg-white/[0.04] backdrop-blur-sm"
                 >
                   <CardContent className="p-8 flex flex-col items-center text-center space-y-4">
                     <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-full mb-2">
-                      <pillar.icon className="w-8 h-8 text-[#e8a3a3]" />
+                      <pillar.icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-white">
                       {pillar.title}
                     </h3>
-                    <p className="text-white/70 font-medium">{pillar.desc}</p>
+                    <p className="text-white/60 font-medium">{pillar.desc}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </div>
         </div>
+
+        <CurvedDividerBottom darkColor="#130707" />
       </section>
 
       {/* ========== CALCULATOR ========== */}
-      <section className="py-16 md:py-24 bg-[#faf8f5]">
+      <section className="py-16 md:py-24 bg-[#130707] relative pt-24 md:pt-32">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Estimate Your Automation ROI
               </h2>
             </div>
 
-            <div className="bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+            <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                  <Label className="text-xs font-bold tracking-wider text-white/50">
                     Process Complexity
                   </Label>
                   <Select onValueChange={setComplexity} value={complexity}>
-                    <SelectTrigger className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm">
+                    <SelectTrigger className="h-11 bg-white/10 border-white/15 rounded-xl text-sm text-white">
                       <SelectValue placeholder="Select size..." />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-[#1a0a0a] border-white/15 text-white">
                       <SelectItem value="S">
                         S - 1 application, 5-10 steps
                       </SelectItem>
@@ -343,7 +389,7 @@ export default function Landing() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                  <Label className="text-xs font-bold tracking-wider text-white/50">
                     Monthly Time
                   </Label>
                   <div className="relative">
@@ -351,34 +397,34 @@ export default function Landing() {
                       type="number"
                       value={hours}
                       onChange={(e) => setHours(e.target.value)}
-                      className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm pr-14"
+                      className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pr-14 text-white"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#1a1a1a]/50 font-bold">
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-white/40 font-bold">
                       hours
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                  <Label className="text-xs font-bold tracking-wider text-white/50">
                     Hourly Cost
                   </Label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#1a1a1a]/50">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/40">
                       &euro;
                     </span>
                     <Input
                       type="number"
                       value={rate}
                       onChange={(e) => setRate(e.target.value)}
-                      className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm pl-7"
+                      className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pl-7 text-white"
                     />
                   </div>
                 </div>
 
                 <Button
                   onClick={handleCalculate}
-                  className="h-11 text-sm font-bold rounded-full bg-[#311111] hover:bg-[#130707] text-white"
+                  className="h-11 text-sm font-bold rounded-full bg-white text-[#311111] hover:bg-white/90"
                 >
                   Calculate
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -387,19 +433,19 @@ export default function Landing() {
             </div>
 
             {showCustom && (
-              <div className="mt-6 bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+              <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
                 <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                  <AlertTriangle className="w-8 h-8 text-[#311111] flex-shrink-0" />
+                  <AlertTriangle className="w-8 h-8 text-white/60 flex-shrink-0" />
                   <div className="flex-1">
-                    <h3 className="text-base font-bold text-[#1a1a1a]">
+                    <h3 className="text-base font-bold text-white">
                       Custom Assessment Required
                     </h3>
-                    <p className="text-sm text-[#1a1a1a]/60 mt-1">
+                    <p className="text-sm text-white/50 mt-1">
                       For XL and XXL complexity, we provide indicative pricing
                       only after a detailed review.
                     </p>
                   </div>
-                  <Button className="rounded-full bg-[#311111] text-white hover:bg-[#130707] px-5 h-10 text-xs font-bold flex-shrink-0">
+                  <Button className="rounded-full bg-white text-[#311111] hover:bg-white/90 px-5 h-10 text-xs font-bold flex-shrink-0">
                     Request Assessment
                     <ArrowRight className="w-3.5 h-3.5 ml-1" />
                   </Button>
@@ -408,14 +454,14 @@ export default function Landing() {
             )}
 
             {showNegative && (
-              <div className="mt-6 bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+              <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
                 <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                  <AlertTriangle className="w-8 h-8 text-[#1a1a1a]/50 flex-shrink-0" />
+                  <AlertTriangle className="w-8 h-8 text-white/40 flex-shrink-0" />
                   <div>
-                    <h3 className="text-base font-bold text-[#1a1a1a]">
+                    <h3 className="text-base font-bold text-white">
                       Review Recommended
                     </h3>
-                    <p className="text-sm text-[#1a1a1a]/60 mt-1">
+                    <p className="text-sm text-white/50 mt-1">
                       This process may not be a strong candidate for managed
                       automation based on the current inputs.
                     </p>
@@ -425,45 +471,45 @@ export default function Landing() {
             )}
 
             {showResult && (
-              <div className="mt-6 border-2 border-[#311111] rounded-2xl p-6 md:p-8 bg-white">
+              <div className="mt-6 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                   <div className="sm:col-span-2 lg:col-span-1">
-                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                    <h3 className="text-xs font-bold tracking-widest text-white/40 mb-1">
                       Annual Savings
                     </h3>
-                    <div className="text-3xl md:text-4xl font-extrabold text-[#311111]">
+                    <div className="text-3xl md:text-4xl font-extrabold text-white">
                       &euro;{Math.round(savings).toLocaleString("en-US")}
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                    <h3 className="text-xs font-bold tracking-widest text-white/40 mb-1">
                       Payback Period
                     </h3>
-                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                    <div className="text-2xl font-bold text-white">
                       {payback.toFixed(1)}{" "}
-                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                      <span className="text-base font-semibold text-white/40">
                         months
                       </span>
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                    <h3 className="text-xs font-bold tracking-widest text-white/40 mb-1">
                       ROI
                     </h3>
-                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                    <div className="text-2xl font-bold text-white">
                       {Math.round(roi)}
-                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                      <span className="text-base font-semibold text-white/40">
                         %
                       </span>
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                    <h3 className="text-xs font-bold tracking-widest text-white/40 mb-1">
                       FTE Equivalent
                     </h3>
-                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                    <div className="text-2xl font-bold text-white">
                       {fte.toFixed(2)}{" "}
-                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                      <span className="text-base font-semibold text-white/40">
                         FTE
                       </span>
                     </div>
@@ -471,9 +517,9 @@ export default function Landing() {
                 </div>
 
                 <div className="mt-6 flex justify-center">
-                  <div className="inline-flex items-center gap-3 bg-[#311111]/10 border-l-4 border-[#311111] px-4 py-3">
-                    <CheckCircle2 className="w-4 h-4 text-[#311111] flex-shrink-0" />
-                    <span className="font-bold text-sm text-[#311111]">
+                  <div className="inline-flex items-center gap-3 bg-white/10 border-l-4 border-white/30 px-4 py-3">
+                    <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
+                    <span className="font-bold text-sm text-white">
                       {getInsight(payback)}
                     </span>
                   </div>
@@ -482,7 +528,7 @@ export default function Landing() {
             )}
 
             {(showResult || showCustom || showNegative) && (
-              <p className="text-xs text-[#1a1a1a]/50 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xs text-white/40 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
                 Indicative calculation based on standard managed automation
                 pricing and an assumed 90% automation ratio. Final pricing
                 depends on process complexity and business environment.
@@ -493,8 +539,8 @@ export default function Landing() {
       </section>
 
       {/* ========== EXAMPLE ROI ========== */}
-      <section className="relative py-16 md:py-24 bg-[#130707] text-white overflow-hidden">
-        <CurvedDividerTop fillColor="#faf8f5" />
+      <section className="relative py-16 md:py-24 bg-[#1a0a0a] text-white overflow-hidden pt-24 md:pt-32">
+        <CurvedDividerTop darkColor="#130707" />
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -543,7 +589,7 @@ export default function Landing() {
                 <ArrowRight className="w-8 h-8 text-white/70 hidden md:block" />
               </div>
 
-              <div className="flex-1 border border-[#311111] bg-[#311111]/[0.3] p-6 md:p-8 flex flex-col gap-4 md:gap-6 rounded-2xl backdrop-blur-sm">
+              <div className="flex-1 border border-white/15 bg-white/[0.05] p-6 md:p-8 flex flex-col gap-4 md:gap-6 rounded-2xl backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white">Automation</h3>
                 <ul className="space-y-3 md:space-y-4 text-lg font-medium text-white/80">
                   <li className="flex justify-between border-b border-white/10 pb-2">
@@ -562,7 +608,7 @@ export default function Landing() {
                 <ArrowRight className="w-8 h-8 text-white/70 hidden md:block" />
               </div>
 
-              <div className="flex-1 bg-[#311111] text-white p-6 md:p-8 flex flex-col gap-4 md:gap-6 shadow-2xl rounded-2xl">
+              <div className="flex-1 bg-[#311111]/60 border border-[#311111] text-white p-6 md:p-8 flex flex-col gap-4 md:gap-6 shadow-2xl rounded-2xl">
                 <h3 className="text-xl font-bold">Business impact</h3>
                 <ul className="space-y-3 md:space-y-4 text-lg font-medium">
                   <li className="flex justify-between border-b border-white/20 pb-2">
@@ -586,39 +632,41 @@ export default function Landing() {
             </div>
           </div>
         </div>
+
+        <CurvedDividerBottom darkColor="#130707" />
       </section>
 
       {/* ========== PRICING ========== */}
-      <section className="py-16 md:py-24 bg-[#faf8f5]">
+      <section className="py-16 md:py-24 bg-[#130707] relative pt-24 md:pt-32">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
                 Automation Engagement Model
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="border-none shadow-md rounded-2xl bg-white">
-                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#faf8f5]/50">
-                  <CardTitle className="text-2xl font-bold">Starter</CardTitle>
-                  <p className="text-[#1a1a1a]/60 font-medium">1 process</p>
+              <Card className="border border-white/10 shadow-md rounded-2xl bg-white/[0.04]">
+                <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.03]">
+                  <CardTitle className="text-2xl font-bold text-white">Starter</CardTitle>
+                  <p className="text-white/50 font-medium">1 process</p>
                 </CardHeader>
                 <CardContent className="p-8 flex flex-col gap-6">
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                      <span className="font-bold text-white/70 text-sm">
                         Setup
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;10,000
                       </span>
                     </div>
                     <div className="flex justify-between items-center pb-2">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                      <span className="font-bold text-white/70 text-sm">
                         Annual
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;5,000
                       </span>
                     </div>
@@ -626,31 +674,31 @@ export default function Landing() {
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-[#311111] shadow-xl rounded-2xl bg-white relative transform md:-translate-y-4">
-                <div className="absolute top-0 inset-x-0 h-1 bg-[#311111]" />
-                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#311111]/5">
-                  <CardTitle className="text-2xl font-bold text-[#311111]">
+              <Card className="border-2 border-white/30 shadow-xl rounded-2xl bg-white/[0.08] relative transform md:-translate-y-4">
+                <div className="absolute top-0 inset-x-0 h-1 bg-white/40" />
+                <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.05]">
+                  <CardTitle className="text-2xl font-bold text-white">
                     Growth
                   </CardTitle>
-                  <p className="text-[#1a1a1a]/60 font-medium">
+                  <p className="text-white/50 font-medium">
                     2&ndash;10 processes
                   </p>
                 </CardHeader>
                 <CardContent className="p-8 flex flex-col gap-6">
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                      <span className="font-bold text-white/70 text-sm">
                         Setup
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;9,500
                       </span>
                     </div>
                     <div className="flex justify-between items-center pb-2">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                      <span className="font-bold text-white/70 text-sm">
                         Annual
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;4,500
                       </span>
                     </div>
@@ -658,28 +706,28 @@ export default function Landing() {
                 </CardContent>
               </Card>
 
-              <Card className="border-none shadow-md rounded-2xl bg-white">
-                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#faf8f5]/50">
-                  <CardTitle className="text-2xl font-bold">Scale</CardTitle>
-                  <p className="text-[#1a1a1a]/60 font-medium">
+              <Card className="border border-white/10 shadow-md rounded-2xl bg-white/[0.04]">
+                <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.03]">
+                  <CardTitle className="text-2xl font-bold text-white">Scale</CardTitle>
+                  <p className="text-white/50 font-medium">
                     10+ processes
                   </p>
                 </CardHeader>
                 <CardContent className="p-8 flex flex-col gap-6">
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                      <span className="font-bold text-white/70 text-sm">
                         Setup
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;9,000
                       </span>
                     </div>
                     <div className="flex justify-between items-center pb-2">
-                      <span className="font-bold text-[#1a1a1a] text-sm">
+                      <span className="font-bold text-white/70 text-sm">
                         Annual
                       </span>
-                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                      <span className="text-2xl font-bold text-white">
                         &euro;4,000
                       </span>
                     </div>
@@ -689,7 +737,7 @@ export default function Landing() {
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-[#1a1a1a]/60 font-medium text-lg">
+              <p className="text-white/50 font-medium text-lg">
                 * Setup fee depends on process complexity.
               </p>
             </div>
@@ -698,8 +746,8 @@ export default function Landing() {
       </section>
 
       {/* ========== FINAL CTA / CONTACT FORM ========== */}
-      <section className="relative py-16 md:py-24 bg-[#311111] text-white overflow-hidden">
-        <CurvedDividerTop fillColor="#faf8f5" />
+      <section className="relative py-16 md:py-24 bg-[#1a0a0a] text-white overflow-hidden pt-24 md:pt-32">
+        <CurvedDividerTop darkColor="#130707" />
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -758,10 +806,10 @@ export default function Landing() {
       </section>
 
       {/* ========== FOOTER ========== */}
-      <footer className="bg-[#130707] text-white py-8 md:py-12 border-t border-white/10">
+      <footer className="bg-[#0d0404] text-white py-8 md:py-12 border-t border-white/10">
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-2xl font-bold">BCA Solutions</div>
-          <div className="text-white/60 font-medium">
+          <div className="text-white/50 font-medium">
             &copy; {new Date().getFullYear()} BCA Solutions. All rights
             reserved.
           </div>
