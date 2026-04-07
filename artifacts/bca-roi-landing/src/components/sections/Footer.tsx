@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/15 py-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm text-white/60">
-          <span>{copyright} &copy; {new Date().getFullYear()}</span>
+          <span>&copy; {new Date().getFullYear()} {copyright}</span>
           <a
             href={privacyUrl}
             className="font-bold text-white/80 hover:text-white transition-colors"

@@ -68,7 +68,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "footer.social.facebook", value: "https://facebook.com/bcasolutions" },
   { key: "footer.social.linkedin", value: "https://linkedin.com/company/bcasolutions" },
   { key: "footer.social.instagram", value: "https://instagram.com/bcasolutions" },
-  { key: "footer.copyright", value: "BCA Solutions" },
+  { key: "footer.copyright", value: "BCA Solutions. All rights reserved." },
   { key: "footer.privacy.text", value: "Privacy Policy" },
   { key: "footer.privacy.url", value: "#" },
 
