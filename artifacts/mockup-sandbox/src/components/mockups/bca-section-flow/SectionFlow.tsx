@@ -66,9 +66,8 @@ function HeroSection() {
 
 function ServiceSection() {
   return (
-    <section className="relative pb-16 pt-16 md:pb-24 md:pt-24 bg-[#130707]">
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#1a0a0a]" />
-      <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707]">
+      <div className="max-w-4xl mx-auto px-4 md:px-8">
         <div className="mb-10">
           <h2 className="text-sm font-bold tracking-[0.3em] text-white/60 mb-4">MANAGED INTELLIGENT AUTOMATION</h2>
           <blockquote className="text-3xl md:text-4xl font-normal text-white leading-tight border-l-4 border-white/30 pl-6 uppercase">
@@ -106,9 +105,8 @@ function ValuePillarsSection() {
     { icon: Calculator, title: "Predictable Cost", desc: "Transparent, scalable pricing" },
   ];
   return (
-    <section className="relative py-16 md:py-24 bg-[#1a0a0a]">
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#130707] to-transparent" />
-      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707]">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
           WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION
         </h2>
@@ -130,9 +128,8 @@ function ValuePillarsSection() {
 
 function ExampleROISection() {
   return (
-    <section className="relative py-16 md:py-24 bg-[#1a0a0a] text-white">
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#130707]" />
-      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707] text-white">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS
         </h2>
@@ -173,9 +170,8 @@ function ExampleROISection() {
 
 function CalculatorSection() {
   return (
-    <section className="relative py-16 md:py-24 bg-[#130707]">
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#1a0a0a] to-transparent" />
-      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707]">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white">ESTIMATE YOUR AUTOMATION ROI</h2>
           <p className="mt-4 text-base text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
