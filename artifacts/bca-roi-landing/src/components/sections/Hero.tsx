@@ -19,7 +19,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[550px] lg:min-h-[700px]">
+    <section className="relative overflow-hidden min-h-[550px] lg:min-h-[750px]">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-bg.jpg')" }}
@@ -28,7 +28,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-[#130707]/50 to-transparent" />
 
       <div className="relative container mx-auto px-4 md:px-8 pt-28 pb-16 lg:py-0 flex items-center justify-center min-h-[inherit]">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-6 lg:space-y-8">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6 lg:space-y-8">
 
           <div className="space-y-4 lg:space-y-5">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1]">
