@@ -11,7 +11,7 @@ import SeoHead from "@/components/SeoHead";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen font-sans">
+    <div className="flex flex-col min-h-screen font-sans bg-[#130707] text-white">
       <SeoHead />
       <Navigation />
       <main className="flex-1">

@@ -32,7 +32,7 @@ function getInsightLabel(paybackMonths: number): string {
 }
 
 export default function Calculator() {
-  const sectionTitle = useContent("calculator.title", "ESTIMATE YOUR AUTOMATION ROI");
+  const sectionTitle = useContent("calculator.title", "Estimate Your Automation ROI");
   const constants = useConstants();
 
   const PRICING: Record<string, { setup: number; service: number }> = (constants.pricing as Record<string, { setup: number; service: number }>) ?? {
@@ -95,24 +95,24 @@ export default function Calculator() {
   const hasResults = result || customAssessment || negativeBusiness;
 
   return (
-    <section id="calculator" className="py-16 md:py-24 bg-card">
+    <section id="calculator" className="py-16 md:py-24 bg-[#130707]">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               {sectionTitle}
             </h2>
           </div>
 
-          <div className="bg-muted/50 border border-border rounded p-6 md:p-8">
+          <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
               <div className="space-y-2">
-                <Label className="text-xs uppercase font-bold tracking-wider text-muted-foreground">Process Complexity</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70">Process Complexity</Label>
                 <Select onValueChange={setComplexity} value={complexity}>
-                  <SelectTrigger className="h-11 bg-background border-border rounded text-sm">
+                  <SelectTrigger className="h-11 bg-white/10 border-white/15 rounded-xl text-sm text-white">
                     <SelectValue placeholder="Select size..." />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-[#1a0a0a] border-white/15 text-white">
                     <SelectItem value="S">S - 1 application, 5-10 steps</SelectItem>
                     <SelectItem value="M">M - 2 applications, 10-20 steps</SelectItem>
                     <SelectItem value="L">L - 2-3 applications, 20-40 steps</SelectItem>
@@ -123,34 +123,34 @@ export default function Calculator() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs uppercase font-bold tracking-wider text-muted-foreground">Monthly Time</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70">Monthly Time</Label>
                 <div className="relative">
                   <Input
                     type="number"
                     value={hours}
                     onChange={(e) => setHours(e.target.value)}
-                    className="h-11 bg-background border-border rounded text-sm pr-14"
+                    className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pr-14 text-white"
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-bold uppercase tracking-wider">hours</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-white/60 font-bold">hours</span>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs uppercase font-bold tracking-wider text-muted-foreground">Hourly Cost</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70">Hourly Cost</Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">&euro;</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/60">&euro;</span>
                   <Input
                     type="number"
                     value={rate}
                     onChange={(e) => setRate(e.target.value)}
-                    className="h-11 bg-background border-border rounded text-sm pl-7"
+                    className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pl-7 text-white"
                   />
                 </div>
               </div>
 
               <Button
                 onClick={handleCalculate}
-                className="h-11 text-sm font-bold tracking-widest uppercase rounded"
+                className="h-11 text-sm font-bold rounded-full bg-white text-[#311111] hover:bg-white/90"
                 data-testid="btn-calculate"
               >
                 Calculate
@@ -160,18 +160,18 @@ export default function Calculator() {
           </div>
 
           {customAssessment && (
-            <div className="mt-6 bg-muted/50 border border-border rounded p-6 md:p-8">
+            <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
               <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                <AlertTriangle className="w-8 h-8 text-primary flex-shrink-0" />
+                <AlertTriangle className="w-8 h-8 text-white/60 flex-shrink-0" />
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-foreground uppercase tracking-wider">Custom Assessment Required</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <h3 className="text-base font-bold text-white">Custom Assessment Required</h3>
+                  <p className="text-sm text-white/70 mt-1">
                     For XL and XXL complexity, we provide indicative pricing only after a detailed review.
                   </p>
                 </div>
                 <a
                   href="#assessment"
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 font-bold text-xs tracking-widest uppercase cursor-pointer hover:bg-primary/90 transition-colors rounded flex-shrink-0"
+                  className="inline-flex items-center gap-2 bg-white text-[#311111] px-5 py-2.5 font-bold text-xs rounded-full cursor-pointer hover:bg-white/90 transition-colors flex-shrink-0"
                 >
                   Request Assessment
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -181,12 +181,12 @@ export default function Calculator() {
           )}
 
           {negativeBusiness && (
-            <div className="mt-6 bg-muted/50 border border-border rounded p-6 md:p-8">
+            <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
               <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                <AlertTriangle className="w-8 h-8 text-muted-foreground flex-shrink-0" />
+                <AlertTriangle className="w-8 h-8 text-white/40 flex-shrink-0" />
                 <div>
-                  <h3 className="text-base font-bold text-foreground uppercase tracking-wider">Review Recommended</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <h3 className="text-base font-bold text-white">Review Recommended</h3>
+                  <p className="text-sm text-white/70 mt-1">
                     This process may not be a strong candidate for managed automation based on the current inputs.
                   </p>
                 </div>
@@ -195,41 +195,41 @@ export default function Calculator() {
           )}
 
           {result && (
-            <div className="mt-6 border-2 border-primary rounded p-6 md:p-8 bg-card">
+            <div className="mt-6 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                 <div className="sm:col-span-2 lg:col-span-1">
-                  <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-1">Annual Savings</h3>
-                  <div className="text-3xl md:text-4xl font-extrabold text-primary">
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h3>
+                  <div className="text-3xl md:text-4xl font-extrabold text-white">
                     {formatCurrency(result.annualSavings)}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-1">Payback Period</h3>
-                  <div className="text-2xl font-bold text-foreground">
-                    {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-muted-foreground">months</span>
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Payback Period</h3>
+                  <div className="text-2xl font-bold text-white">
+                    {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-white/60">months</span>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-1">ROI</h3>
-                  <div className="text-2xl font-bold text-foreground">
-                    {Math.round(result.roi)}<span className="text-base font-semibold text-muted-foreground">%</span>
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">ROI</h3>
+                  <div className="text-2xl font-bold text-white">
+                    {Math.round(result.roi)}<span className="text-base font-semibold text-white/60">%</span>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-1">FTE Equivalent</h3>
-                  <div className="text-2xl font-bold text-foreground">
-                    {result.fte.toFixed(2)} <span className="text-base font-semibold text-muted-foreground">FTE</span>
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">FTE Equivalent</h3>
+                  <div className="text-2xl font-bold text-white">
+                    {result.fte.toFixed(2)} <span className="text-base font-semibold text-white/60">FTE</span>
                   </div>
                 </div>
               </div>
 
               <div className="mt-6 flex justify-center">
-                <div className="inline-flex items-center gap-3 bg-primary/10 border-l-4 border-primary px-4 py-3">
-                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="font-bold text-sm tracking-wider text-primary uppercase">
+                <div className="inline-flex items-center gap-3 bg-white/10 border-l-4 border-white/30 px-4 py-3">
+                  <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
+                  <span className="font-bold text-sm text-white">
                     {getInsightLabel(result.paybackMonths)}
                   </span>
                 </div>
@@ -238,7 +238,7 @@ export default function Calculator() {
           )}
 
           {hasResults && (
-            <p className="text-xs text-muted-foreground mt-4 text-center leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xs text-white/60 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
               Indicative calculation based on standard managed automation pricing and an assumed {Math.round(AUTOMATION_RATIO * 100)}% automation ratio. Final pricing depends on process complexity and business environment.
             </p>
           )}

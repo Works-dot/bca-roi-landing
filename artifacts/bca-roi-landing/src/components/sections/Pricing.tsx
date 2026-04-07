@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useContent } from "@/lib/cms-context";
 
 export default function Pricing() {
-  const title = useContent("pricing.title", "AUTOMATION ENGAGEMENT MODEL");
+  const title = useContent("pricing.title", "Automation Engagement Model");
   const starterName = useContent("pricing.starter.name", "Starter");
   const starterDesc = useContent("pricing.starter.description", "1 process");
   const starterSetup = useContent("pricing.starter.setup", "\u20AC10,000");
@@ -18,70 +18,70 @@ export default function Pricing() {
   const note = useContent("pricing.note", "* Setup fee depends on process complexity.");
 
   return (
-    <section id="pricing" className="py-16 md:py-24 bg-muted">
+    <section id="pricing" className="py-16 md:py-24 bg-[#130707]">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               {title}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <Card className="border-none shadow-md rounded bg-card">
-              <CardHeader className="text-center pb-2 border-b border-border bg-muted/30">
-                <CardTitle className="text-2xl font-bold uppercase tracking-widest">{starterName}</CardTitle>
-                <p className="text-muted-foreground font-medium">{starterDesc}</p>
+            <Card className="border border-white/10 shadow-md rounded-2xl bg-white/[0.04]">
+              <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.03]">
+                <CardTitle className="text-2xl font-bold text-white">{starterName}</CardTitle>
+                <p className="text-white/70 font-medium">{starterDesc}</p>
               </CardHeader>
               <CardContent className="p-8 flex flex-col gap-6">
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-border pb-4">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Setup</span>
-                    <span className="text-2xl font-bold text-foreground">{starterSetup}</span>
+                  <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                    <span className="font-bold text-white/70 text-sm">Setup</span>
+                    <span className="text-2xl font-bold text-white">{starterSetup}</span>
                   </div>
                   <div className="flex justify-between items-center pb-2">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Annual</span>
-                    <span className="text-2xl font-bold text-foreground">{starterAnnual}</span>
+                    <span className="font-bold text-white/70 text-sm">Annual</span>
+                    <span className="text-2xl font-bold text-white">{starterAnnual}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-primary shadow-xl rounded bg-card relative transform md:-translate-y-4">
-              <div className="absolute top-0 inset-x-0 h-1 bg-primary"></div>
-              <CardHeader className="text-center pb-2 border-b border-border bg-primary/5">
-                <CardTitle className="text-2xl font-bold uppercase tracking-widest text-primary">{growthName}</CardTitle>
-                <p className="text-muted-foreground font-medium">{growthDesc}</p>
+            <Card className="border-2 border-white/30 shadow-xl rounded-2xl bg-white/[0.08] relative transform md:-translate-y-4">
+              <div className="absolute top-0 inset-x-0 h-1 bg-white/40" />
+              <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.05]">
+                <CardTitle className="text-2xl font-bold text-white">{growthName}</CardTitle>
+                <p className="text-white/70 font-medium">{growthDesc}</p>
               </CardHeader>
               <CardContent className="p-8 flex flex-col gap-6">
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-border pb-4">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Setup</span>
-                    <span className="text-2xl font-bold text-foreground">{growthSetup}</span>
+                  <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                    <span className="font-bold text-white/70 text-sm">Setup</span>
+                    <span className="text-2xl font-bold text-white">{growthSetup}</span>
                   </div>
                   <div className="flex justify-between items-center pb-2">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Annual</span>
-                    <span className="text-2xl font-bold text-foreground">{growthAnnual}</span>
+                    <span className="font-bold text-white/70 text-sm">Annual</span>
+                    <span className="text-2xl font-bold text-white">{growthAnnual}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-none shadow-md rounded bg-card">
-              <CardHeader className="text-center pb-2 border-b border-border bg-muted/30">
-                <CardTitle className="text-2xl font-bold uppercase tracking-widest">{scaleName}</CardTitle>
-                <p className="text-muted-foreground font-medium">{scaleDesc}</p>
+            <Card className="border border-white/10 shadow-md rounded-2xl bg-white/[0.04]">
+              <CardHeader className="text-center pb-2 border-b border-white/10 bg-white/[0.03]">
+                <CardTitle className="text-2xl font-bold text-white">{scaleName}</CardTitle>
+                <p className="text-white/70 font-medium">{scaleDesc}</p>
               </CardHeader>
               <CardContent className="p-8 flex flex-col gap-6">
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-border pb-4">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Setup</span>
-                    <span className="text-2xl font-bold text-foreground">{scaleSetup}</span>
+                  <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                    <span className="font-bold text-white/70 text-sm">Setup</span>
+                    <span className="text-2xl font-bold text-white">{scaleSetup}</span>
                   </div>
                   <div className="flex justify-between items-center pb-2">
-                    <span className="font-bold text-foreground uppercase text-sm tracking-wider">Annual</span>
-                    <span className="text-2xl font-bold text-foreground">{scaleAnnual}</span>
+                    <span className="font-bold text-white/70 text-sm">Annual</span>
+                    <span className="text-2xl font-bold text-white">{scaleAnnual}</span>
                   </div>
                 </div>
               </CardContent>
@@ -90,7 +90,7 @@ export default function Pricing() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-muted-foreground font-medium text-lg">
+            <p className="text-white/70 font-medium text-lg">
               {note}
             </p>
           </div>

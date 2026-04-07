@@ -100,7 +100,7 @@ The project is deployed to Railway via GitHub auto-deploy:
 
 React + Vite landing page for BCA Solutions' Managed Intelligent Automation service. Single-page app with CMS integration.
 
-- Design: Dosis font, UPPERCASE headings, primary #731517, warm neutral palette
+- Design: Prompt font (Google Fonts), dark theme (#130707 base, #1a0a0a accent, #311111 primary), white text, curved SVG dividers with glow between sections, rounded-full buttons, rounded-2xl cards, bg images with dark overlays on Hero/ExampleROI/Contact, light (#faf8f5) contact form card
 - Pages: `/` (landing page), `/admin` (admin panel)
 - CMS: All text content loaded from database via `CmsProvider` context (`src/lib/cms-context.tsx`)
 - Calculator: Uses admin-editable constants from DB (pricing, automationRatio, workingHoursPerMonth)

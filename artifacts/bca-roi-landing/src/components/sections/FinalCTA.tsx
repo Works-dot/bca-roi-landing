@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/cms-context";
 import { submitContact } from "@/lib/api";
+import { CurvedDividerTop } from "@/components/CurvedDividers";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -15,7 +16,7 @@ const formSchema = z.object({
 });
 
 export default function FinalCTA() {
-  const headline = useContent("cta.headline", "START WITH ONE PROCESS");
+  const headline = useContent("cta.headline", "Start With One Process");
   const subheadline = useContent("cta.subheadline", "Validate ROI quickly and scale automation.");
   const buttonText = useContent("cta.button", "Request Detailed Assessment");
 
@@ -48,32 +49,33 @@ export default function FinalCTA() {
   }
 
   return (
-    <section id="assessment" className="py-16 md:py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="assessment" className="relative py-16 md:py-24 pt-24 md:pt-32 bg-[#1a0a0a] text-white overflow-hidden">
+      <CurvedDividerTop darkColor="#130707" />
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')" }} />
-      <div className="absolute inset-0 bg-primary/90" />
+      <div className="absolute inset-0 bg-[#311111]/90" />
       
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 relative z-10 pt-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
           
           <div className="flex-1 space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold uppercase leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               {headline}
             </h2>
-            <p className="text-xl md:text-2xl font-medium text-primary-foreground/90">
+            <p className="text-xl md:text-2xl font-medium text-white/90">
               {subheadline}
             </p>
           </div>
           
-          <div className="flex-1 w-full max-w-md bg-background p-8 shadow-2xl">
+          <div className="flex-1 w-full max-w-md bg-[#faf8f5] p-8 shadow-2xl rounded-2xl">
             {submitted ? (
               <div className="text-center space-y-4 py-8">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 bg-[#311111]/10 rounded-full flex items-center justify-center mx-auto">
+                  <svg className="w-8 h-8 text-[#311111]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-foreground uppercase tracking-wider">Thank You</h3>
-                <p className="text-muted-foreground">We'll be in touch within 24 hours to schedule your assessment.</p>
+                <h3 className="text-xl font-bold text-[#1a1a1a]">Thank You</h3>
+                <p className="text-[#1a1a1a]/60">We'll be in touch within 24 hours to schedule your assessment.</p>
               </div>
             ) : (
               <Form {...form}>
@@ -95,9 +97,9 @@ export default function FinalCTA() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Name</FormLabel>
+                        <FormLabel className="text-[#1a1a1a] font-bold">Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John Doe" className="h-12 rounded border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="John Doe" className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -108,9 +110,9 @@ export default function FinalCTA() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Email</FormLabel>
+                        <FormLabel className="text-[#1a1a1a] font-bold">Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="john@company.com" type="email" className="h-12 rounded border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="john@company.com" type="email" className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -121,9 +123,9 @@ export default function FinalCTA() {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-foreground font-bold uppercase tracking-wider">Company</FormLabel>
+                        <FormLabel className="text-[#1a1a1a] font-bold">Company</FormLabel>
                         <FormControl>
-                          <Input placeholder="Acme Corp" className="h-12 rounded border-border bg-background text-foreground" {...field} />
+                          <Input placeholder="Acme Corp" className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -137,7 +139,7 @@ export default function FinalCTA() {
                   <Button 
                     type="submit" 
                     disabled={submitting}
-                    className="w-full h-14 text-base font-bold uppercase tracking-widest rounded mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
+                    className="w-full h-14 text-base font-bold rounded-full mt-4 bg-[#311111] hover:bg-[#130707] text-white"
                     data-testid="btn-submit-assessment"
                   >
                     {submitting ? "Submitting..." : buttonText}
