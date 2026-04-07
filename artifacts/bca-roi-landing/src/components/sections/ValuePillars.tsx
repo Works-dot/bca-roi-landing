@@ -2,7 +2,6 @@ import { Layers, ShieldCheck, Clock, Calculator } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useContent } from "@/lib/cms-context";
 import { ICON_MAP } from "@/lib/icon-map";
-import { CurvedDividerBottom } from "@/components/CurvedDividers";
 
 export default function ValuePillars() {
   const title = useContent("pillars.title", "Why Organizations Choose Managed Automation");
@@ -28,9 +27,8 @@ export default function ValuePillars() {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 pb-28 md:pb-36 bg-[#1a0a0a] z-20">
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#130707] to-transparent" />
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707]">
+      <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -56,31 +54,6 @@ export default function ValuePillars() {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="absolute -bottom-[50px] md:-bottom-[70px] left-0 w-full overflow-hidden leading-[0] z-10">
-        <svg
-          viewBox="0 0 1440 80"
-          preserveAspectRatio="none"
-          className="block w-full h-[50px] md:h-[70px]"
-        >
-          <path
-            d="M0,0 Q720,80 1440,0"
-            fill="none"
-            stroke="url(#glowBottomVP)"
-            strokeWidth="2"
-          />
-          <path d="M0,0 Q720,80 1440,0 L1440,80 L0,80 Z" fill="#1a0a0a" />
-          <defs>
-            <linearGradient id="glowBottomVP" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-              <stop offset="30%" stopColor="rgba(255,255,255,0.25)" />
-              <stop offset="50%" stopColor="rgba(255,255,255,0.4)" />
-              <stop offset="70%" stopColor="rgba(255,255,255,0.25)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-            </linearGradient>
-          </defs>
-        </svg>
       </div>
     </section>
   );

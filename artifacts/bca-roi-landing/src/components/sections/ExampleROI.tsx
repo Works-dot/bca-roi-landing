@@ -1,6 +1,5 @@
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
-import { CurvedDividerBottom } from "@/components/CurvedDividers";
 
 export default function ExampleROI() {
   const title = useContent("example.title", "Typical ROI From Automating a Single Process");
@@ -22,11 +21,8 @@ export default function ExampleROI() {
   const footerBold = footerParts.length > 1 ? footerParts.slice(1).join(". ") : "";
 
   return (
-    <section className="relative pt-32 md:pt-44 pb-28 md:pb-36 bg-[#1a0a0a] text-white overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070')" }} />
-      <div className="absolute inset-0 bg-[#130707]/[0.93]" />
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(19,7,7,0.6) 0%, transparent 15%, transparent 85%, rgba(19,7,7,0.4) 100%)' }} />
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-[#130707] text-white">
+      <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">
@@ -95,8 +91,6 @@ export default function ExampleROI() {
           </div>
         </div>
       </div>
-
-      <CurvedDividerBottom darkColor="#130707" />
     </section>
   );
 }

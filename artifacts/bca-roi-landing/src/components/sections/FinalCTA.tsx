@@ -51,6 +51,7 @@ export default function FinalCTA() {
   return (
     <section id="assessment" className="relative py-16 md:py-24 pt-24 md:pt-32 bg-[#1a0a0a] text-white overflow-hidden">
       <CurvedDividerTop darkColor="#130707" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#311111] z-[5]" />
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')" }} />
       <div className="absolute inset-0 bg-[#311111]/90" />
       
