@@ -22,7 +22,7 @@ export default function ExampleROI() {
   const footerBold = footerParts.length > 1 ? footerParts.slice(1).join(". ") : "";
 
   return (
-    <section className="relative py-16 md:py-24 pb-28 md:pb-36 bg-[#1a0a0a] text-white overflow-hidden">
+    <section className="relative pt-32 md:pt-44 pb-28 md:pb-36 bg-[#1a0a0a] text-white overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070')" }} />
       <div className="absolute inset-0 bg-[#130707]/[0.93]" />
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(19,7,7,0.6) 0%, transparent 15%, transparent 85%, rgba(19,7,7,0.4) 100%)' }} />
