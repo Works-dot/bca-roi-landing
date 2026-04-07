@@ -293,9 +293,9 @@ export default function Landing() {
       </section>
 
       {/* ========== VALUE PILLARS ========== */}
-      <section className="relative py-16 md:py-24 bg-[#1a0a0a] pt-24 md:pt-32">
-        <CurvedDividerTop darkColor="#130707" />
-        <div className="container mx-auto px-4 md:px-8 pt-6">
+      <section className="relative py-16 md:py-24 pb-28 md:pb-36 bg-[#1a0a0a]">
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#130707] to-transparent" />
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -539,8 +539,7 @@ export default function Landing() {
       </section>
 
       {/* ========== EXAMPLE ROI ========== */}
-      <section className="relative py-16 md:py-24 bg-[#1a0a0a] text-white overflow-hidden pt-24 md:pt-32">
-        <CurvedDividerTop darkColor="#130707" />
+      <section className="relative py-16 md:py-24 pb-28 md:pb-36 bg-[#1a0a0a] text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -553,10 +552,10 @@ export default function Landing() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(19,7,7,0.3) 0%, transparent 20%, transparent 80%, rgba(19,7,7,0.3) 100%)",
+              "linear-gradient(to bottom, rgba(19,7,7,0.6) 0%, transparent 15%, transparent 85%, rgba(19,7,7,0.4) 100%)",
           }}
         />
-        <div className="container mx-auto px-4 md:px-8 relative z-10 pt-6">
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold">
