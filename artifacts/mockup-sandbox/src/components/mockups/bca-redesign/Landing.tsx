@@ -1,467 +1,770 @@
-import React, { useState } from "react";
-import { CheckCircle2, Layers, ShieldCheck, Clock, Calculator, ArrowRight, ArrowDown, Cog, Rocket, TrendingDown, AlertTriangle } from "lucide-react";
+import { useState } from "react";
+import {
+  CheckCircle2,
+  Layers,
+  ShieldCheck,
+  Clock,
+  Calculator,
+  ArrowRight,
+  ArrowDown,
+  Cog,
+  Rocket,
+  TrendingDown,
+  AlertTriangle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const CurvedDividerTop = ({ fillColor }: { fillColor: string }) => (
+  <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+    <svg
+      viewBox="0 0 1440 60"
+      preserveAspectRatio="none"
+      className="block w-full h-[40px] md:h-[60px]"
+    >
+      <path d="M0,60 Q720,0 1440,60 L1440,0 L0,0 Z" fill={fillColor} />
+    </svg>
+  </div>
+);
 
 export default function Landing() {
-  const [complexity, setComplexity] = useState("M");
-  const [monthlyHours, setMonthlyHours] = useState(100);
-  const [hourlyCost, setHourlyCost] = useState(40);
-  const [showResults, setShowResults] = useState(false);
+  const [complexity, setComplexity] = useState<string>("");
+  const [hours, setHours] = useState("120");
+  const [rate, setRate] = useState("35");
+  const [showResult, setShowResult] = useState(false);
+  const [showCustom, setShowCustom] = useState(false);
+  const [showNegative, setShowNegative] = useState(false);
 
-  const calculateROI = () => {
-    setShowResults(true);
+  const handleCalculate = () => {
+    if (complexity === "XL" || complexity === "XXL") {
+      setShowCustom(true);
+      setShowResult(false);
+      setShowNegative(false);
+      return;
+    }
+    setShowCustom(false);
+    const monthlyHours = parseFloat(hours) || 0;
+    const hourlyCost = parseFloat(rate) || 0;
+    const pricing: Record<string, { setup: number; service: number }> = {
+      S: { setup: 5000, service: 3000 },
+      M: { setup: 10000, service: 5000 },
+      L: { setup: 17500, service: 7000 },
+    };
+    const p = pricing[complexity];
+    if (!p || monthlyHours <= 0 || hourlyCost <= 0) return;
+    const annualManual = monthlyHours * hourlyCost * 12;
+    const remaining = annualManual * 0.1;
+    const annualAuto = p.service + remaining;
+    const savings = annualManual - annualAuto;
+    if (savings <= 0) {
+      setShowNegative(true);
+      setShowResult(false);
+      return;
+    }
+    setShowNegative(false);
+    setShowResult(true);
   };
 
-  // Mock calculation logic for display
-  const annualCost = monthlyHours * hourlyCost * 12;
-  const estimatedSavings = annualCost * 0.7; // assuming 70% savings
-  const paybackPeriod = 10; // static for mockup
-  const roiPercent = 120; // static for mockup
-  const fteEquivalent = (monthlyHours / 160).toFixed(1);
+  const monthlyHours = parseFloat(hours) || 0;
+  const hourlyCost = parseFloat(rate) || 0;
+  const pricing: Record<string, { setup: number; service: number }> = {
+    S: { setup: 5000, service: 3000 },
+    M: { setup: 10000, service: 5000 },
+    L: { setup: 17500, service: 7000 },
+  };
+  const p = pricing[complexity] || { setup: 10000, service: 5000 };
+  const annualManual = monthlyHours * hourlyCost * 12;
+  const remaining = annualManual * 0.1;
+  const annualAuto = p.service + remaining;
+  const savings = annualManual - annualAuto;
+  const monthlySavings = savings / 12;
+  const payback = monthlySavings > 0 ? p.setup / monthlySavings : 0;
+  const roi = savings > 0 ? (savings / p.setup) * 100 : 0;
+  const fte = monthlyHours / 144;
+
+  function getInsight(pb: number) {
+    if (pb < 6) return "Excellent candidate";
+    if (pb < 12) return "Strong candidate";
+    if (pb < 24) return "Moderate candidate";
+    return "Low ROI candidate";
+  }
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] text-slate-800 font-['Prompt'] selection:bg-[#311111] selection:text-[#faf8f5]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#130707]/90 backdrop-blur-md border-b border-white/10 text-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8a3333] to-[#311111] flex items-center justify-center shadow-lg">
-              <span className="font-bold text-lg leading-none">B</span>
-            </div>
-            <span className="font-medium text-xl tracking-tight">BCA Solutions</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#" className="hover:text-[#e8a3a3] transition-colors">Home</a>
-            <a href="#" className="hover:text-[#e8a3a3] transition-colors">Solutions</a>
-            <a href="#" className="hover:text-[#e8a3a3] transition-colors">Pricing</a>
-            <Button className="rounded-full bg-[#faf8f5] text-[#130707] hover:bg-[#e8a3a3] hover:text-[#130707] transition-all">
-              Get Assessment
-            </Button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen font-['Prompt'] bg-[#faf8f5] text-[#1a1a1a]">
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 bg-[#130707] text-[#faf8f5] overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <img src="/__mockup/images/hero-bca.png" alt="Hero background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#130707] via-[#130707]/80 to-transparent"></div>
+      {/* ========== NAVIGATION ========== */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#130707]/95 backdrop-blur-sm border-b border-white/10 h-20 transition-all">
+        <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-between">
+          <div className="cursor-pointer font-bold text-xl text-white tracking-tight">
+            BCA Solutions
+          </div>
+          <nav className="hidden md:flex items-center gap-8">
+            <button className="text-sm font-semibold text-white/90 hover:text-white transition-colors">
+              Home
+            </button>
+            <button className="text-sm font-semibold text-white/90 hover:text-white transition-colors">
+              Solutions
+            </button>
+            <button className="text-sm font-semibold text-white/90 hover:text-white transition-colors">
+              Pricing
+            </button>
+          </nav>
+          <Button
+            variant="outline"
+            className="rounded-full border-2 border-white text-white bg-transparent hover:bg-white/10 px-6 h-11 text-sm font-bold"
+          >
+            Get Assessment
+          </Button>
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-medium leading-tight mb-6 text-white">
-              Automation Without the Operational Burden
-            </h1>
-            <p className="text-xl text-[#d4c5c5] mb-8 leading-relaxed">
-              We deliver business process automation as a fully managed service.
-            </p>
-            
-            <div className="space-y-4 mb-10">
+      </header>
+
+      {/* ========== HERO ========== */}
+      <section className="relative overflow-hidden min-h-[600px] lg:min-h-[800px]">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#130707]/95 via-[#130707]/88 to-[#130707]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#130707]/50 to-transparent" />
+
+        <div className="relative container mx-auto px-4 md:px-8 pt-28 pb-16 lg:py-0 flex items-center justify-center min-h-[inherit]">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-16 items-center w-full">
+            <div className="flex flex-col space-y-6 lg:space-y-8">
+              <div className="space-y-4 lg:space-y-5">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1]">
+                  Automation Without the Operational Burden
+                </h1>
+                <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium">
+                  We deliver business process automation as a fully managed
+                  service.
+                </p>
+              </div>
+
+              <ul className="space-y-2 lg:space-y-3">
+                {[
+                  "No infrastructure to build or maintain",
+                  "No internal automation team needed",
+                  "Fast ROI with predictable costs",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-3 text-base md:text-lg font-medium text-white/90"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-white/70 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-1 lg:pt-2">
+                <Button className="w-full sm:w-auto h-14 px-10 text-base font-bold rounded-full bg-white text-[#311111] hover:bg-white/90 shadow-lg">
+                  Calculate Your ROI
+                </Button>
+              </div>
+            </div>
+
+            <div className="hidden lg:flex flex-col items-center justify-center gap-0 w-full lg:max-w-[550px] lg:ml-auto pt-2 lg:pt-0">
+              <div className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-4 lg:px-6 lg:py-7 text-center flex flex-col items-center">
+                <Cog className="w-6 h-6 lg:w-8 lg:h-8 text-white/80 mb-1.5 lg:mb-2" />
+                <span className="font-bold text-xs lg:text-base text-white">
+                  Manual Process
+                </span>
+              </div>
+
+              <div className="flex items-center justify-center py-1 lg:py-1.5">
+                <ArrowDown className="w-5 h-5 lg:w-7 lg:h-7 text-white/80" />
+              </div>
+
+              <div className="w-full bg-[#311111]/80 backdrop-blur-sm border border-[#311111] rounded-2xl px-4 py-4 lg:px-6 lg:py-7 text-center shadow-lg shadow-[#311111]/20 flex flex-col items-center">
+                <Rocket className="w-6 h-6 lg:w-8 lg:h-8 text-white mb-1.5 lg:mb-2" />
+                <span className="font-bold text-xs lg:text-base text-white">
+                  Automated Process
+                </span>
+              </div>
+
+              <div className="flex items-center justify-center py-1 lg:py-1.5">
+                <ArrowDown className="w-5 h-5 lg:w-7 lg:h-7 text-white/80" />
+              </div>
+
+              <div className="w-full bg-white/15 backdrop-blur-sm border border-white/30 rounded-2xl px-4 py-4 lg:px-6 lg:py-7 text-center flex flex-col items-center">
+                <TrendingDown className="w-6 h-6 lg:w-8 lg:h-8 text-white/80 mb-1.5 lg:mb-2" />
+                <span className="font-bold text-xs lg:text-base text-white leading-tight">
+                  Time Saved, Costs Reduced
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== SERVICE EXPLANATION ========== */}
+      <section className="py-16 md:py-24 bg-[#faf8f5] border-b border-[#e8e0d8]">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-10 md:mb-16">
+              <h2 className="text-sm font-bold tracking-[0.3em] text-[#311111] mb-4">
+                MANAGED INTELLIGENT AUTOMATION
+              </h2>
+              <blockquote className="text-3xl md:text-4xl lg:text-5xl font-medium text-[#1a1a1a] leading-tight border-l-4 border-[#311111] pl-6 md:pl-10">
+                You run the business.{" "}
+                <span className="font-bold text-[#311111]">
+                  We run the automation.
+                </span>
+              </blockquote>
+            </div>
+
+            <div className="space-y-8 text-lg text-[#1a1a1a]/80 font-medium">
+              <p className="text-2xl text-[#1a1a1a] font-semibold">
+                Managed Automation delivers business process automation as a
+                fully managed service.
+              </p>
+
+              <ul className="space-y-6 mt-8">
+                {[
+                  "Instead of building an automation platform and internal team, organizations can simply automate their processes through our service.",
+                  "BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients.",
+                  "This enables organizations to achieve fast and measurable ROI, benefit from predictable service costs, and scale automation across the business.",
+                ].map((text, i) => (
+                  <li key={i} className="flex gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-[#311111] shrink-0 mt-1" />
+                    <p>{text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== VALUE PILLARS ========== */}
+      <section className="relative py-16 md:py-24 bg-[#311111]">
+        <CurvedDividerTop fillColor="#faf8f5" />
+        <div className="container mx-auto px-4 md:px-8 pt-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Why Organizations Choose Managed Automation
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                "No infrastructure to build or maintain",
-                "No internal automation team needed",
-                "Fast ROI with predictable costs"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-[#a74646]" />
-                  <span className="text-lg text-[#e6dcdc]">{item}</span>
-                </div>
+                {
+                  icon: Layers,
+                  title: "Zero Infrastructure",
+                  desc: "No servers to provision, no software to install, no licenses to manage.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Compliance & Reliability",
+                  desc: "Bank-grade security and guaranteed SLAs for your critical processes.",
+                },
+                {
+                  icon: Clock,
+                  title: "Fast Deployment",
+                  desc: "From assessment to production in weeks, not months. Rapid time to value.",
+                },
+                {
+                  icon: Calculator,
+                  title: "Predictable Costs",
+                  desc: "Flat monthly fee per process. No hidden costs or surprise upgrades.",
+                },
+              ].map((pillar, i) => (
+                <Card
+                  key={i}
+                  className="border border-white/15 shadow-md hover:shadow-lg transition-shadow rounded-2xl bg-[#130707]/50 backdrop-blur-sm"
+                >
+                  <CardContent className="p-8 flex flex-col items-center text-center space-y-4">
+                    <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-full mb-2">
+                      <pillar.icon className="w-8 h-8 text-[#e8a3a3]" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-white/70 font-medium">{pillar.desc}</p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="rounded-full px-8 py-6 text-lg bg-[#a74646] hover:bg-[#8a3333] text-white transition-all shadow-lg shadow-[#a74646]/20">
-                Calculate Your ROI <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+      {/* ========== CALCULATOR ========== */}
+      <section className="py-16 md:py-24 bg-[#faf8f5]">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
+                Estimate Your Automation ROI
+              </h2>
             </div>
-          </div>
-          <div className="hidden md:block relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#311111] to-transparent rounded-3xl opacity-50 blur-2xl"></div>
-            <img 
-              src="/__mockup/images/office-bca.png" 
-              alt="Premium office" 
-              className="rounded-3xl shadow-2xl relative z-10 border border-white/10"
-            />
-          </div>
-        </div>
 
-        {/* Curved Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg className="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C73.8,30.3,150.3,55.8,227.1,65.7c31.1,4,62.6,6.3,94.29,6.5Z" fill="#faf8f5"></path>
-          </svg>
-        </div>
-      </section>
-
-      {/* Service Explanation */}
-      <section className="py-24 bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#e8a3a3]/20 text-[#8a3333] font-medium text-sm mb-6">
-              Managed Intelligent Automation
-            </span>
-            <h2 className="text-3xl md:text-5xl font-medium text-[#130707] mb-8">
-              "You run the business. We run the automation."
-            </h2>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              Stop worrying about servers, licenses, and break-fixes. Our fully managed approach means you get the benefits of automation without the headache of managing it.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white border-none shadow-xl shadow-[#311111]/5 rounded-3xl p-6 transition-all hover:-translate-y-1 duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-[#faf8f5] flex items-center justify-center mb-6 text-[#8a3333]">
-                <Layers className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-medium text-[#130707] mb-3">End-to-End Service</h3>
-              <p className="text-slate-600">From initial assessment and development to ongoing maintenance and optimization, we handle everything.</p>
-            </Card>
-            <Card className="bg-white border-none shadow-xl shadow-[#311111]/5 rounded-3xl p-6 transition-all hover:-translate-y-1 duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-[#faf8f5] flex items-center justify-center mb-6 text-[#8a3333]">
-                <ShieldCheck className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-medium text-[#130707] mb-3">Enterprise Grade</h3>
-              <p className="text-slate-600">Built on robust infrastructure with comprehensive security, compliance, and disaster recovery built in.</p>
-            </Card>
-            <Card className="bg-white border-none shadow-xl shadow-[#311111]/5 rounded-3xl p-6 transition-all hover:-translate-y-1 duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-[#faf8f5] flex items-center justify-center mb-6 text-[#8a3333]">
-                <Rocket className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-medium text-[#130707] mb-3">Continuous Optimization</h3>
-              <p className="text-slate-600">We proactively monitor and improve your automated processes to ensure maximum performance and ROI.</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Value Pillars - Dark Section */}
-      <section className="relative py-24 bg-[#311111] text-[#faf8f5]">
-        <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-          <svg className="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C73.8,30.3,150.3,55.8,227.1,65.7c31.1,4,62.6,6.3,94.29,6.5Z" fill="#faf8f5"></path>
-          </svg>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10 pt-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-[#130707]/40 border-white/10 text-[#faf8f5] rounded-3xl p-6 backdrop-blur-sm">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4">
-                <Cog className="w-6 h-6 text-[#e8a3a3]" />
-              </div>
-              <h4 className="text-lg font-medium mb-2">Zero Infrastructure</h4>
-              <p className="text-[#d4c5c5] text-sm">No servers to provision, no software to install, no licenses to manage.</p>
-            </Card>
-            <Card className="bg-[#130707]/40 border-white/10 text-[#faf8f5] rounded-3xl p-6 backdrop-blur-sm">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4">
-                <ShieldCheck className="w-6 h-6 text-[#e8a3a3]" />
-              </div>
-              <h4 className="text-lg font-medium mb-2">Compliance & Reliability</h4>
-              <p className="text-[#d4c5c5] text-sm">Bank-grade security and guaranteed SLAs for your critical processes.</p>
-            </Card>
-            <Card className="bg-[#130707]/40 border-white/10 text-[#faf8f5] rounded-3xl p-6 backdrop-blur-sm">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4">
-                <Clock className="w-6 h-6 text-[#e8a3a3]" />
-              </div>
-              <h4 className="text-lg font-medium mb-2">Fast Deployment</h4>
-              <p className="text-[#d4c5c5] text-sm">From assessment to production in weeks, not months. Rapid time to value.</p>
-            </Card>
-            <Card className="bg-[#130707]/40 border-white/10 text-[#faf8f5] rounded-3xl p-6 backdrop-blur-sm">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4">
-                <TrendingDown className="w-6 h-6 text-[#e8a3a3]" />
-              </div>
-              <h4 className="text-lg font-medium mb-2">Predictable Costs</h4>
-              <p className="text-[#d4c5c5] text-sm">Flat monthly fee per process. No hidden costs or surprise upgrades.</p>
-            </Card>
-          </div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-          <svg className="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C73.8,30.3,150.3,55.8,227.1,65.7c31.1,4,62.6,6.3,94.29,6.5Z" fill="#faf8f5"></path>
-          </svg>
-        </div>
-      </section>
-
-      {/* ROI Calculator & Example */}
-      <section className="py-24 bg-[#faf8f5]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-medium text-[#130707] mb-6">Quantify Your Impact</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">See how much time and money you can save by migrating manual processes to our managed automation platform.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Calculator Form */}
-            <Card className="bg-white border-none shadow-xl shadow-[#311111]/5 rounded-3xl p-8 lg:p-10">
-              <div className="flex items-center gap-3 mb-8">
-                <Calculator className="w-6 h-6 text-[#8a3333]" />
-                <h3 className="text-2xl font-medium text-[#130707]">ROI Calculator</h3>
-              </div>
-              
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <Label className="text-base text-slate-700">Process Complexity</Label>
-                  <Select value={complexity} onValueChange={setComplexity}>
-                    <SelectTrigger className="rounded-xl border-slate-200 h-12">
-                      <SelectValue placeholder="Select complexity" />
+            <div className="bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                <div className="space-y-2">
+                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                    Process Complexity
+                  </Label>
+                  <Select onValueChange={setComplexity} value={complexity}>
+                    <SelectTrigger className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm">
+                      <SelectValue placeholder="Select size..." />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="S">Small (Simple data entry)</SelectItem>
-                      <SelectItem value="M">Medium (Rule-based, multiple apps)</SelectItem>
-                      <SelectItem value="L">Large (Complex logic, exception handling)</SelectItem>
-                      <SelectItem value="XL">Extra Large (OCR, basic AI)</SelectItem>
-                      <SelectItem value="XXL">XXL (Advanced cognitive automation)</SelectItem>
+                      <SelectItem value="S">
+                        S - 1 application, 5-10 steps
+                      </SelectItem>
+                      <SelectItem value="M">
+                        M - 2 applications, 10-20 steps
+                      </SelectItem>
+                      <SelectItem value="L">
+                        L - 2-3 applications, 20-40 steps
+                      </SelectItem>
+                      <SelectItem value="XL">
+                        XL - 3-4 applications, 40+ steps
+                      </SelectItem>
+                      <SelectItem value="XXL">
+                        XXL - Complex, end-to-end processes
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-3">
-                  <Label className="text-base text-slate-700">Manual Hours per Month</Label>
-                  <Input 
-                    type="number" 
-                    value={monthlyHours}
-                    onChange={(e) => setMonthlyHours(Number(e.target.value))}
-                    className="rounded-xl border-slate-200 h-12" 
-                  />
+                <div className="space-y-2">
+                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                    Monthly Time
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      value={hours}
+                      onChange={(e) => setHours(e.target.value)}
+                      className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm pr-14"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#1a1a1a]/50 font-bold">
+                      hours
+                    </span>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <Label className="text-base text-slate-700">Fully Loaded Hourly Cost (€)</Label>
-                  <Input 
-                    type="number" 
-                    value={hourlyCost}
-                    onChange={(e) => setHourlyCost(Number(e.target.value))}
-                    className="rounded-xl border-slate-200 h-12" 
-                  />
+                <div className="space-y-2">
+                  <Label className="text-xs font-bold tracking-wider text-[#1a1a1a]/60">
+                    Hourly Cost
+                  </Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#1a1a1a]/50">
+                      &euro;
+                    </span>
+                    <Input
+                      type="number"
+                      value={rate}
+                      onChange={(e) => setRate(e.target.value)}
+                      className="h-11 bg-white border-[#e8e0d8] rounded-xl text-sm pl-7"
+                    />
+                  </div>
                 </div>
 
-                <Button 
-                  onClick={calculateROI}
-                  className="w-full rounded-full py-6 text-lg bg-[#311111] hover:bg-[#130707] text-white transition-all mt-4"
+                <Button
+                  onClick={handleCalculate}
+                  className="h-11 text-sm font-bold rounded-full bg-[#311111] hover:bg-[#130707] text-white"
                 >
-                  Calculate Results
+                  Calculate
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-
-                {showResults && (
-                  <div className="mt-8 p-6 bg-[#faf8f5] rounded-2xl border border-[#e8a3a3]/30 animate-in fade-in slide-in-from-bottom-4">
-                    <h4 className="text-lg font-medium text-[#130707] mb-4">Estimated Impact</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm text-slate-500 mb-1">Annual Savings</p>
-                        <p className="text-2xl font-semibold text-[#8a3333]">€{estimatedSavings.toLocaleString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-slate-500 mb-1">ROI</p>
-                        <p className="text-2xl font-semibold text-[#8a3333]">~{roiPercent}%</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-slate-500 mb-1">Payback Period</p>
-                        <p className="text-lg font-medium text-slate-800">{paybackPeriod} months</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-slate-500 mb-1">FTE Equivalent</p>
-                        <p className="text-lg font-medium text-slate-800">{fteEquivalent} FTE</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
-            </Card>
+            </div>
 
-            {/* Example Comparison */}
-            <div className="space-y-8">
-              <div className="bg-white rounded-3xl p-8 shadow-xl shadow-[#311111]/5">
-                <h3 className="text-2xl font-medium text-[#130707] mb-6">Real World Example</h3>
-                <p className="text-slate-600 mb-8">Medium complexity invoice processing task performed 35 hours per month.</p>
-                
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
-                        <AlertTriangle className="w-5 h-5 text-slate-500" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-[#130707]">Manual Process</p>
-                        <p className="text-sm text-slate-500">Inefficient, error-prone</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-[#130707]">€16,800</p>
-                      <p className="text-xs text-slate-500">annual cost</p>
-                    </div>
+            {showCustom && (
+              <div className="mt-6 bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+                <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                  <AlertTriangle className="w-8 h-8 text-[#311111] flex-shrink-0" />
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold text-[#1a1a1a]">
+                      Custom Assessment Required
+                    </h3>
+                    <p className="text-sm text-[#1a1a1a]/60 mt-1">
+                      For XL and XXL complexity, we provide indicative pricing
+                      only after a detailed review.
+                    </p>
                   </div>
+                  <Button className="rounded-full bg-[#311111] text-white hover:bg-[#130707] px-5 h-10 text-xs font-bold flex-shrink-0">
+                    Request Assessment
+                    <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </div>
+              </div>
+            )}
 
-                  <div className="flex justify-center">
-                    <ArrowDown className="w-6 h-6 text-slate-300" />
-                  </div>
-
-                  <div className="flex items-center justify-between p-4 rounded-2xl bg-[#311111] text-white shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                        <Rocket className="w-5 h-5 text-[#e8a3a3]" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-white">Managed Automation</p>
-                        <p className="text-sm text-[#d4c5c5]">€10,000 setup + €5k/yr</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold text-[#e8a3a3]">~€12,000</p>
-                      <p className="text-xs text-[#d4c5c5]">annual savings</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
-                    <div>
-                      <p className="text-sm text-slate-500">Payback Period</p>
-                      <p className="font-medium text-[#130707]">~10 months</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-500">Return on Investment</p>
-                      <p className="font-medium text-[#130707]">~100% ROI</p>
-                    </div>
+            {showNegative && (
+              <div className="mt-6 bg-white/80 border border-[#e8e0d8] rounded-2xl p-6 md:p-8">
+                <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                  <AlertTriangle className="w-8 h-8 text-[#1a1a1a]/50 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-base font-bold text-[#1a1a1a]">
+                      Review Recommended
+                    </h3>
+                    <p className="text-sm text-[#1a1a1a]/60 mt-1">
+                      This process may not be a strong candidate for managed
+                      automation based on the current inputs.
+                    </p>
                   </div>
                 </div>
               </div>
+            )}
+
+            {showResult && (
+              <div className="mt-6 border-2 border-[#311111] rounded-2xl p-6 md:p-8 bg-white">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                  <div className="sm:col-span-2 lg:col-span-1">
+                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                      Annual Savings
+                    </h3>
+                    <div className="text-3xl md:text-4xl font-extrabold text-[#311111]">
+                      &euro;{Math.round(savings).toLocaleString("en-US")}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                      Payback Period
+                    </h3>
+                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                      {payback.toFixed(1)}{" "}
+                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                        months
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                      ROI
+                    </h3>
+                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                      {Math.round(roi)}
+                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                        %
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold tracking-widest text-[#1a1a1a]/50 mb-1">
+                      FTE Equivalent
+                    </h3>
+                    <div className="text-2xl font-bold text-[#1a1a1a]">
+                      {fte.toFixed(2)}{" "}
+                      <span className="text-base font-semibold text-[#1a1a1a]/50">
+                        FTE
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex justify-center">
+                  <div className="inline-flex items-center gap-3 bg-[#311111]/10 border-l-4 border-[#311111] px-4 py-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#311111] flex-shrink-0" />
+                    <span className="font-bold text-sm text-[#311111]">
+                      {getInsight(payback)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {(showResult || showCustom || showNegative) && (
+              <p className="text-xs text-[#1a1a1a]/50 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
+                Indicative calculation based on standard managed automation
+                pricing and an assumed 90% automation ratio. Final pricing
+                depends on process complexity and business environment.
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== EXAMPLE ROI ========== */}
+      <section className="relative py-16 md:py-24 bg-[#130707] text-white overflow-hidden">
+        <CurvedDividerTop fillColor="#faf8f5" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070')",
+          }}
+        />
+        <div className="absolute inset-0 bg-[#130707]/[0.93]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(19,7,7,0.3) 0%, transparent 20%, transparent 80%, rgba(19,7,7,0.3) 100%)",
+          }}
+        />
+        <div className="container mx-auto px-4 md:px-8 relative z-10 pt-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Typical ROI From Automating a Single Process
+              </h2>
+            </div>
+
+            <div className="flex flex-col md:flex-row md:items-stretch gap-0">
+              <div className="flex-1 border border-white/20 p-6 md:p-8 flex flex-col gap-4 md:gap-6 rounded-2xl backdrop-blur-sm bg-white/[0.03]">
+                <h3 className="text-xl font-bold text-white">
+                  Manual process
+                </h3>
+                <ul className="space-y-3 md:space-y-4 text-lg font-medium text-white/80">
+                  <li className="flex justify-between border-b border-white/10 pb-2">
+                    <span className="text-white">~2 hours/day</span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/10 pb-2">
+                    <span className="text-white">&euro;40/hour</span>
+                  </li>
+                  <li className="flex justify-between font-bold pt-2">
+                    <span className="text-white text-xl">
+                      &euro;16,800 annual cost
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="flex items-center justify-center py-2 md:py-0 md:px-3">
+                <ArrowDown className="w-6 h-6 text-white/70 md:hidden" />
+                <ArrowRight className="w-8 h-8 text-white/70 hidden md:block" />
+              </div>
+
+              <div className="flex-1 border border-[#311111] bg-[#311111]/[0.3] p-6 md:p-8 flex flex-col gap-4 md:gap-6 rounded-2xl backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-white">Automation</h3>
+                <ul className="space-y-3 md:space-y-4 text-lg font-medium text-white/80">
+                  <li className="flex justify-between border-b border-white/10 pb-2">
+                    <span className="text-white">&euro;10,000 setup</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span className="text-white">
+                      &euro;5,000 annual service
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="flex items-center justify-center py-2 md:py-0 md:px-3">
+                <ArrowDown className="w-6 h-6 text-white/70 md:hidden" />
+                <ArrowRight className="w-8 h-8 text-white/70 hidden md:block" />
+              </div>
+
+              <div className="flex-1 bg-[#311111] text-white p-6 md:p-8 flex flex-col gap-4 md:gap-6 shadow-2xl rounded-2xl">
+                <h3 className="text-xl font-bold">Business impact</h3>
+                <ul className="space-y-3 md:space-y-4 text-lg font-medium">
+                  <li className="flex justify-between border-b border-white/20 pb-2">
+                    <span className="font-bold">~&euro;12,000 savings</span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/20 pb-2">
+                    <span className="font-bold">~10-month payback</span>
+                  </li>
+                  <li className="flex justify-between font-bold pt-2">
+                    <span className="text-2xl">~100% ROI</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-10 md:mt-16 text-center">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-light italic">
+                "Small processes.{" "}
+                <span className="font-bold not-italic">Big impact.</span>"
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-24 bg-[#130707] text-[#faf8f5] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#311111]/40 via-[#130707] to-[#130707]"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-medium text-white mb-6">Automation Engagement Model</h2>
-            <p className="text-xl text-[#d4c5c5] max-w-2xl mx-auto">Transparent, predictable pricing. No hidden fees or surprise license renewals.</p>
-          </div>
+      {/* ========== PRICING ========== */}
+      <section className="py-16 md:py-24 bg-[#faf8f5]">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">
+                Automation Engagement Model
+              </h2>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Starter */}
-            <Card className="bg-[#1a0c0c] border-white/10 text-white rounded-3xl overflow-hidden flex flex-col">
-              <CardHeader className="p-8 pb-4">
-                <CardTitle className="text-2xl font-medium mb-2">Starter</CardTitle>
-                <CardDescription className="text-[#d4c5c5]">Perfect for proving value</CardDescription>
-                <div className="mt-6">
-                  <span className="text-4xl font-semibold">€5,000</span>
-                  <span className="text-[#d4c5c5]">/yr</span>
-                </div>
-                <p className="text-sm text-[#d4c5c5] mt-2">+ €10,000 one-time setup</p>
-              </CardHeader>
-              <CardContent className="p-8 pt-4 flex-1 flex flex-col">
-                <ul className="space-y-4 mb-8 flex-1">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">1 Automated Process</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">Standard SLA</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">Quarterly Review</span></li>
-                </ul>
-                <Button className="w-full rounded-full bg-white/10 hover:bg-white/20 text-white border-none">Get Started</Button>
-              </CardContent>
-            </Card>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="border-none shadow-md rounded-2xl bg-white">
+                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#faf8f5]/50">
+                  <CardTitle className="text-2xl font-bold">Starter</CardTitle>
+                  <p className="text-[#1a1a1a]/60 font-medium">1 process</p>
+                </CardHeader>
+                <CardContent className="p-8 flex flex-col gap-6">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Setup
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;10,000
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center pb-2">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Annual
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;5,000
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-            {/* Growth (Featured) */}
-            <Card className="bg-gradient-to-b from-[#311111] to-[#1a0c0c] border-[#8a3333] border-2 text-white rounded-3xl overflow-hidden flex flex-col relative transform md:-translate-y-4 shadow-2xl shadow-[#8a3333]/20">
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#e8a3a3] to-transparent"></div>
-              <CardHeader className="p-8 pb-4">
-                <div className="inline-block px-3 py-1 rounded-full bg-[#8a3333] text-white text-xs font-medium mb-4 w-fit">Most Popular</div>
-                <CardTitle className="text-2xl font-medium mb-2">Growth</CardTitle>
-                <CardDescription className="text-[#e8a3a3]">Scale your automation</CardDescription>
-                <div className="mt-6">
-                  <span className="text-4xl font-semibold">€4,500</span>
-                  <span className="text-[#d4c5c5]">/yr per process</span>
-                </div>
-                <p className="text-sm text-[#d4c5c5] mt-2">+ €9,500 setup per process</p>
-              </CardHeader>
-              <CardContent className="p-8 pt-4 flex-1 flex flex-col">
-                <ul className="space-y-4 mb-8 flex-1">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#e8a3a3]" /><span className="text-sm">2-10 Automated Processes</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#e8a3a3]" /><span className="text-sm">Priority SLA</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#e8a3a3]" /><span className="text-sm">Monthly Review & Optimization</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#e8a3a3]" /><span className="text-sm">Dedicated Success Manager</span></li>
-                </ul>
-                <Button className="w-full rounded-full bg-[#e8a3a3] hover:bg-white text-[#130707] font-medium border-none">Start Scaling</Button>
-              </CardContent>
-            </Card>
+              <Card className="border-2 border-[#311111] shadow-xl rounded-2xl bg-white relative transform md:-translate-y-4">
+                <div className="absolute top-0 inset-x-0 h-1 bg-[#311111]" />
+                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#311111]/5">
+                  <CardTitle className="text-2xl font-bold text-[#311111]">
+                    Growth
+                  </CardTitle>
+                  <p className="text-[#1a1a1a]/60 font-medium">
+                    2&ndash;10 processes
+                  </p>
+                </CardHeader>
+                <CardContent className="p-8 flex flex-col gap-6">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Setup
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;9,500
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center pb-2">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Annual
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;4,500
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-            {/* Scale */}
-            <Card className="bg-[#1a0c0c] border-white/10 text-white rounded-3xl overflow-hidden flex flex-col">
-              <CardHeader className="p-8 pb-4">
-                <CardTitle className="text-2xl font-medium mb-2">Scale</CardTitle>
-                <CardDescription className="text-[#d4c5c5]">Enterprise transformation</CardDescription>
-                <div className="mt-6">
-                  <span className="text-4xl font-semibold">€4,000</span>
-                  <span className="text-[#d4c5c5]">/yr per process</span>
-                </div>
-                <p className="text-sm text-[#d4c5c5] mt-2">+ €9,000 setup per process</p>
-              </CardHeader>
-              <CardContent className="p-8 pt-4 flex-1 flex flex-col">
-                <ul className="space-y-4 mb-8 flex-1">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">10+ Automated Processes</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">Custom SLA</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">Continuous Optimization</span></li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#8a3333]" /><span className="text-sm">Strategic Roadmap Planning</span></li>
-                </ul>
-                <Button className="w-full rounded-full bg-white/10 hover:bg-white/20 text-white border-none">Contact Sales</Button>
-              </CardContent>
-            </Card>
+              <Card className="border-none shadow-md rounded-2xl bg-white">
+                <CardHeader className="text-center pb-2 border-b border-[#e8e0d8] bg-[#faf8f5]/50">
+                  <CardTitle className="text-2xl font-bold">Scale</CardTitle>
+                  <p className="text-[#1a1a1a]/60 font-medium">
+                    10+ processes
+                  </p>
+                </CardHeader>
+                <CardContent className="p-8 flex flex-col gap-6">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-[#e8e0d8] pb-4">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Setup
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;9,000
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center pb-2">
+                      <span className="font-bold text-[#1a1a1a] text-sm">
+                        Annual
+                      </span>
+                      <span className="text-2xl font-bold text-[#1a1a1a]">
+                        &euro;4,000
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-12">
+              <p className="text-[#1a1a1a]/60 font-medium text-lg">
+                * Setup fee depends on process complexity.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="py-24 bg-gradient-to-b from-[#faf8f5] to-white">
-        <div className="max-w-3xl mx-auto px-6">
-          <Card className="bg-white border-none shadow-2xl shadow-[#311111]/5 rounded-3xl overflow-hidden">
-            <div className="p-8 md:p-12">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl font-medium text-[#130707] mb-4">Ready to Automate?</h2>
-                <p className="text-slate-600">Get a free, detailed assessment of your automation potential.</p>
-              </div>
-              
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-slate-700">Full Name</Label>
-                    <Input id="name" placeholder="John Doe" className="rounded-xl border-slate-200 h-12 bg-slate-50" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-slate-700">Company</Label>
-                    <Input id="company" placeholder="Acme Corp" className="rounded-xl border-slate-200 h-12 bg-slate-50" />
-                  </div>
+      {/* ========== FINAL CTA / CONTACT FORM ========== */}
+      <section className="relative py-16 md:py-24 bg-[#311111] text-white overflow-hidden">
+        <CurvedDividerTop fillColor="#faf8f5" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')",
+          }}
+        />
+        <div className="absolute inset-0 bg-[#311111]/90" />
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10 pt-6">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+            <div className="flex-1 space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                Start With One Process
+              </h2>
+              <p className="text-xl md:text-2xl font-medium text-white/90">
+                Validate ROI quickly and scale automation.
+              </p>
+            </div>
+
+            <div className="flex-1 w-full max-w-md bg-[#faf8f5] p-8 shadow-2xl rounded-2xl">
+              <form
+                className="space-y-6"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <div className="space-y-2">
+                  <Label className="text-[#1a1a1a] font-bold">Name</Label>
+                  <Input
+                    placeholder="John Doe"
+                    className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]"
+                  />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-slate-700">Work Email</Label>
-                  <Input id="email" type="email" placeholder="john@company.com" className="rounded-xl border-slate-200 h-12 bg-slate-50" />
+                  <Label className="text-[#1a1a1a] font-bold">Email</Label>
+                  <Input
+                    placeholder="john@company.com"
+                    type="email"
+                    className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]"
+                  />
                 </div>
-                <Button className="w-full rounded-full py-6 text-lg bg-[#311111] hover:bg-[#130707] text-white mt-4">
+                <div className="space-y-2">
+                  <Label className="text-[#1a1a1a] font-bold">Company</Label>
+                  <Input
+                    placeholder="Acme Corp"
+                    className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]"
+                  />
+                </div>
+
+                <Button className="w-full h-14 text-base font-bold rounded-full mt-4 bg-[#311111] hover:bg-[#130707] text-white">
                   Request Detailed Assessment
                 </Button>
-                <p className="text-center text-xs text-slate-500 mt-4">We respect your privacy. No spam, ever.</p>
               </form>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#130707] border-t border-white/10 py-12 text-center text-[#d4c5c5]">
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <div className="w-6 h-6 rounded bg-gradient-to-br from-[#8a3333] to-[#311111] flex items-center justify-center">
-            <span className="font-bold text-xs text-white leading-none">B</span>
+      {/* ========== FOOTER ========== */}
+      <footer className="bg-[#130707] text-white py-8 md:py-12 border-t border-white/10">
+        <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-2xl font-bold">BCA Solutions</div>
+          <div className="text-white/60 font-medium">
+            &copy; {new Date().getFullYear()} BCA Solutions. All rights
+            reserved.
           </div>
-          <span className="font-medium text-lg text-white">BCA Solutions</span>
-        </div>
-        <p className="text-sm">© {new Date().getFullYear()} BCA Solutions. All rights reserved.</p>
-        <div className="flex justify-center gap-6 mt-6 text-sm">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-white transition-colors">Contact</a>
         </div>
       </footer>
     </div>
