@@ -22,7 +22,7 @@ export default function Navigation() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#130707]/95 backdrop-blur-sm border-b border-white/10 h-16"
+          ? "bg-[#311111] backdrop-blur-sm border-b border-white/10 h-16"
           : "bg-transparent border-b border-transparent h-20"
       }`}
     >
@@ -39,7 +39,7 @@ export default function Navigation() {
 
         <div className="flex items-center">
           <button
-            className="cursor-pointer font-bold rounded-full border-2 border-white text-white bg-transparent hover:bg-white/10 transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm"
+            className="cursor-pointer font-bold rounded-full border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#311111] transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm"
             onClick={() => scrollTo("assessment")}
             data-testid="btn-nav-assessment"
           >
