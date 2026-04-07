@@ -34,7 +34,7 @@ export default function Navigation() {
         <nav className="hidden md:flex items-center gap-8">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="cursor-pointer text-sm font-semibold text-white/90 hover:text-white transition-colors">Home</button>
           <button onClick={() => scrollTo("service")} className="cursor-pointer text-sm font-semibold text-white/90 hover:text-white transition-colors">Solutions</button>
-          <button onClick={() => scrollTo("pricing")} className="cursor-pointer text-sm font-semibold text-white/90 hover:text-white transition-colors">Pricing</button>
+          {/* <button onClick={() => scrollTo("pricing")} className="cursor-pointer text-sm font-semibold text-white/90 hover:text-white transition-colors">Pricing</button> */}
         </nav>
 
         <div className="flex items-center">
