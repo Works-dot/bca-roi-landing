@@ -28,6 +28,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "pillars.4.icon", value: "Calculator" },
 
   { key: "calculator.title", value: "ESTIMATE YOUR AUTOMATION ROI" },
+  { key: "calculator.description", value: "Use this calculator to get a quick estimate of how much time and cost your organization could save by automating a specific business process. Simply select the complexity of the process, enter the monthly hours currently spent on it, and your average hourly cost — then see your projected annual savings, payback period, and ROI." },
 
   { key: "example.title", value: "TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS" },
   { key: "example.manual.title", value: "Manual process" },

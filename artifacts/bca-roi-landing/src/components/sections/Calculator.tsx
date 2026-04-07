@@ -33,6 +33,7 @@ function getInsightLabel(paybackMonths: number): string {
 
 export default function Calculator() {
   const sectionTitle = useContent("calculator.title", "Estimate Your Automation ROI");
+  const sectionDescription = useContent("calculator.description", "Use this calculator to get a quick estimate of how much time and cost your organization could save by automating a specific business process. Simply select the complexity of the process, enter the monthly hours currently spent on it, and your average hourly cost — then see your projected annual savings, payback period, and ROI.");
   const constants = useConstants();
 
   const PRICING: Record<string, { setup: number; service: number }> = (constants.pricing as Record<string, { setup: number; service: number }>) ?? {
@@ -102,6 +103,9 @@ export default function Calculator() {
             <h2 className="text-3xl md:text-4xl font-bold text-white">
               {sectionTitle}
             </h2>
+            <p className="mt-4 text-base md:text-lg text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
+              {sectionDescription}
+            </p>
           </div>
 
           <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
