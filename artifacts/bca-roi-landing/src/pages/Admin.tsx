@@ -48,6 +48,7 @@ const TEXTAREA_KEYS = new Set([
   "service.bullet.1",
   "service.bullet.2",
   "service.bullet.3",
+  "calculator.description",
   "pillars.1.description",
   "pillars.2.description",
   "pillars.3.description",
@@ -97,7 +98,7 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "pillars.4.description",
     "pillars.4.icon",
   ],
-  Calculator: ["calculator.title"],
+  Calculator: ["calculator.title", "calculator.description"],
   "Example ROI": [
     "example.title",
     "example.manual.title",
