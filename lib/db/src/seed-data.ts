@@ -63,8 +63,14 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "cta.subheadline", value: "Validate ROI quickly and scale automation." },
   { key: "cta.button", value: "Request Detailed Assessment" },
 
-  { key: "footer.brand", value: "BCA Solutions" },
-  { key: "footer.copyright", value: "BCA Solutions. All rights reserved." },
+  { key: "footer.tagline", value: "Experts In Technology, Partners In Business" },
+  { key: "footer.subtitle", value: "Empowering Your Digital Journey since 2007" },
+  { key: "footer.social.facebook", value: "https://facebook.com/bcasolutions" },
+  { key: "footer.social.linkedin", value: "https://linkedin.com/company/bcasolutions" },
+  { key: "footer.social.instagram", value: "https://instagram.com/bcasolutions" },
+  { key: "footer.copyright", value: "BCA Solutions" },
+  { key: "footer.privacy.text", value: "Privacy Policy" },
+  { key: "footer.privacy.url", value: "#" },
 
   { key: "seo.title", value: "BCA Solutions — Managed Intelligent Automation" },
   { key: "seo.description", value: "Deliver business process automation as a fully managed service. No infrastructure, no internal team needed. Calculate your ROI today." },

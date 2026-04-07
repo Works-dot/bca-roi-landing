@@ -131,7 +131,16 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "pricing.note",
   ],
   "Final CTA": ["cta.headline", "cta.subheadline", "cta.button"],
-  Footer: ["footer.brand", "footer.copyright"],
+  Footer: [
+    "footer.tagline",
+    "footer.subtitle",
+    "footer.social.facebook",
+    "footer.social.linkedin",
+    "footer.social.instagram",
+    "footer.copyright",
+    "footer.privacy.text",
+    "footer.privacy.url",
+  ],
 };
 
 function prettyKey(key: string): string {
