@@ -9,7 +9,7 @@ export default function Footer() {
   const facebookUrl = useContent("footer.social.facebook", "https://facebook.com/bcasolutions");
   const linkedinUrl = useContent("footer.social.linkedin", "https://linkedin.com/company/bcasolutions");
   const instagramUrl = useContent("footer.social.instagram", "https://instagram.com/bcasolutions");
-  const copyright = useContent("footer.copyright", "BCA Solutions");
+  const copyright = useContent("footer.copyright", "BCA Solutions. All rights reserved.");
   const privacyText = useContent("footer.privacy.text", "Privacy Policy");
   const privacyUrl = useContent("footer.privacy.url", "#");
 
@@ -20,7 +20,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#130707] text-white pt-20 md:pt-24">
+    <footer className="relative bg-[#311111] text-white pt-20 md:pt-24">
       <CurvedDividerTop darkColor="#311111" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
