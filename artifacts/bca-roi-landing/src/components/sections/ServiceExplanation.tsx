@@ -3,15 +3,11 @@ import { useContent } from "@/lib/cms-context";
 
 export default function ServiceExplanation() {
   const label = useContent("service.label", "MANAGED INTELLIGENT AUTOMATION");
-  const quote = useContent("service.quote", "You run the business. We run the automation.");
+  const quote = useContent("service.quote", "YOU RUN <b>THE BUSINESS.</b><br>WE RUN <b>THE AUTOMATION.</b>");
   const intro = useContent("service.intro", "Managed Automation delivers business process automation as a fully managed service.");
   const bullet1 = useContent("service.bullet.1", "Instead of building an automation platform and internal team, organizations can simply automate their processes through our service.");
   const bullet2 = useContent("service.bullet.2", "BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients.");
   const bullet3 = useContent("service.bullet.3", "This enables organizations to achieve fast and measurable ROI, benefit from predictable service costs, and scale automation across the business.");
-
-  const quoteParts = quote.split(". ");
-  const firstPart = quoteParts[0] + ".";
-  const secondPart = quoteParts.length > 1 ? quoteParts.slice(1).join(". ") : "";
 
   return (
     <section id="service" className="py-16 md:py-24 bg-[#130707] relative">
@@ -22,9 +18,10 @@ export default function ServiceExplanation() {
             <h2 className="text-sm font-bold tracking-[0.3em] text-white/60 mb-4">
               {label}
             </h2>
-            <blockquote className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight border-l-4 border-white/30 pl-6 md:pl-10">
-              {firstPart} {secondPart && <span className="font-bold text-white">{secondPart}</span>}
-            </blockquote>
+            <blockquote
+              className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-tight border-l-4 border-white/30 pl-6 md:pl-10 uppercase [&_b]:font-extrabold"
+              dangerouslySetInnerHTML={{ __html: quote }}
+            />
           </div>
           
           <div className="space-y-8 text-lg text-white/70 font-medium">

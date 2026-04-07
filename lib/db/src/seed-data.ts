@@ -7,7 +7,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "hero.cta", value: "Calculate Your ROI" },
 
   { key: "service.label", value: "MANAGED INTELLIGENT AUTOMATION" },
-  { key: "service.quote", value: "You run the business. We run the automation." },
+  { key: "service.quote", value: "YOU RUN <b>THE BUSINESS.</b><br>WE RUN <b>THE AUTOMATION.</b>" },
   { key: "service.intro", value: "Managed Automation delivers business process automation as a fully managed service." },
   { key: "service.bullet.1", value: "Instead of building an automation platform and internal team, organizations can simply automate their processes through our service." },
   { key: "service.bullet.2", value: "BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients." },
