@@ -10,6 +10,7 @@ export const modules: ModuleMap = {
   "./components/mockups/bca-roi-contrast/HeroColors.tsx": () => import("../components/mockups/bca-roi-contrast/HeroColors.tsx"),
   "./components/mockups/bca-roi-contrast/LighterBordo.tsx": () => import("../components/mockups/bca-roi-contrast/LighterBordo.tsx"),
   "./components/mockups/bca-roi-contrast/WhiteAccent.tsx": () => import("../components/mockups/bca-roi-contrast/WhiteAccent.tsx"),
+  "./components/mockups/bca-section-flow/SectionFlow.tsx": () => import("../components/mockups/bca-section-flow/SectionFlow.tsx"),
   "./components/mockups/bca-vibes/CoolPrecision.tsx": () => import("../components/mockups/bca-vibes/CoolPrecision.tsx"),
   "./components/mockups/bca-vibes/SoftAuthority.tsx": () => import("../components/mockups/bca-vibes/SoftAuthority.tsx"),
   "./components/mockups/bca-vibes/WarmExecutive.tsx": () => import("../components/mockups/bca-vibes/WarmExecutive.tsx")
