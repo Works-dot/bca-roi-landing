@@ -20,8 +20,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#311111] text-white pt-20 md:pt-24">
-      <CurvedDividerTop darkColor="#130707" />
+    <footer className="relative bg-[#130707] text-white pt-20 md:pt-24">
+      <CurvedDividerTop darkColor="#311111" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col items-center text-center space-y-6 pb-10">
