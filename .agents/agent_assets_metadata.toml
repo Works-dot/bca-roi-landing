@@ -1,5 +1,16 @@
 uploads = []
-generated = []
+
+[[generated]]
+id = "0fK7VVmSrSgdL_PVVmDa4"
+uri = "file://artifacts/mockup-sandbox/public/images/hero-bca.png"
+type = "image"
+title = "Corporate abstract warm wood tones"
+
+[[generated]]
+id = "wOku0J_68PSH82H6e69Ts"
+uri = "file://artifacts/mockup-sandbox/public/images/office-bca.png"
+type = "image"
+title = "Premium European office space"
 
 [[outputs]]
 id = "sd5Eq02tukL7pY1qSrc71"
