@@ -53,9 +53,9 @@ export default function Hero() {
           <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0 text-base md:text-lg text-white/80 font-medium">
             <span className="inline-flex items-center gap-2 whitespace-nowrap">
               Built on
-              <img src={uipathLogo} alt="UiPath" className="h-7 md:h-9 inline-block object-contain" />
+              <img src={uipathLogo} alt="UiPath" className="h-8 md:h-9 inline-block object-contain" />
             </span>
-            <span>— the leading enterprise automation platform.</span>
+            <span className="hidden md:inline">— the leading enterprise automation platform.</span>
           </p>
 
           <div className="pt-1 lg:pt-2">
