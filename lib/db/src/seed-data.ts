@@ -4,6 +4,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "hero.checklist.1", value: "No infrastructure to build or maintain" },
   { key: "hero.checklist.2", value: "No internal automation team needed" },
   { key: "hero.checklist.3", value: "Fast ROI with predictable costs" },
+  { key: "hero.checklist.4", value: "Most processes pay back within 6–12 months" },
   { key: "hero.cta", value: "Calculate Your ROI" },
 
   { key: "service.label", value: "Managed Intelligent Automation" },

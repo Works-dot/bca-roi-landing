@@ -9,6 +9,7 @@ export default function Hero() {
   const check1 = useContent("hero.checklist.1", "No infrastructure to build or maintain");
   const check2 = useContent("hero.checklist.2", "No internal automation team needed");
   const check3 = useContent("hero.checklist.3", "Fast ROI with predictable costs");
+  const check4 = useContent("hero.checklist.4", "Most processes pay back within 6–12 months");
   const cta = useContent("hero.cta", "Calculate Your ROI");
 
   const scrollToCalculator = () => {
@@ -40,7 +41,7 @@ export default function Hero() {
           </div>
 
           <ul className="space-y-2 lg:space-y-3 inline-flex flex-col items-start">
-            {[check1, check2, check3].map((item, i) => (
+            {[check1, check2, check3, check4].map((item, i) => (
               <li key={i} className="flex items-center gap-3 text-base md:text-lg font-medium text-white/90">
                 <CheckCircle2 className="w-5 h-5 text-white/70 flex-shrink-0" />
                 <span>{item}</span>

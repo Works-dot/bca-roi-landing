@@ -74,6 +74,7 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "hero.checklist.1",
     "hero.checklist.2",
     "hero.checklist.3",
+    "hero.checklist.4",
     "hero.cta",
   ],
   Service: [
