@@ -2,7 +2,7 @@ import { Facebook, Linkedin, Instagram } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 import footerLogo from "@assets/Logo_v2_1775568074590.png";
-import uipathFastTrack from "@assets/REFRESHED_UiPath-Fast-Track-Badge@3x_1775638381698.png";
+import uipathFastTrack from "@assets/uipath-fast-track-partner-logo_1775638887078.png";
 import uipathGoldPartner from "@assets/uipath-partner-gold-lockup-digital-rgb-w_1775638381699.png";
 
 export default function Footer() {
