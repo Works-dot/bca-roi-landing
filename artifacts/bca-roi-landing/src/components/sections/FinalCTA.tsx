@@ -26,6 +26,7 @@ export default function FinalCTA() {
   const headline = useContent("cta.headline", "Start With One Process");
   const subheadline = useContent("cta.subheadline", "Validate ROI quickly and scale automation.");
   const buttonText = useContent("cta.button", "Request assessment");
+  const successMessage = useContent("cta.successMessage", "We'll be in touch shortly to schedule your assessment.");
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -82,7 +83,7 @@ export default function FinalCTA() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-[#1a1a1a]">Thank You</h3>
-                <p className="text-[#1a1a1a]/60">We'll be in touch within 24 hours to schedule your assessment.</p>
+                <p className="text-[#1a1a1a]/60">{successMessage}</p>
               </div>
             ) : (
               <Form {...form}>

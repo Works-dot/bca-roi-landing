@@ -140,7 +140,7 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "example.impact.roi",
     "example.footer",
   ],
-  "Final CTA": ["cta.headline", "cta.subheadline", "cta.button"],
+  "Final CTA": ["cta.headline", "cta.subheadline", "cta.button", "cta.successMessage"],
   Footer: [
     "footer.tagline",
     "footer.subtitle",
