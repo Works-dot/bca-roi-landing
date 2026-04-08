@@ -52,7 +52,7 @@ export default function Hero() {
 
           <p className="flex items-center justify-center gap-2 text-base md:text-lg text-white/80 font-medium">
             Built on
-            <img src={uipathLogo} alt="UiPath" className="h-6 md:h-7 inline-block object-contain" />
+            <img src={uipathLogo} alt="UiPath" className="h-7 md:h-9 inline-block object-contain" />
             — the leading enterprise automation platform.
           </p>
 
