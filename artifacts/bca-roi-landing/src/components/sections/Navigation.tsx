@@ -71,25 +71,31 @@ export default function Navigation() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-[#311111] border-t border-white/10">
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
+        <>
+          <div
+            className="md:hidden fixed inset-0 top-16 z-[-1]"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="md:hidden bg-[#311111] border-t border-white/10">
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.target}
+                  onClick={() => scrollTo(link.target)}
+                  className="cursor-pointer text-left px-4 py-3 text-sm font-semibold text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
               <button
-                key={link.target}
-                onClick={() => scrollTo(link.target)}
-                className="cursor-pointer text-left px-4 py-3 text-sm font-semibold text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                onClick={() => scrollTo("assessment")}
+                className="cursor-pointer text-left px-4 py-3 text-sm font-bold text-white hover:bg-white/5 rounded-lg transition-colors"
               >
-                {link.label}
+                Get Assessment
               </button>
-            ))}
-            <button
-              onClick={() => scrollTo("assessment")}
-              className="cursor-pointer text-left px-4 py-3 text-sm font-bold text-white hover:bg-white/5 rounded-lg transition-colors"
-            >
-              Get Assessment
-            </button>
-          </nav>
-        </div>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
