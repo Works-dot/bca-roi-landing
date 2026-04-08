@@ -9,6 +9,10 @@ import { useContent } from "@/lib/cms-context";
 import { submitContact } from "@/lib/api";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 
+function sanitizeHtml(html: string): string {
+  return html.replace(/<(?!\/?(?:br|b)\b)[^>]*>/gi, "");
+}
+
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Valid email is required"),
@@ -64,7 +68,7 @@ export default function FinalCTA() {
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               {headline}
             </h2>
-            <p className="text-xl md:text-2xl font-medium text-white/90" dangerouslySetInnerHTML={{ __html: subheadline }} />
+            <p className="text-xl md:text-2xl font-medium text-white/90" dangerouslySetInnerHTML={{ __html: sanitizeHtml(subheadline) }} />
           </div>
           
           <div className="flex-1 w-full max-w-md bg-[#faf8f5] p-8 shadow-2xl rounded-2xl">
