@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerBottom } from "@/components/CurvedDividers";
@@ -57,6 +57,7 @@ export default function Hero() {
               data-testid="btn-hero-cta"
             >
               {cta}
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
 
