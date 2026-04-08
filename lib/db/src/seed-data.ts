@@ -1,19 +1,19 @@
 export const cmsContent: { key: string; value: string }[] = [
-  { key: "hero.headline", value: "AUTOMATION WITHOUT THE OPERATIONAL BURDEN" },
+  { key: "hero.headline", value: "Automation Without the Operational Burden" },
   { key: "hero.subheadline", value: "We deliver business process automation as a fully managed service." },
   { key: "hero.checklist.1", value: "No infrastructure to build or maintain" },
   { key: "hero.checklist.2", value: "No internal automation team needed" },
   { key: "hero.checklist.3", value: "Fast ROI with predictable costs" },
   { key: "hero.cta", value: "Calculate Your ROI" },
 
-  { key: "service.label", value: "MANAGED INTELLIGENT AUTOMATION" },
-  { key: "service.quote", value: "YOU RUN <b>THE BUSINESS.</b><br>WE RUN <b>THE AUTOMATION.</b>" },
+  { key: "service.label", value: "Managed Intelligent Automation" },
+  { key: "service.quote", value: "You Run <b>the Business.</b><br>We Run <b>the Automation.</b>" },
   { key: "service.intro", value: "Managed Automation delivers business process automation as a fully managed service." },
   { key: "service.bullet.1", value: "Instead of building an automation platform and internal team, organizations can simply automate their processes through our service." },
   { key: "service.bullet.2", value: "BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients." },
   { key: "service.bullet.3", value: "This enables organizations to achieve fast and measurable ROI, benefit from predictable service costs, and scale automation across the business." },
 
-  { key: "pillars.title", value: "WHY ORGANIZATIONS CHOOSE MANAGED AUTOMATION" },
+  { key: "pillars.title", value: "Why Organizations Choose Managed Automation" },
   { key: "pillars.1.title", value: "Lower Complexity" },
   { key: "pillars.1.description", value: "No platform to manage" },
   { key: "pillars.1.icon", value: "Layers" },
@@ -27,10 +27,10 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "pillars.4.description", value: "Transparent, scalable pricing" },
   { key: "pillars.4.icon", value: "Calculator" },
 
-  { key: "calculator.title", value: "ESTIMATE YOUR AUTOMATION ROI" },
+  { key: "calculator.title", value: "Estimate Your Automation ROI" },
   { key: "calculator.description", value: "Use this calculator to get a quick estimate of how much time and cost your organization could save by automating a specific business process. Simply select the complexity of the process, enter the monthly hours currently spent on it, and your average hourly cost — then see your projected annual savings, payback period, and ROI." },
 
-  { key: "example.title", value: "TYPICAL ROI FROM AUTOMATING A SINGLE PROCESS" },
+  { key: "example.title", value: "Typical ROI From Automating a Single Process" },
   { key: "example.manual.title", value: "Manual process" },
   { key: "example.manual.hours", value: "~2 hours/day" },
   { key: "example.manual.rate", value: "\u20AC40/hour" },
@@ -44,7 +44,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "example.impact.roi", value: "~100% ROI" },
   { key: "example.footer", value: "Small processes. Big impact." },
 
-  { key: "pricing.title", value: "AUTOMATION ENGAGEMENT MODEL" },
+  { key: "pricing.title", value: "Automation Engagement Model" },
   { key: "pricing.starter.name", value: "Starter" },
   { key: "pricing.starter.description", value: "1 process" },
   { key: "pricing.starter.setup", value: "\u20AC10,000" },
@@ -59,7 +59,7 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "pricing.scale.annual", value: "\u20AC4,000" },
   { key: "pricing.note", value: "* Setup fee depends on process complexity." },
 
-  { key: "cta.headline", value: "START WITH ONE PROCESS" },
+  { key: "cta.headline", value: "Start With One Process" },
   { key: "cta.subheadline", value: "Validate ROI quickly and scale automation." },
   { key: "cta.button", value: "Request Detailed Assessment" },
 

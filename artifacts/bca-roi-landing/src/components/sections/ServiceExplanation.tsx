@@ -2,8 +2,8 @@ import { CheckCircle2 } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
 
 export default function ServiceExplanation() {
-  const label = useContent("service.label", "MANAGED INTELLIGENT AUTOMATION");
-  const quote = useContent("service.quote", "YOU RUN <b>THE BUSINESS.</b><br>WE RUN <b>THE AUTOMATION.</b>");
+  const label = useContent("service.label", "Managed Intelligent Automation");
+  const quote = useContent("service.quote", "You Run <b>the Business.</b><br>We Run <b>the Automation.</b>");
   const intro = useContent("service.intro", "Managed Automation delivers business process automation as a fully managed service.");
   const bullet1 = useContent("service.bullet.1", "Instead of building an automation platform and internal team, organizations can simply automate their processes through our service.");
   const bullet2 = useContent("service.bullet.2", "BCA designs, develops, and operates the automations end-to-end, removing the operational complexity from our clients.");
@@ -19,7 +19,7 @@ export default function ServiceExplanation() {
               {label}
             </h2>
             <blockquote
-              className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-tight border-l-4 border-white/30 pl-6 md:pl-10 uppercase [&_b]:font-extrabold"
+              className="text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-tight border-l-4 border-white/30 pl-6 md:pl-10 [&_b]:font-extrabold"
               dangerouslySetInnerHTML={{ __html: quote }}
             />
           </div>
