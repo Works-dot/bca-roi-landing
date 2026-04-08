@@ -2,6 +2,8 @@ import { Facebook, Linkedin, Instagram } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 import footerLogo from "@assets/Logo_v2_1775568074590.png";
+import uipathFastTrack from "@assets/REFRESHED_UiPath-Fast-Track-Badge@3x_1775638381698.png";
+import uipathGoldPartner from "@assets/uipath-partner-gold-lockup-digital-rgb-w_1775638381699.png";
 
 export default function Footer() {
   const tagline = useContent("footer.tagline", "Experts In Technology, Partners In Business");
@@ -34,6 +36,19 @@ export default function Footer() {
           <p className="text-sm md:text-base text-white/70 font-medium">
             {subtitle}
           </p>
+
+          <div className="flex items-center justify-center gap-6 md:gap-8 pt-2">
+            <img
+              src={uipathFastTrack}
+              alt="UiPath Fast Track Partner"
+              className="h-14 md:h-16 object-contain"
+            />
+            <img
+              src={uipathGoldPartner}
+              alt="UiPath Gold Partner"
+              className="max-w-[160px] md:max-w-[200px] object-contain"
+            />
+          </div>
 
           <div className="flex items-center gap-8 pt-2">
             {socials.map((s) => (
