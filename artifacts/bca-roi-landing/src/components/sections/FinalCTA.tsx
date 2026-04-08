@@ -10,7 +10,9 @@ import { submitContact } from "@/lib/api";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 
 function sanitizeHtml(html: string): string {
-  return html.replace(/<(?!\/?(?:br|b)\b)[^>]*>/gi, "");
+  return html
+    .replace(/<(br|b)\s+[^>]*>/gi, (_, tag) => `<${tag}>`)
+    .replace(/<(?!\/?(?:br|b)\b)[^>]*>/gi, "");
 }
 
 const formSchema = z.object({
