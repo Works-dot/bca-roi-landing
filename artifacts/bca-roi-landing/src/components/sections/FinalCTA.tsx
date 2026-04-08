@@ -64,9 +64,7 @@ export default function FinalCTA() {
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               {headline}
             </h2>
-            <p className="text-xl md:text-2xl font-medium text-white/90">
-              {subheadline}
-            </p>
+            <p className="text-xl md:text-2xl font-medium text-white/90" dangerouslySetInnerHTML={{ __html: subheadline }} />
           </div>
           
           <div className="flex-1 w-full max-w-md bg-[#faf8f5] p-8 shadow-2xl rounded-2xl">
