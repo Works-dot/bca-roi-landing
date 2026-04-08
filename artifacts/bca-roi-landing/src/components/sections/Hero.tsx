@@ -2,6 +2,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerBottom } from "@/components/CurvedDividers";
+import uipathLogo from "@assets/uipath-promo-logo-digital-rgb-w_1775650205430.png";
 
 export default function Hero() {
   const headline = useContent("hero.headline", "Automation Without the Operational Burden");
@@ -60,6 +61,12 @@ export default function Hero() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
+
+          <p className="flex items-center justify-center gap-1.5 text-sm text-white/60 font-medium">
+            Built on
+            <img src={uipathLogo} alt="UiPath" className="h-5 inline-block object-contain" />
+            — the leading enterprise automation platform.
+          </p>
 
         </div>
       </div>
