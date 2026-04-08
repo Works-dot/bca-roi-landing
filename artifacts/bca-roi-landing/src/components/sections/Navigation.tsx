@@ -36,7 +36,7 @@ export default function Navigation() {
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 h-full flex items-center justify-between">
-        <div className="cursor-pointer" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMobileOpen(false); }}>
+        <div className="flex-1 cursor-pointer" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMobileOpen(false); }}>
           <img src={logo} alt="BCA Solutions" className="h-8 lg:h-10" />
         </div>
 
@@ -52,7 +52,7 @@ export default function Navigation() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex-1 flex items-center justify-end gap-1">
           <button
             className="cursor-pointer font-bold rounded-full border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#311111] transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm"
             onClick={() => scrollTo("assessment")}
