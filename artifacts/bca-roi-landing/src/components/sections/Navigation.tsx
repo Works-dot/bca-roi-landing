@@ -52,7 +52,7 @@ export default function Navigation() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
           <button
             className="cursor-pointer font-bold rounded-full border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#311111] transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm"
             onClick={() => scrollTo("assessment")}
@@ -61,7 +61,7 @@ export default function Navigation() {
             Get Assessment
           </button>
           <button
-            className="md:hidden cursor-pointer text-white p-2"
+            className="md:hidden cursor-pointer text-white p-1"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >

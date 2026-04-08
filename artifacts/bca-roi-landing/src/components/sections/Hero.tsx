@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#130707]/95 via-[#130707]/88 to-[#130707]/60" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#130707]/50 to-transparent" />
 
-      <div className="relative container mx-auto px-4 md:px-8 pt-28 pb-16 lg:py-0 flex items-center justify-center min-h-[inherit]">
+      <div className="relative container mx-auto px-4 md:px-8 pt-28 pb-28 lg:py-0 flex items-center justify-center min-h-[inherit]">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6 lg:space-y-8">
 
           <div className="space-y-4 lg:space-y-5">
@@ -41,19 +41,21 @@ export default function Hero() {
             </p>
           </div>
 
-          <ul className="space-y-2 lg:space-y-3 inline-flex flex-col items-start">
+          <ul className="space-y-2 lg:space-y-3 inline-flex flex-col items-start text-left">
             {[check1, check2, check3, check4].map((item, i) => (
-              <li key={i} className="flex items-center gap-3 text-base md:text-lg font-medium text-white/90">
-                <CheckCircle2 className="w-5 h-5 text-white/70 flex-shrink-0" />
+              <li key={i} className="flex items-start gap-3 text-base md:text-lg font-medium text-white/90">
+                <CheckCircle2 className="w-5 h-5 mt-1 text-white/70 flex-shrink-0" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
 
-          <p className="flex items-center justify-center gap-2 text-base md:text-lg text-white/80 font-medium">
-            Built on
-            <img src={uipathLogo} alt="UiPath" className="h-7 md:h-9 inline-block object-contain" />
-            — the leading enterprise automation platform.
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0 text-base md:text-lg text-white/80 font-medium">
+            <span className="inline-flex items-center gap-2 whitespace-nowrap">
+              Built on
+              <img src={uipathLogo} alt="UiPath" className="h-7 md:h-9 inline-block object-contain" />
+            </span>
+            <span>— the leading enterprise automation platform.</span>
           </p>
 
           <div className="pt-1 lg:pt-2">
