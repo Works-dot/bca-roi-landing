@@ -38,16 +38,20 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center justify-center gap-6 md:gap-8 pt-2">
-            <img
-              src={uipathFastTrack}
-              alt="UiPath Fast Track Partner"
-              className="h-14 md:h-16 object-contain"
-            />
-            <img
-              src={uipathGoldPartner}
-              alt="UiPath Gold Partner"
-              className="max-w-[160px] md:max-w-[200px] object-contain"
-            />
+            <a href="https://www.uipath.com/partners/business-partners?location=hungary" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+              <img
+                src={uipathFastTrack}
+                alt="UiPath Fast Track Partner"
+                className="h-14 md:h-16 object-contain"
+              />
+            </a>
+            <a href="https://www.uipath.com/partners/business-partners?location=hungary" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+              <img
+                src={uipathGoldPartner}
+                alt="UiPath Gold Partner"
+                className="max-w-[160px] md:max-w-[200px] object-contain"
+              />
+            </a>
           </div>
 
           <div className="flex items-center gap-8 pt-2">
