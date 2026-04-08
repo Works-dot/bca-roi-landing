@@ -10,20 +10,20 @@ const MIN_SUBMIT_TIME_MS = 2000;
 
 router.post("/submissions", async (req, res, next) => {
   try {
-    const { name, email, company, website, _t } = req.body;
+    const { name, email, company, position, website, _t } = req.body;
 
     if (website) {
-      res.status(201).json({ id: 0, name: "", email: "", company: "", createdAt: new Date().toISOString() });
+      res.status(201).json({ id: 0, name: "", email: "", company: "", position: "", createdAt: new Date().toISOString() });
       return;
     }
 
     if (typeof _t !== "number" || !Number.isFinite(_t)) {
-      res.status(201).json({ id: 0, name: "", email: "", company: "", createdAt: new Date().toISOString() });
+      res.status(201).json({ id: 0, name: "", email: "", company: "", position: "", createdAt: new Date().toISOString() });
       return;
     }
     const elapsed = Date.now() - _t;
     if (elapsed < MIN_SUBMIT_TIME_MS || elapsed > 3600000) {
-      res.status(201).json({ id: 0, name: "", email: "", company: "", createdAt: new Date().toISOString() });
+      res.status(201).json({ id: 0, name: "", email: "", company: "", position: "", createdAt: new Date().toISOString() });
       return;
     }
 
@@ -40,9 +40,11 @@ router.post("/submissions", async (req, res, next) => {
       return;
     }
 
+    const positionVal = position && typeof position === "string" ? position.trim() : null;
+
     const [submission] = await db
       .insert(contactSubmissionsTable)
-      .values({ name: name.trim(), email: email.trim(), company: company.trim() })
+      .values({ name: name.trim(), email: email.trim(), company: company.trim(), position: positionVal })
       .returning();
 
     res.status(201).json(submission);

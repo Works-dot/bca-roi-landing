@@ -13,6 +13,7 @@ const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Valid email is required"),
   company: z.string().min(2, "Company is required"),
+  position: z.string().optional(),
 });
 
 export default function FinalCTA() {
@@ -32,6 +33,7 @@ export default function FinalCTA() {
       name: "",
       email: "",
       company: "",
+      position: "",
     },
   });
 
@@ -127,6 +129,19 @@ export default function FinalCTA() {
                         <FormLabel className="text-[#1a1a1a] font-bold">Company</FormLabel>
                         <FormControl>
                           <Input placeholder="Acme Corp" className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="position"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-[#1a1a1a] font-bold">Position</FormLabel>
+                        <FormControl>
+                          <Input placeholder="CTO, Operations Manager..." className="h-12 rounded-xl border-[#e8e0d8] bg-white text-[#1a1a1a]" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

@@ -36,6 +36,7 @@ interface Submission {
   name: string;
   email: string;
   company: string;
+  position: string | null;
   createdAt: string;
 }
 
@@ -675,6 +676,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Name</th>
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Email</th>
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Company</th>
+                    <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Position</th>
                     <th className="text-left px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Date</th>
                     <th className="text-right px-6 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Actions</th>
                   </tr>
@@ -682,7 +684,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                 <tbody className="divide-y divide-border">
                   {submissions.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="text-center py-12 text-muted-foreground">
+                      <td colSpan={7} className="text-center py-12 text-muted-foreground">
                         No submissions yet.
                       </td>
                     </tr>
@@ -693,6 +695,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                         <td className="px-6 py-4 text-sm font-medium text-foreground">{s.name}</td>
                         <td className="px-6 py-4 text-sm text-foreground">{s.email}</td>
                         <td className="px-6 py-4 text-sm text-foreground">{s.company}</td>
+                        <td className="px-6 py-4 text-sm text-foreground">{s.position || "—"}</td>
                         <td className="px-6 py-4 text-sm text-muted-foreground">
                           {new Date(s.createdAt).toLocaleDateString("en-US", {
                             year: "numeric",

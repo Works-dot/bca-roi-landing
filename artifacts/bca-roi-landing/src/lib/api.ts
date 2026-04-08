@@ -91,7 +91,7 @@ export async function updateConstants(entries: { key: string; value: unknown }[]
   if (!res.ok) throw new Error("Failed to update constants");
 }
 
-export async function submitContact(data: { name: string; email: string; company: string; website?: string; _t?: number }): Promise<unknown> {
+export async function submitContact(data: { name: string; email: string; company: string; position?: string; website?: string; _t?: number }): Promise<unknown> {
   const res = await fetch(`${BASE}/submissions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -132,6 +132,7 @@ export async function fetchSubmissions(): Promise<Array<{
   name: string;
   email: string;
   company: string;
+  position: string | null;
   createdAt: string;
 }>> {
   const token = getStoredToken();
