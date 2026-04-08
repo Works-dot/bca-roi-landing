@@ -6,12 +6,12 @@ export const modules: ModuleMap = {
   "./components/mockups/bca-dark-bgs/SubtleGradients.tsx": () => import("../components/mockups/bca-dark-bgs/SubtleGradients.tsx"),
   "./components/mockups/bca-dark-bgs/TexturedDepth.tsx": () => import("../components/mockups/bca-dark-bgs/TexturedDepth.tsx"),
   "./components/mockups/bca-redesign/Landing.tsx": () => import("../components/mockups/bca-redesign/Landing.tsx"),
-  "./components/mockups/bca-roi-contrast/GoldAccent.tsx": () => import("../components/mockups/bca-roi-contrast/GoldAccent.tsx"),
-  "./components/mockups/bca-roi-contrast/HeroColors.tsx": () => import("../components/mockups/bca-roi-contrast/HeroColors.tsx"),
-  "./components/mockups/bca-roi-contrast/LighterBordo.tsx": () => import("../components/mockups/bca-roi-contrast/LighterBordo.tsx"),
-  "./components/mockups/bca-roi-contrast/WhiteAccent.tsx": () => import("../components/mockups/bca-roi-contrast/WhiteAccent.tsx"),
   "./components/mockups/bca-section-flow/SectionFlow.tsx": () => import("../components/mockups/bca-section-flow/SectionFlow.tsx"),
   "./components/mockups/bca-vibes/CoolPrecision.tsx": () => import("../components/mockups/bca-vibes/CoolPrecision.tsx"),
   "./components/mockups/bca-vibes/SoftAuthority.tsx": () => import("../components/mockups/bca-vibes/SoftAuthority.tsx"),
-  "./components/mockups/bca-vibes/WarmExecutive.tsx": () => import("../components/mockups/bca-vibes/WarmExecutive.tsx")
+  "./components/mockups/bca-vibes/WarmExecutive.tsx": () => import("../components/mockups/bca-vibes/WarmExecutive.tsx"),
+  "./components/mockups/bca-roi-contrast/GoldAccent.tsx": () => import("../components/mockups/bca-roi-contrast/GoldAccent.tsx"),
+  "./components/mockups/bca-roi-contrast/HeroColors.tsx": () => import("../components/mockups/bca-roi-contrast/HeroColors.tsx"),
+  "./components/mockups/bca-roi-contrast/LighterBordo.tsx": () => import("../components/mockups/bca-roi-contrast/LighterBordo.tsx"),
+  "./components/mockups/bca-roi-contrast/WhiteAccent.tsx": () => import("../components/mockups/bca-roi-contrast/WhiteAccent.tsx")
 };

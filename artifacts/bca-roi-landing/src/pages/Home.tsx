@@ -4,6 +4,7 @@ import ServiceExplanation from "@/components/sections/ServiceExplanation";
 import ValuePillars from "@/components/sections/ValuePillars";
 import Calculator from "@/components/sections/Calculator";
 import ExampleROI from "@/components/sections/ExampleROI";
+import ProcessComplexity from "@/components/sections/ProcessComplexity";
 import Pricing from "@/components/sections/Pricing";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/sections/Footer";
@@ -19,6 +20,7 @@ export default function Home() {
         <ServiceExplanation />
         <ValuePillars />
         <ExampleROI />
+        <ProcessComplexity />
         <Calculator />
         {/* <Pricing /> */}
         <FinalCTA />
