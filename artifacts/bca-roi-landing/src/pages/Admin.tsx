@@ -140,22 +140,6 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "example.impact.roi",
     "example.footer",
   ],
-  Pricing: [
-    "pricing.title",
-    "pricing.starter.name",
-    "pricing.starter.description",
-    "pricing.starter.setup",
-    "pricing.starter.annual",
-    "pricing.growth.name",
-    "pricing.growth.description",
-    "pricing.growth.setup",
-    "pricing.growth.annual",
-    "pricing.scale.name",
-    "pricing.scale.description",
-    "pricing.scale.setup",
-    "pricing.scale.annual",
-    "pricing.note",
-  ],
   "Final CTA": ["cta.headline", "cta.subheadline", "cta.button"],
   Footer: [
     "footer.tagline",
@@ -531,7 +515,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
               onClick={() => setTab(t.id)}
               className={`px-6 py-3 font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer ${
                 tab === t.id
-                  ? "border-b-2 border-primary text-primary"
+                  ? "border-b-2 border-white text-white"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
