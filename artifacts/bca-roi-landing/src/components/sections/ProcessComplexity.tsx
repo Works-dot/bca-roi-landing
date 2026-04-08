@@ -44,7 +44,7 @@ export default function ProcessComplexity() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-[#130707]">
+    <section id="complexity" className="py-16 md:py-24 bg-[#130707]">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-16">
