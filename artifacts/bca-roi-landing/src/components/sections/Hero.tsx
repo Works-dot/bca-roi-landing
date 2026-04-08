@@ -50,6 +50,12 @@ export default function Hero() {
             ))}
           </ul>
 
+          <p className="flex items-center justify-center gap-2 text-base md:text-lg text-white/80 font-medium">
+            Built on
+            <img src={uipathLogo} alt="UiPath" className="h-6 md:h-7 inline-block object-contain" />
+            — the leading enterprise automation platform.
+          </p>
+
           <div className="pt-1 lg:pt-2">
             <Button
               size="lg"
@@ -61,12 +67,6 @@ export default function Hero() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
-
-          <p className="flex items-center justify-center gap-1.5 text-sm text-white/60 font-medium">
-            Built on
-            <img src={uipathLogo} alt="UiPath" className="h-5 inline-block object-contain" />
-            — the leading enterprise automation platform.
-          </p>
 
         </div>
       </div>
