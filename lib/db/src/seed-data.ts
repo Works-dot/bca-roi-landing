@@ -84,7 +84,7 @@ export const cmsContent: { key: string; value: string }[] = [
 
   { key: "cta.headline", value: "Start With One Process" },
   { key: "cta.subheadline", value: "Validate ROI quickly and scale automation." },
-  { key: "cta.button", value: "Request Detailed Assessment" },
+  { key: "cta.button", value: "Request assessment" },
 
   { key: "footer.tagline", value: "Experts In Technology, Partners In Business" },
   { key: "footer.subtitle", value: "Empowering Your Digital Journey since 2007" },

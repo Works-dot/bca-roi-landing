@@ -209,9 +209,9 @@ export default function Calculator() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Payback Period</h3>
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">FTE Equivalent</h3>
                   <div className="text-2xl font-bold text-white">
-                    {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-white/60">months</span>
+                    {result.fte.toFixed(2)} <span className="text-base font-semibold text-white/60">FTE</span>
                   </div>
                 </div>
 
@@ -223,20 +223,29 @@ export default function Calculator() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">FTE Equivalent</h3>
+                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Payback Period</h3>
                   <div className="text-2xl font-bold text-white">
-                    {result.fte.toFixed(2)} <span className="text-base font-semibold text-white/60">FTE</span>
+                    {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-white/60">months</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 flex justify-center">
-                <div className="inline-flex items-center gap-3 bg-white/10 border-l-4 border-white/30 px-4 py-3">
-                  <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
-                  <span className="font-bold text-sm text-white">
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="inline-flex items-center gap-3 border-l-4 border-white/30 px-4 py-3">
+                  <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0" />
+                  <span className="font-bold text-lg text-white">
                     {getInsightLabel(result.paybackMonths)}
                   </span>
                 </div>
+                {result.paybackMonths < 12 && (
+                  <a
+                    href="#assessment"
+                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-5 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors"
+                  >
+                    Request assessment
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
               </div>
             </div>
           )}

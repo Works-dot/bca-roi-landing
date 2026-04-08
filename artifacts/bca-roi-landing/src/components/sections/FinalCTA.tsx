@@ -19,7 +19,7 @@ const formSchema = z.object({
 export default function FinalCTA() {
   const headline = useContent("cta.headline", "Start With One Process");
   const subheadline = useContent("cta.subheadline", "Validate ROI quickly and scale automation.");
-  const buttonText = useContent("cta.button", "Request Detailed Assessment");
+  const buttonText = useContent("cta.button", "Request assessment");
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
