@@ -39,7 +39,7 @@ export default function ValuePillars() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {pillars.map((pillar, i) => (
               <Card key={i} className="border border-white/10 shadow-md hover:shadow-lg transition-shadow rounded-2xl bg-white/[0.04] backdrop-blur-sm">
-                <CardContent className="p-8 flex flex-col items-center text-center space-y-4">
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-full mb-2">
                     <pillar.icon className="w-8 h-8 text-white" />
                   </div>
