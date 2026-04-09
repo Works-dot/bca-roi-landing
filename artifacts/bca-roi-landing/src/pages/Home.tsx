@@ -19,9 +19,9 @@ export default function Home() {
         <Hero />
         <ServiceExplanation />
         <ValuePillars />
-        <ExampleROI />
         <ProcessComplexity />
         <Calculator />
+        <ExampleROI />
         {/* <Pricing /> */}
         <FinalCTA />
       </main>
