@@ -81,7 +81,7 @@ export default function ProcessComplexity() {
                       <ul className="space-y-3">
                         {level.bullets.map((bullet, j) => (
                           <li key={j} className="flex items-start gap-2 text-sm text-white/70 font-medium leading-relaxed">
-                            <span className="text-white/30 mt-1.5 shrink-0">•</span>
+                            <span className="text-white/30 shrink-0 leading-relaxed">•</span>
                             <span>{bullet}</span>
                           </li>
                         ))}
@@ -106,7 +106,7 @@ export default function ProcessComplexity() {
                 <ul className="space-y-2">
                   {level.bullets.map((bullet, j) => (
                     <li key={j} className="flex items-start gap-2 text-sm text-white/70 font-medium leading-relaxed">
-                      <span className="text-white/30 mt-0.5 shrink-0">•</span>
+                      <span className="text-white/30 shrink-0 leading-relaxed">•</span>
                       <span>{bullet}</span>
                     </li>
                   ))}
