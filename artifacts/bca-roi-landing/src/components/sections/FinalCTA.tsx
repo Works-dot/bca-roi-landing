@@ -67,7 +67,7 @@ export default function FinalCTA() {
       <div className="container mx-auto px-4 md:px-8 relative z-10 pt-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
           
-          <div className="flex-1 space-y-6">
+          <div className="flex-1 space-y-6 text-center md:text-left">
             <h2 className="text-4xl md:text-5xl font-bold leading-tight">
               {headline}
             </h2>
