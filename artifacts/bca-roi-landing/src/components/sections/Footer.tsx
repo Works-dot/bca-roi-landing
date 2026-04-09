@@ -56,7 +56,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-8 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 pt-2">
             {socials.map((s) => (
               <a
                 key={s.label}
