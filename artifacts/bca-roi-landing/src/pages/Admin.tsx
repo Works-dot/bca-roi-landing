@@ -147,6 +147,7 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "footer.social.facebook",
     "footer.social.linkedin",
     "footer.social.instagram",
+    "footer.social.website",
     "footer.copyright",
     "footer.privacy.text",
     "footer.privacy.url",

@@ -1,4 +1,4 @@
-import { Facebook, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Linkedin, Instagram, Globe } from "lucide-react";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 import footerLogo from "@assets/Logo_v2_1775568074590.png";
@@ -11,6 +11,7 @@ export default function Footer() {
   const facebookUrl = useContent("footer.social.facebook", "https://facebook.com/bcasolutions");
   const linkedinUrl = useContent("footer.social.linkedin", "https://linkedin.com/company/bcasolutions");
   const instagramUrl = useContent("footer.social.instagram", "https://instagram.com/bcasolutions");
+  const websiteUrl = useContent("footer.social.website", "https://bcasolutions.hu");
   const copyright = useContent("footer.copyright", "BCA Solutions. All rights reserved.");
   const privacyText = useContent("footer.privacy.text", "Privacy Policy");
   const privacyUrl = useContent("footer.privacy.url", "#");
@@ -19,6 +20,7 @@ export default function Footer() {
     { icon: Facebook, label: "Facebook", url: facebookUrl },
     { icon: Linkedin, label: "LinkedIn", url: linkedinUrl },
     { icon: Instagram, label: "Instagram", url: instagramUrl },
+    { icon: Globe, label: "Website", url: websiteUrl },
   ];
 
   return (
