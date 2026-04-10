@@ -185,49 +185,47 @@ export default function Calculator() {
           </div>
 
           {customAssessment && (
-            <div className="mt-8">
-              <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
-              <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <AlertTriangle className="w-8 h-8 text-white/60" />
-                  <div>
-                    <h4 className="text-lg font-bold text-white">Custom assessment required</h4>
-                    <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
-                      For complex, end-to-end processes, we provide tailored estimates after a detailed review.
-                    </p>
-                  </div>
-                  <a
-                    href="#assessment"
-                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
-                  >
-                    Explore alternative processes
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+            <div className="mt-8 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
+              <h3 className="text-sm font-bold tracking-widest text-white/60 mb-5">Your estimated impact</h3>
+              <div className="flex flex-col items-center text-center gap-3">
+                <AlertTriangle className="w-8 h-8 text-white/60" />
+                <div>
+                  <h4 className="text-lg font-bold text-white">Custom assessment required</h4>
+                  <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
+                    For complex, end-to-end processes, we provide tailored estimates after a detailed review.
+                  </p>
                 </div>
+                <a
+                  href="#assessment"
+                  onClick={(e) => { e.preventDefault(); document.getElementById("assessment")?.scrollIntoView({ behavior: "smooth" }); }}
+                  className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
+                >
+                  Explore alternative processes
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           )}
 
           {negativeBusiness && (
-            <div className="mt-8">
-              <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
-              <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <AlertTriangle className="w-8 h-8 text-white/40" />
-                  <div>
-                    <h4 className="text-lg font-bold text-white">Review recommended</h4>
-                    <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
-                      This process may not be an ideal starting point based on the current inputs.
-                    </p>
-                  </div>
-                  <a
-                    href="#assessment"
-                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
-                  >
-                    Review scope and optimize
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+            <div className="mt-8 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
+              <h3 className="text-sm font-bold tracking-widest text-white/60 mb-5">Your estimated impact</h3>
+              <div className="flex flex-col items-center text-center gap-3">
+                <AlertTriangle className="w-8 h-8 text-white/40" />
+                <div>
+                  <h4 className="text-lg font-bold text-white">Review recommended</h4>
+                  <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
+                    This process may not be an ideal starting point based on the current inputs.
+                  </p>
                 </div>
+                <a
+                  href="#assessment"
+                  onClick={(e) => { e.preventDefault(); document.getElementById("assessment")?.scrollIntoView({ behavior: "smooth" }); }}
+                  className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
+                >
+                  Review scope and optimize
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           )}
@@ -235,9 +233,8 @@ export default function Calculator() {
           {result && (() => {
             const insight = getInsightInfo(result.paybackMonths);
             return (
-              <div className="mt-8">
-                <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
-                <div className="border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
+              <div className="mt-8 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
+                <h3 className="text-sm font-bold tracking-widest text-white/60 mb-5">Your estimated impact</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     <div className="sm:col-span-2 lg:col-span-1">
                       <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h4>
@@ -279,6 +276,7 @@ export default function Calculator() {
                       </p>
                       <a
                         href="#assessment"
+                        onClick={(e) => { e.preventDefault(); document.getElementById("assessment")?.scrollIntoView({ behavior: "smooth" }); }}
                         className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-4"
                       >
                         {insight.buttonText}
@@ -286,7 +284,6 @@ export default function Calculator() {
                       </a>
                     </div>
                   </div>
-                </div>
               </div>
             );
           })()}
