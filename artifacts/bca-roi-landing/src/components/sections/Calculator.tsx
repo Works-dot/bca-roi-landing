@@ -186,7 +186,7 @@ export default function Calculator() {
 
           {customAssessment && (
             <div className="mt-8 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-              <h3 className="text-lg font-bold text-white text-center mb-5">Your estimated impact</h3>
+              <h3 className="text-xl font-bold text-white text-center mb-5">Your estimated impact</h3>
               <div className="flex flex-col items-center text-center gap-3">
                 <AlertTriangle className="w-8 h-8 text-white/60" />
                 <div>
@@ -209,7 +209,7 @@ export default function Calculator() {
 
           {negativeBusiness && (
             <div className="mt-8 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-              <h3 className="text-lg font-bold text-white text-center mb-5">Your estimated impact</h3>
+              <h3 className="text-xl font-bold text-white text-center mb-5">Your estimated impact</h3>
               <div className="flex flex-col items-center text-center gap-3">
                 <AlertTriangle className="w-8 h-8 text-white/40" />
                 <div>
@@ -234,7 +234,7 @@ export default function Calculator() {
             const insight = getInsightInfo(result.paybackMonths);
             return (
               <div className="mt-8 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
-                <h3 className="text-lg font-bold text-white text-center mb-5">Your estimated impact</h3>
+                <h3 className="text-xl font-bold text-white text-center mb-5">Your estimated impact</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     <div className="sm:col-span-2 lg:col-span-1">
                       <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h4>
