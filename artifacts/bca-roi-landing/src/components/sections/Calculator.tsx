@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, AlertTriangle, ArrowRight } from "lucide-react";
+import { CheckCircle2, AlertTriangle, ArrowRight, Info } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useContent, useConstants } from "@/lib/cms-context";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { trackCalculatorUse } from "@/lib/api";
 
 interface CalculationResult {
@@ -132,7 +133,19 @@ export default function Calculator() {
           <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
               <div className="space-y-2">
-                <Label className="text-xs font-bold tracking-wider text-white/70">Process Complexity</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70 flex items-center gap-1">
+                  Process type
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="w-3.5 h-3.5 text-white/40 cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Based on the examples above</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </Label>
                 <Select onValueChange={setComplexity} value={complexity}>
                   <SelectTrigger className="h-11 bg-white/10 border-white/15 rounded-xl text-sm text-white">
                     <SelectValue placeholder="Select size..." />
@@ -148,7 +161,7 @@ export default function Calculator() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold tracking-wider text-white/70">Monthly Time</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70">Monthly time spent on this process</Label>
                 <div className="relative">
                   <Input
                     type="number"
@@ -161,7 +174,7 @@ export default function Calculator() {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold tracking-wider text-white/70">Hourly Cost</Label>
+                <Label className="text-xs font-bold tracking-wider text-white/70">Average hourly cost</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/60">&euro;</span>
                   <Input
