@@ -24,11 +24,32 @@ function formatCurrency(value: number): string {
   return "\u20AC" + Math.round(value).toLocaleString("en-US");
 }
 
-function getInsightLabel(paybackMonths: number): string {
-  if (paybackMonths < 6) return "Excellent candidate";
-  if (paybackMonths < 12) return "Strong candidate";
-  if (paybackMonths < 24) return "Moderate candidate";
-  return "Low ROI candidate";
+function getInsightInfo(paybackMonths: number): { label: string; description: string; buttonText: string } {
+  if (paybackMonths < 1) return {
+    label: "Excellent candidate",
+    description: "Results indicate very high automation potential. We recommend reviewing your inputs or requesting a detailed assessment to validate the estimate.",
+    buttonText: "Review inputs or request assessment",
+  };
+  if (paybackMonths < 6) return {
+    label: "Excellent candidate",
+    description: "Strong ROI potential with fast return. This process is an ideal candidate for automation.",
+    buttonText: "Start with this process",
+  };
+  if (paybackMonths < 12) return {
+    label: "Strong candidate",
+    description: "Clear business value with predictable ROI. A strong starting point for automation.",
+    buttonText: "Start with this process",
+  };
+  if (paybackMonths < 24) return {
+    label: "Moderate candidate",
+    description: "Potential value, depending on scale and optimization. May benefit from further assessment.",
+    buttonText: "Review scope and optimize",
+  };
+  return {
+    label: "Review recommended",
+    description: "This process may not be an ideal starting point based on the current inputs.",
+    buttonText: "Review scope and optimize",
+  };
 }
 
 export default function Calculator() {
@@ -164,91 +185,111 @@ export default function Calculator() {
           </div>
 
           {customAssessment && (
-            <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-              <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                <AlertTriangle className="w-8 h-8 text-white/60 flex-shrink-0" />
-                <div className="flex-1">
-                  <h3 className="text-base font-bold text-white">Custom Assessment Required</h3>
-                  <p className="text-sm text-white/70 mt-1">
-                    For XL and XXL complexity, we provide indicative pricing only after a detailed review.
-                  </p>
+            <div className="mt-8">
+              <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
+              <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
+                <div className="flex flex-col items-center text-center gap-3">
+                  <AlertTriangle className="w-8 h-8 text-white/60" />
+                  <div>
+                    <h4 className="text-lg font-bold text-white">Custom assessment required</h4>
+                    <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
+                      For complex, end-to-end processes, we provide tailored estimates after a detailed review.
+                    </p>
+                  </div>
+                  <a
+                    href="#assessment"
+                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
+                  >
+                    Explore alternative processes
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
                 </div>
-                <a
-                  href="#assessment"
-                  className="inline-flex items-center gap-2 bg-white text-[#311111] px-5 py-2.5 font-bold text-xs rounded-full cursor-pointer hover:bg-white/90 transition-colors flex-shrink-0"
-                >
-                  Request Assessment
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
               </div>
             </div>
           )}
 
           {negativeBusiness && (
-            <div className="mt-6 bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
-              <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                <AlertTriangle className="w-8 h-8 text-white/40 flex-shrink-0" />
-                <div>
-                  <h3 className="text-base font-bold text-white">Review Recommended</h3>
-                  <p className="text-sm text-white/70 mt-1">
-                    This process may not be a strong candidate for managed automation based on the current inputs.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {result && (
-            <div className="mt-6 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                <div className="sm:col-span-2 lg:col-span-1">
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h3>
-                  <div className="text-3xl md:text-4xl font-extrabold text-white">
-                    {formatCurrency(result.annualSavings)}
+            <div className="mt-8">
+              <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
+              <div className="bg-white/[0.06] border border-white/10 rounded-2xl p-6 md:p-8">
+                <div className="flex flex-col items-center text-center gap-3">
+                  <AlertTriangle className="w-8 h-8 text-white/40" />
+                  <div>
+                    <h4 className="text-lg font-bold text-white">Review recommended</h4>
+                    <p className="text-sm text-white/70 mt-1 leading-relaxed max-w-lg mx-auto">
+                      This process may not be an ideal starting point based on the current inputs.
+                    </p>
                   </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">FTE Equivalent</h3>
-                  <div className="text-2xl font-bold text-white">
-                    {result.fte.toFixed(2)} <span className="text-base font-semibold text-white/60">FTE</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">ROI</h3>
-                  <div className="text-2xl font-bold text-white">
-                    {Math.round(result.roi)}<span className="text-base font-semibold text-white/60">%</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold tracking-widest text-white/60 mb-1">Payback Period</h3>
-                  <div className="text-2xl font-bold text-white">
-                    {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-white/60">months</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <div className="inline-flex items-center gap-3 border-l-4 border-white/30 px-4 py-3">
-                  <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0" />
-                  <span className="font-bold text-lg text-white">
-                    {getInsightLabel(result.paybackMonths)}
-                  </span>
-                </div>
-                {result.paybackMonths < 12 && (
                   <a
                     href="#assessment"
-                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-5 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors"
+                    className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-2"
                   >
-                    Request assessment
+                    Review scope and optimize
                     <ArrowRight className="w-4 h-4" />
                   </a>
-                )}
+                </div>
               </div>
             </div>
           )}
+
+          {result && (() => {
+            const insight = getInsightInfo(result.paybackMonths);
+            return (
+              <div className="mt-8">
+                <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2">Your estimated impact</h3>
+                <div className="border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                    <div className="sm:col-span-2 lg:col-span-1">
+                      <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h4>
+                      <div className="text-3xl md:text-4xl font-extrabold text-white">
+                        {formatCurrency(result.annualSavings)}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">FTE Equivalent</h4>
+                      <div className="text-2xl font-bold text-white">
+                        {result.fte.toFixed(2)} <span className="text-base font-semibold text-white/60">FTE</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">ROI</h4>
+                      <div className="text-2xl font-bold text-white">
+                        {Math.round(result.roi)}<span className="text-base font-semibold text-white/60">%</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">Payback Period</h4>
+                      <div className="text-2xl font-bold text-white">
+                        {result.paybackMonths.toFixed(1)} <span className="text-base font-semibold text-white/60">months</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-white/10 mt-6 pt-6">
+                    <div className="flex flex-col items-center text-center gap-1">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0" />
+                        <span className="text-lg font-bold text-white">{insight.label}</span>
+                      </div>
+                      <p className="text-sm text-white/70 leading-relaxed max-w-lg mx-auto mt-1">
+                        {insight.description}
+                      </p>
+                      <a
+                        href="#assessment"
+                        className="inline-flex items-center gap-2 bg-white text-[#311111] px-6 py-2.5 font-bold text-sm rounded-full cursor-pointer hover:bg-white/90 transition-colors mt-4"
+                      >
+                        {insight.buttonText}
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
           {hasResults && (
             <p className="text-xs text-white/60 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
