@@ -248,8 +248,8 @@ export default function Calculator() {
             return (
               <div className="mt-8 border-2 border-white/20 rounded-2xl p-6 md:p-8 bg-white/[0.06]">
                 <h3 className="text-xl font-bold text-white text-center mb-5">Your estimated impact</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                    <div className="sm:col-span-2 lg:col-span-1">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                    <div>
                       <h4 className="text-xs font-bold tracking-widest text-white/60 mb-1">Annual Savings</h4>
                       <div className="text-3xl md:text-4xl font-extrabold text-white">
                         {formatCurrency(result.annualSavings)}
