@@ -400,7 +400,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
   ];
 
   const SEO_FIELDS: { key: string; label: string; placeholder: string; multiline?: boolean }[] = [
-    { key: "seo.title", label: "Page Title", placeholder: "BCA Solutions — Managed Intelligent Automation" },
+    { key: "seo.title", label: "Page Title", placeholder: "Managed Automation by BCA" },
     { key: "seo.description", label: "Meta Description", placeholder: "Deliver business process automation as a fully managed service...", multiline: true },
     { key: "seo.keywords", label: "Keywords", placeholder: "managed automation, RPA, business process..." },
     { key: "seo.ogTitle", label: "OG Title (Social Share)", placeholder: "Same as Page Title if left empty" },

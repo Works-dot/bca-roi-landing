@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useContent } from "@/lib/cms-context";
 
 export default function SeoHead() {
-  const title = useContent("seo.title", "BCA Solutions — Managed Intelligent Automation");
+  const title = useContent("seo.title", "Managed Automation by BCA");
   const description = useContent("seo.description", "Deliver business process automation as a fully managed service.");
   const ogTitle = useContent("seo.ogTitle", "");
   const ogDescription = useContent("seo.ogDescription", "");
