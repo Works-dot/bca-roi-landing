@@ -29,7 +29,9 @@ export default function Footer() {
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col items-center text-center space-y-6 pb-10">
-          <img src={footerLogo} alt="BCA Solutions" className="h-16 md:h-20" />
+          <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
+            <img src={footerLogo} alt="BCA Solutions" className="h-16 md:h-20" />
+          </a>
 
           <h3 className="text-xl md:text-2xl font-bold">
             {tagline}
