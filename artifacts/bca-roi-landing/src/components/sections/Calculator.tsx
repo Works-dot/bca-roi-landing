@@ -28,22 +28,22 @@ function formatCurrency(value: number): string {
 function getInsightInfo(paybackMonths: number): { label: string; description: string; buttonText: string } {
   if (paybackMonths < 1) return {
     label: "Excellent candidate",
-    description: "Results indicate very high automation potential. We recommend reviewing your inputs or requesting a detailed assessment to validate the estimate.",
+    description: "Results indicate very high automation potential.\nWe recommend reviewing your inputs or requesting a detailed assessment to validate the estimate.",
     buttonText: "Review inputs or request assessment",
   };
   if (paybackMonths < 6) return {
     label: "Excellent candidate",
-    description: "Strong ROI potential with fast return. This process is an ideal candidate for automation.",
+    description: "Strong ROI potential with fast return.\nThis process is an ideal candidate for automation.",
     buttonText: "Start with this process",
   };
   if (paybackMonths < 12) return {
     label: "Strong candidate",
-    description: "Clear business value with predictable ROI. A strong starting point for automation.",
+    description: "Clear business value with predictable ROI.\nA strong starting point for automation.",
     buttonText: "Start with this process",
   };
   if (paybackMonths < 24) return {
     label: "Moderate candidate",
-    description: "Potential value, depending on scale and optimization. May benefit from further assessment.",
+    description: "Potential value, depending on scale and optimization.\nMay benefit from further assessment.",
     buttonText: "Review scope and optimize",
   };
   return {
@@ -284,7 +284,7 @@ export default function Calculator() {
                         <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0" />
                         <span className="text-lg font-bold text-white">{insight.label}</span>
                       </div>
-                      <p className="text-sm text-white/70 leading-relaxed max-w-lg mx-auto mt-1">
+                      <p className="text-sm text-white/70 leading-relaxed max-w-lg mx-auto mt-1 whitespace-pre-line">
                         {insight.description}
                       </p>
                       <a
