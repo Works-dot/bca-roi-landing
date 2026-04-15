@@ -75,6 +75,13 @@ export default function Calculator() {
   const [negativeBusiness, setNegativeBusiness] = useState(false);
 
   const handleCalculate = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'cta_click', {
+        cta_name: 'calculate',
+        cta_text: 'Calculate',
+      });
+    }
+
     if (complexity === "XL" || complexity === "XXL") {
       setCustomAssessment(true);
       setResult(null);

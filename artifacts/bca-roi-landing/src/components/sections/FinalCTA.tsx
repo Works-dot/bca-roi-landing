@@ -50,6 +50,12 @@ export default function FinalCTA() {
     try {
       await submitContact({ ...values, website: honeypot, _t: formLoadTime.current });
       setSubmitted(true);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'cta_click', {
+          cta_name: 'request_assessment',
+          cta_text: 'Request Assessment',
+        });
+      }
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
