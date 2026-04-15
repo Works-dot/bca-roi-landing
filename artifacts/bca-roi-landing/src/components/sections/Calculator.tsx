@@ -303,7 +303,7 @@ export default function Calculator() {
 
           {hasResults && (
             <p className="text-xs text-white/60 mt-4 text-center leading-relaxed max-w-3xl mx-auto">
-              Indicative calculation based on standard managed automation pricing and an assumed {Math.round(AUTOMATION_RATIO * 100)}% automation ratio. Final pricing depends on process complexity and business environment.
+              Indicative calculation based on an assumed {Math.round(AUTOMATION_RATIO * 100)}% automation ratio and typical volumes (up to 4,000 transactions/month). Final results may vary based on actual volume, process complexity, and business environment.
             </p>
           )}
         </div>
