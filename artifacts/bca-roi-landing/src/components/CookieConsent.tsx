@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
 
 const GA_ID = "G-F9X3TPGGNF";
 
@@ -46,12 +45,14 @@ export default function CookieConsent() {
       <div className="container mx-auto px-4 md:px-8 py-3 flex items-center justify-between gap-4">
         <p className="text-sm text-white/70 font-medium">
           This website uses cookies.{" "}
-          <Link
-            href="/privacy"
+          <a
+            href="https://www.bcasolutions.eu/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline text-white/80 hover:text-white transition-colors"
           >
             Details
-          </Link>
+          </a>
         </p>
         <button
           onClick={handleAccept}

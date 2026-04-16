@@ -1,5 +1,4 @@
 import { Facebook, Linkedin, Instagram, Globe } from "lucide-react";
-import { Link } from "wouter";
 import { useContent } from "@/lib/cms-context";
 import { CurvedDividerTop } from "@/components/CurvedDividers";
 import footerLogo from "@assets/Logo_v2_1775568074590.png";
@@ -14,7 +13,6 @@ export default function Footer() {
   const instagramUrl = useContent("footer.social.instagram", "https://instagram.com/bcasolutions");
   const websiteUrl = useContent("footer.social.website", "https://bcasolutions.hu");
   const copyright = useContent("footer.copyright", "BCA Solutions. All rights reserved.");
-  const privacyText = useContent("footer.privacy.text", "Privacy Policy");
 
   const socials = [
     { icon: Facebook, label: "Facebook", url: facebookUrl },
@@ -76,12 +74,14 @@ export default function Footer() {
 
         <div className="border-t border-white/15 py-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-sm text-white/60">
           <span>&copy; {new Date().getFullYear()} {copyright}</span>
-          <Link
-            href="/privacy"
+          <a
+            href="https://www.bcasolutions.eu/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-bold text-white/80 hover:text-white transition-colors"
           >
-            {privacyText}
-          </Link>
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>

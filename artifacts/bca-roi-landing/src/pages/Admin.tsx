@@ -24,10 +24,7 @@ import {
   fetchAnalyticsStats,
 } from "@/lib/api";
 import { ICON_MAP } from "@/lib/icon-map";
-import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.snow.css";
-
-type Tab = "content" | "constants" | "submissions" | "analytics" | "seo" | "privacy";
+type Tab = "content" | "constants" | "submissions" | "analytics" | "seo";
 
 interface AnalyticsStats {
   calculatorUses: { total: number; today: number; thisWeek: number };
@@ -151,7 +148,6 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "footer.social.instagram",
     "footer.social.website",
     "footer.copyright",
-    "footer.privacy.text",
   ],
 };
 
@@ -325,15 +321,6 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
           else setMessage("Failed to load submissions");
         })
         .finally(() => setLoading(false));
-    } else if (tab === "privacy") {
-      setDirty({});
-      fetchContent()
-        .then(setContent)
-        .catch((err) => {
-          if (err.message === "Session expired") onLogout();
-          else setMessage("Failed to load content");
-        })
-        .finally(() => setLoading(false));
     } else {
       fetchAnalyticsStats()
         .then(setAnalyticsStats)
@@ -407,7 +394,6 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
     { id: "seo", label: "SEO" },
     { id: "submissions", label: "Submissions" },
     { id: "analytics", label: "Analytics" },
-    { id: "privacy", label: "Privacy Policy" },
   ];
 
   const SEO_FIELDS: { key: string; label: string; placeholder: string; multiline?: boolean }[] = [
@@ -725,42 +711,6 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
                   )}
                 </tbody>
               </table>
-            </div>
-          </div>
-        ) : tab === "privacy" ? (
-          <div className="space-y-6">
-            <div className="bg-card border border-border p-6 space-y-4">
-              <h2 className="text-lg font-bold uppercase tracking-wider text-foreground border-b border-border pb-2">
-                Privacy Policy Content
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Edit the privacy policy page content using the editor below. Supports headings, bold, italic, lists, and links.
-              </p>
-              <div className="bg-background border border-border rounded overflow-hidden [&_.ql-toolbar]:border-border [&_.ql-container]:border-border [&_.ql-editor]:min-h-[400px] [&_.ql-editor]:text-foreground [&_.ql-snow_.ql-stroke]:stroke-foreground [&_.ql-snow_.ql-fill]:fill-foreground [&_.ql-snow_.ql-picker-label]:text-foreground [&_.ql-snow_.ql-picker-options]:bg-card [&_.ql-snow_.ql-picker-options]:border-border">
-                <ReactQuill
-                  theme="snow"
-                  value={dirty["privacy.content"] ?? content["privacy.content"] ?? ""}
-                  onChange={(val: string) => handleContentChange("privacy.content", val)}
-                  modules={{
-                    toolbar: [
-                      [{ header: [2, 3, false] }],
-                      ["bold", "italic", "underline"],
-                      [{ list: "ordered" }, { list: "bullet" }],
-                      ["link"],
-                      ["clean"],
-                    ],
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <Button
-                onClick={handleSaveContent}
-                disabled={saving || Object.keys(dirty).length === 0}
-                className="h-12 px-10 text-sm font-bold uppercase tracking-widest rounded"
-              >
-                {saving ? "Saving..." : `Save Privacy Policy (${Object.keys(dirty).length})`}
-              </Button>
             </div>
           </div>
         ) : (
