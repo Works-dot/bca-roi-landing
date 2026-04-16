@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -324,6 +324,14 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
         .catch((err) => {
           if (err.message === "Session expired") onLogout();
           else setMessage("Failed to load submissions");
+        })
+        .finally(() => setLoading(false));
+    } else if (tab === "privacy") {
+      fetchContent()
+        .then(setContent)
+        .catch((err) => {
+          if (err.message === "Session expired") onLogout();
+          else setMessage("Failed to load content");
         })
         .finally(() => setLoading(false));
     } else {

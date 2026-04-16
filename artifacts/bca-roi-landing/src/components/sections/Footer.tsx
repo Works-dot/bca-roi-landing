@@ -15,7 +15,6 @@ export default function Footer() {
   const websiteUrl = useContent("footer.social.website", "https://bcasolutions.hu");
   const copyright = useContent("footer.copyright", "BCA Solutions. All rights reserved.");
   const privacyText = useContent("footer.privacy.text", "Privacy Policy");
-  const privacyUrl = useContent("footer.privacy.url", "#");
 
   const socials = [
     { icon: Facebook, label: "Facebook", url: facebookUrl },
