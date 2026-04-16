@@ -1,0 +1,89 @@
+Please update the calculator form and CTA tracking on this page using the already installed Google Analytics 4 gtag implementation.
+
+Context:
+
+GA4 is already installed on the page with gtag
+We want to track calculator interactions and key CTA buttons
+Do not use Google Tag Manager
+Do not track on every keystroke
+Use change / blur style interaction points where appropriate
+
+---
+
+Form interactions
+When the user selects a value in the Process type dropdown, send:
+
+gtag('event', 'form_interaction', {
+  field_name: 'process_type'
+});
+
+
+When the user completes or changes the Monthly time spent on this process field, send:
+
+gtag('event', 'form_interaction', {
+  field_name: 'monthly_hours'
+});
+
+
+When the user completes or changes the Average hourly cost field, send:
+
+gtag('event', 'form_interaction', {
+  field_name: 'hourly_cost'
+});
+
+
+---
+CTA tracking
+Keep the existing tracking for the Calculate button:
+
+gtag('event', 'cta_click', {
+  cta_name: 'calculate',
+  cta_text: 'Calculate'
+});
+
+
+Keep/add tracking for Request Assessment button:
+
+gtag('event', 'cta_click', {
+  cta_name: 'request_assessment',
+  cta_text: 'Request Assessment'
+});
+
+
+Add tracking for Get Assessment button:
+
+gtag('event', 'cta_click', {
+  cta_name: 'get_assessment',
+  cta_text: 'Get Assessment'
+});
+
+
+Add tracking for See your ROI in seconds button:
+
+gtag('event', 'cta_click', {
+  cta_name: 'see_roi',
+  cta_text: 'See your ROI in seconds'
+});
+
+
+---
+
+Implementation requirements
+Avoid duplicate firing if possible
+Do not send actual input values to GA4 (only field names)
+Use clean, maintainable code
+If the page uses React, implement this in the component logic properly
+If the page uses plain HTML/JS, attach event listeners after DOM load
+Ensure events fire before navigation if buttons redirect
+
+---
+
+Add step tracking for funnel analysis:
+gtag('event', 'form_step', { step: 'process_type_selected' });
+gtag('event', 'form_step', { step: 'hours_filled' });
+gtag('event', 'form_step', { step: 'cost_filled' });
+
+
+---
+
+Please generate production-ready implementation code and clearly indicate where the changes should be applied. 
