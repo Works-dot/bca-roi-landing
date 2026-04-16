@@ -1,18 +1,41 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 
+const GA_ID = "G-F9X3TPGGNF";
+
+function loadGoogleAnalytics() {
+  if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`)) {
+    return;
+  }
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function (...args: any[]) {
+    window.dataLayer!.push(args);
+  };
+  window.gtag("js", new Date());
+  window.gtag("config", GA_ID);
+}
+
+
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("cookie_consent");
-    if (consent !== "true") {
+    if (consent === "true") {
+      loadGoogleAnalytics();
+    } else {
       setVisible(true);
     }
   }, []);
 
   const handleAccept = () => {
     localStorage.setItem("cookie_consent", "true");
+    loadGoogleAnalytics();
     setVisible(false);
   };
 
