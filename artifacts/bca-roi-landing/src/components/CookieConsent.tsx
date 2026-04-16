@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const GA_ID = "G-F9X3TPGGNF";
+const LINKEDIN_PARTNER_ID = "8230386";
 
 function loadGoogleAnalytics() {
   if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`)) {
@@ -19,6 +20,32 @@ function loadGoogleAnalytics() {
   window.gtag("config", GA_ID);
 }
 
+function loadLinkedInInsightTag() {
+  if (document.querySelector('script[src*="snap.licdn.com/li.lms-analytics/insight.min.js"]')) {
+    return;
+  }
+  (window as any)._linkedin_partner_id = LINKEDIN_PARTNER_ID;
+  (window as any)._linkedin_data_partner_ids = (window as any)._linkedin_data_partner_ids || [];
+  (window as any)._linkedin_data_partner_ids.push(LINKEDIN_PARTNER_ID);
+
+  const s = document.getElementsByTagName("script")[0];
+  const b = document.createElement("script");
+  b.type = "text/javascript";
+  b.async = true;
+  b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+  s.parentNode!.insertBefore(b, s);
+}
+
+function shouldLoadMarketingTags() {
+  return true;
+}
+
+function loadAllTrackingTags() {
+  loadGoogleAnalytics();
+  if (shouldLoadMarketingTags()) {
+    loadLinkedInInsightTag();
+  }
+}
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -26,7 +53,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem("cookie_consent");
     if (consent === "true") {
-      loadGoogleAnalytics();
+      loadAllTrackingTags();
     } else {
       setVisible(true);
     }
@@ -34,7 +61,7 @@ export default function CookieConsent() {
 
   const handleAccept = () => {
     localStorage.setItem("cookie_consent", "true");
-    loadGoogleAnalytics();
+    loadAllTrackingTags();
     setVisible(false);
   };
 
