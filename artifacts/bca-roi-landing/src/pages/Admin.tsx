@@ -326,6 +326,7 @@ function AdminPanel({ onLogout }: { onLogout: () => void }) {
         })
         .finally(() => setLoading(false));
     } else if (tab === "privacy") {
+      setDirty({});
       fetchContent()
         .then(setContent)
         .catch((err) => {
