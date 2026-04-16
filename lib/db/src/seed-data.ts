@@ -105,6 +105,8 @@ export const cmsContent: { key: string; value: string }[] = [
   { key: "seo.ogImage", value: "" },
   { key: "seo.canonical", value: "" },
   { key: "seo.keywords", value: "managed automation, business process automation, RPA, ROI calculator, BCA Solutions" },
+
+  { key: "privacy.content", value: "" },
 ];
 
 export const calculatorConstants: { key: string; value: unknown }[] = [
