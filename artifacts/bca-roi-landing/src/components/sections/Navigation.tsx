@@ -55,7 +55,12 @@ export default function Navigation() {
         <div className="flex-1 flex items-center justify-end gap-1">
           <button
             className="cursor-pointer font-bold rounded-full border-2 border-white text-white bg-transparent hover:bg-white hover:text-[#311111] transition-all px-4 md:px-8 h-10 md:h-12 text-xs md:text-sm"
-            onClick={() => scrollTo("assessment")}
+            onClick={() => {
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', 'cta_click', { cta_name: 'get_assessment', cta_text: 'Get Assessment' });
+              }
+              scrollTo("assessment");
+            }}
             data-testid="btn-nav-assessment"
           >
             Get Assessment
@@ -88,7 +93,12 @@ export default function Navigation() {
                 </button>
               ))}
               <button
-                onClick={() => scrollTo("assessment")}
+                onClick={() => {
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'cta_click', { cta_name: 'get_assessment', cta_text: 'Get Assessment' });
+                  }
+                  scrollTo("assessment");
+                }}
                 className="cursor-pointer text-left px-4 py-3 text-sm font-bold text-white hover:bg-white/5 rounded-lg transition-colors"
               >
                 Get Assessment

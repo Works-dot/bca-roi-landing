@@ -14,6 +14,12 @@ export default function Hero() {
   const cta = useContent("hero.cta", "Calculate Your ROI");
 
   const scrollToCalculator = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'cta_click', {
+        cta_name: 'see_roi',
+        cta_text: 'See your ROI in seconds',
+      });
+    }
     const el = document.getElementById("calculator");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });

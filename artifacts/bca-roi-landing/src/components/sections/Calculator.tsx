@@ -153,7 +153,13 @@ export default function Calculator() {
                     </Tooltip>
                   </TooltipProvider>
                 </Label>
-                <Select onValueChange={setComplexity} value={complexity}>
+                <Select onValueChange={(val: string) => {
+                  setComplexity(val);
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'form_interaction', { field_name: 'process_type' });
+                    window.gtag('event', 'form_step', { step: 'process_type_selected' });
+                  }
+                }} value={complexity}>
                   <SelectTrigger className="h-11 bg-white/10 border-white/15 rounded-xl text-sm text-white">
                     <SelectValue placeholder="Select size..." />
                   </SelectTrigger>
@@ -174,6 +180,12 @@ export default function Calculator() {
                     type="number"
                     value={hours}
                     onChange={(e) => setHours(e.target.value)}
+                    onBlur={() => {
+                      if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'form_interaction', { field_name: 'monthly_hours' });
+                        window.gtag('event', 'form_step', { step: 'hours_filled' });
+                      }
+                    }}
                     className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pr-14 text-white"
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-white/60 font-bold">hours</span>
@@ -188,6 +200,12 @@ export default function Calculator() {
                     type="number"
                     value={rate}
                     onChange={(e) => setRate(e.target.value)}
+                    onBlur={() => {
+                      if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'form_interaction', { field_name: 'hourly_cost' });
+                        window.gtag('event', 'form_step', { step: 'cost_filled' });
+                      }
+                    }}
                     className="h-11 bg-white/10 border-white/15 rounded-xl text-sm pl-7 text-white"
                   />
                 </div>
