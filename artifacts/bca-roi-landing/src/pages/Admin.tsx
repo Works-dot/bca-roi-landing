@@ -152,7 +152,6 @@ const CONTENT_GROUPS: Record<string, string[]> = {
     "footer.social.website",
     "footer.copyright",
     "footer.privacy.text",
-    "footer.privacy.url",
   ],
 };
 
