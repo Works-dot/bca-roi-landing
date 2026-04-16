@@ -6,7 +6,7 @@ import footerLogo from "@assets/Logo_v2_1775568074590.png";
 import uipathFastTrack from "@assets/uipath-fast-track-partner-logo_1775638887078.png";
 import uipathGoldPartner from "@assets/uipath-partner-gold-lockup-digital-rgb-w_1775638381699.png";
 
-export default function Footer() {
+export default function Footer({ hideCurve = false }: { hideCurve?: boolean }) {
   const tagline = useContent("footer.tagline", "Experts In Technology, Partners In Business");
   const subtitle = useContent("footer.subtitle", "Empowering Your Digital Journey since 2007");
   const facebookUrl = useContent("footer.social.facebook", "https://facebook.com/bcasolutions");
@@ -25,7 +25,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#311111] text-white pt-20 md:pt-24">
-      <CurvedDividerTop darkColor="#311111" />
+      {!hideCurve && <CurvedDividerTop darkColor="#311111" />}
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="flex flex-col items-center text-center space-y-6 pb-10">

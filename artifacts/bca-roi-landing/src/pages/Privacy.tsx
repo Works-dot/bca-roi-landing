@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import { useContent } from "@/lib/cms-context";
-import { CurvedDividerBottom } from "@/components/CurvedDividers";
+
 import Footer from "@/components/sections/Footer";
 import logo from "@assets/bca_logo_1775555829987.png";
 
@@ -59,7 +59,7 @@ export default function Privacy() {
   const privacyContent = useContent("privacy.content", DEFAULT_PRIVACY_CONTENT);
 
   return (
-    <div className="flex flex-col min-h-screen font-sans bg-[#130707] text-white overflow-x-hidden">
+    <div className="flex flex-col min-h-screen font-sans bg-[#311111] text-white overflow-x-hidden">
       <section className="relative bg-[#311111] pt-8 pb-20 md:pb-28">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center gap-4 mb-12">
@@ -73,7 +73,6 @@ export default function Privacy() {
             </h1>
           </div>
         </div>
-        <CurvedDividerBottom darkColor="#130707" />
       </section>
 
       <main className="flex-1">
@@ -94,7 +93,7 @@ export default function Privacy() {
         </div>
       </main>
 
-      <Footer />
+      <Footer hideCurve />
     </div>
   );
 }
