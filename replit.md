@@ -101,11 +101,13 @@ The project is deployed to Railway via GitHub auto-deploy:
 React + Vite landing page for BCA Solutions' Managed Intelligent Automation service. Single-page app with CMS integration.
 
 - Design: Prompt font (Google Fonts), dark theme (#130707 base, #1a0a0a accent, #311111 primary), white text, curved SVG dividers with glow between sections, rounded-full buttons, rounded-2xl cards, bg images with dark overlays on Hero/ExampleROI/Contact, light (#faf8f5) contact form card
-- Pages: `/` (landing page), `/admin` (admin panel)
+- Pages: `/` (landing page), `/privacy` (privacy policy page), `/admin` (admin panel)
 - CMS: All text content loaded from database via `CmsProvider` context (`src/lib/cms-context.tsx`)
 - Calculator: Uses admin-editable constants from DB (pricing, automationRatio, workingHoursPerMonth)
 - Contact form: Submits to `POST /api/submissions`, shows success state
-- Admin panel (`/admin`): 3 tabs — Content (grouped by section, textareas for long text, icon dropdowns for pillar icons), Calculator Constants (structured numeric inputs for pricing tiers S/M/L, automation ratio %, working hours/month), Submissions (table view)
+- Cookie consent: Bottom banner with "I understand." button, stores consent in localStorage, "Details" links to /privacy
+- Privacy Policy page: `/privacy` with hero + curved divider, CMS-driven HTML content (key: `privacy.content`), default placeholder content, back-to-home link, footer
+- Admin panel (`/admin`): 6 tabs — Content (grouped by section, textareas for long text, icon dropdowns for pillar icons), Calculator Constants (structured numeric inputs for pricing tiers S/M/L, automation ratio %, working hours/month), SEO, Submissions (table view), Analytics, Privacy Policy (WYSIWYG editor via react-quill-new)
 - Admin auth: Username/password login form at `/admin`, JWT token stored in localStorage, logout button in header. Credentials: username `bca-admin`, bcrypt-hashed password in env vars (`ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `JWT_SECRET`)
 - Vite proxy: `/api` proxied to `http://localhost:8080` in dev
 - Section components in `src/components/sections/` all use `useContent()` hook for CMS text
