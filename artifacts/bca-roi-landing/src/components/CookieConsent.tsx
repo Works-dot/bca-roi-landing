@@ -24,9 +24,9 @@ function loadLinkedInInsightTag() {
   if (document.querySelector('script[src*="snap.licdn.com/li.lms-analytics/insight.min.js"]')) {
     return;
   }
-  (window as any)._linkedin_partner_id = LINKEDIN_PARTNER_ID;
-  (window as any)._linkedin_data_partner_ids = (window as any)._linkedin_data_partner_ids || [];
-  (window as any)._linkedin_data_partner_ids.push(LINKEDIN_PARTNER_ID);
+  window._linkedin_partner_id = LINKEDIN_PARTNER_ID;
+  window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+  window._linkedin_data_partner_ids.push(LINKEDIN_PARTNER_ID);
 
   const s = document.getElementsByTagName("script")[0];
   const b = document.createElement("script");
