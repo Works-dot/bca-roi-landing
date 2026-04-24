@@ -13,11 +13,12 @@ function loadGoogleAnalytics() {
   document.head.appendChild(script);
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function (...args: any[]) {
-    window.dataLayer!.push(args);
-  };
-  window.gtag("js", new Date());
-  window.gtag("config", GA_ID);
+  function gtag(this: any) {
+    window.dataLayer!.push(arguments);
+  }
+  window.gtag = gtag as any;
+  (window.gtag as any)("js", new Date());
+  (window.gtag as any)("config", GA_ID);
 }
 
 function loadLinkedInInsightTag() {
