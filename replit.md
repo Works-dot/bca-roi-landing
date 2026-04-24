@@ -89,7 +89,8 @@ Production migrations are handled by Replit when publishing. In development, we 
 The project is deployed to Railway via GitHub auto-deploy:
 
 - **GitHub repo**: `https://github.com/Works-dot/bca-roi-landing.git` (remote name: `github`)
-- **Auto-push**: A git post-commit hook pushes to GitHub after every commit. Railway auto-deploys from `main` branch.
+- **Auto-push**: A git post-commit hook pushes to GitHub after every commit. The post-merge script (`scripts/post-merge.sh`) also pushes to GitHub after task merges. Railway auto-deploys from `main` branch.
+- **Manual sync**: Run `pnpm --filter @workspace/scripts run sync-github` or `bash scripts/sync-github.sh` to manually push to GitHub
 - **Dockerfile**: Multi-stage build — installs deps, builds frontend + API, copies only production artifacts to final image
 - **railway.toml**: Healthcheck on `/api/content`
 - **Production architecture**: Single service — API server serves both `/api` routes AND the frontend static files (via `express.static`)
